@@ -19,7 +19,7 @@ const receiveSessionErrors = errors => ({
   errors
 });
 
-const clearErrors = () => ({
+const removeErrors = () => ({
   type: CLEAR_ERRORS
 });
 
@@ -45,4 +45,8 @@ export const logout = () => dispatch => (
       () => dispatch(logoutCurrentUser()),
       err => dispatch(receiveSessionErrors(err.responseJSON))
     )
+);
+
+export const clearErrors = () => dispatch => (
+  dispatch(removeErrors())
 );
