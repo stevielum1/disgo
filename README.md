@@ -1,24 +1,9 @@
-# README
+# DISGO
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+A Discord clone!
 
-Things you may want to cover:
+[Live Demo]() (will update when hosted on Heroku)
 
-* Ruby version
+[Here](https://discordapp.com/) is the real site for reference.
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Please see the [wiki](https://github.com/stevielum1/disgo/wiki) for more information.
