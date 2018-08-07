@@ -32,6 +32,8 @@ class SessionForm extends React.Component {
   render() {
     const { formType, errors } = this.props;
 
+
+
     const usernameField = formType === "Signup" ? (
       <label>Username:
         <input
