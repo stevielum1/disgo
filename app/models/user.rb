@@ -1,13 +1,13 @@
 class User < ApplicationRecord
-  validates :username, :email, :session_token, presence: true, uniqueness: true
+  validates :username, :salt, :email, :img_url, :session_token, presence: true, uniqueness: true
   validates :password, length: { minimum: 6, allow_nil: true }
 
-  after_initialize :ensure_session_token
+  after_initialize :ensure_session_token, :ensure_salt, :ensure_img_url
 
   attr_reader :password
 
-  def self.find_by_credentials(username, password)
-    user = User.find_by(username: username)
+  def self.find_by_credentials(email, password)
+    user = User.find_by(email: email)
     return nil unless user
     user.is_password?(password) ? user : nil
   end
@@ -29,5 +29,18 @@ class User < ApplicationRecord
     self.session_token = SecureRandom.urlsafe_base64
     self.save!
     self.session_token
+  end
+
+  private
+  def ensure_salt
+    salt = ""
+    4.times do
+      salt += rand(0..9).to_s
+    end
+    self.salt = salt
+  end
+
+  def ensure_img_url
+    self.img_url = "default_img_url"
   end
 end
