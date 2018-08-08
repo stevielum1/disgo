@@ -1,0 +1,64 @@
+.session-logo {
+  padding-top: 50px;
+  color: white;
+  text-align: center;
+  height: 100px;
+  font-size: 36px;
+}
+
+.session-form {
+  margin: 0 auto;
+  background: #36393f;
+  color: lightgray;
+  min-height: 200px;
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 0;
+  font-size: 14px;
+  border-radius: 5px;
+
+  h2 {
+    font-size: 20px;
+    text-align: center;
+  }
+
+  label {
+    padding: 10px 30px;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 12px;
+
+    input {
+      box-sizing: border-box;
+      border: 1px solid #272727;
+      border-radius: 5px;
+      color: inherit;
+      background: rgba(0,0,0,0.1);
+      padding: 10px;
+      width: 100%;
+      margin: 5px 0;
+      font-size: 12px;
+    }
+  }
+
+  button[type="submit"] {
+    font-size: inherit;
+    border: 0;
+    color: inherit;
+    padding: 10px;
+    background: #7289da;
+    box-sizing: border-box;
+    margin: 5px 30px;
+  }
+
+  span {
+    padding: 20px 0 0 30px;
+
+    a {
+      color: #7289da;
+      text-decoration: none;
+    }
+  }
+
+}

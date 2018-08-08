@@ -33,7 +33,8 @@ class SessionForm extends React.Component {
     const { formType, errors } = this.props;
 
     const usernameField = formType === "Signup" ? (
-      <label>Username:
+      <label>
+        <p>Username</p>
         <input
           type="text"
           value={this.state.username}
@@ -42,7 +43,8 @@ class SessionForm extends React.Component {
     ) : ( null );
 
     const emailField = (
-      <label>Email:
+      <label>
+        <p>Email</p>
         <input
           type="text"
           value={this.state.email}
@@ -51,7 +53,8 @@ class SessionForm extends React.Component {
     );
 
     const passwordField = (
-      <label>Password:
+      <label>
+        <p>Password</p>
         <input
           type="password"
           value={this.state.password}
@@ -60,7 +63,9 @@ class SessionForm extends React.Component {
     );
 
     const otherButton = formType === "Signup" ? (
-      <Link to="/login">Already have an account?</Link>
+      <span>
+        <Link to="/login">Already have an account?</Link>
+      </span>
     ) : (
       <span>
         Need an account? <Link to="/signup">Register</Link>
@@ -69,22 +74,29 @@ class SessionForm extends React.Component {
 
     return (
       <div>
-        <h2 className="session-header">{formType}</h2>
-        {
-          errors.map((error, idx) => (
-            <p className="session-error" key={idx}>{error}</p>
-          ))
-        }
+        <div className="session-logo">Disgo</div>
         <form
           className="session-form"
           onSubmit={this.handleSubmit}>
-          {usernameField}
+
+          <h2 className="session-header">{formType}</h2>
+
+          {
+            errors.map((error, idx) => (
+              <p className="session-error" key={idx}>{error}</p>
+            ))
+          }
+
           {emailField}
+          {usernameField}
           {passwordField}
-          <button type="submit"
+          
+          <button
+            type="submit"
             onClick={this.handleSubmit}>{formType}</button>
+
+          {otherButton}
         </form>
-        {otherButton}
       </div>
     )
   }
