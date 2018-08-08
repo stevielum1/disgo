@@ -1,5 +1,6 @@
 .session-form-container {
-  background: url("https://cdn.pixabay.com/photo/2016/11/18/22/58/galaxy-1837306_1280.jpg");
+  /* source: https://pixabay.com/en/game-gaming-gaming-console-gamer-1926907/ */
+  background: url("https://cdn.pixabay.com/photo/2016/12/23/07/01/game-1926907_1280.png");
   height: 100vh;
 
   .session-logo {
@@ -8,6 +9,7 @@
     text-align: center;
     height: 100px;
     font-size: 36px;
+    font-family: 'Orbitron', sans-serif;
   }
 
   .session-form {
