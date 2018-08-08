@@ -32,6 +32,16 @@ class SessionForm extends React.Component {
   render() {
     const { formType, errors } = this.props;
 
+    let formHeading = "";
+    let formSubHeading = "";
+
+    if (formType === "Signup") {
+      formHeading = "Create an account";
+    } else {
+      formHeading = "Welcome back!";
+      formSubHeading = "We're so excited to see you again!";
+    }
+
     const usernameField = formType === "Signup" ? (
       <label>
         <p>Username</p>
@@ -47,6 +57,7 @@ class SessionForm extends React.Component {
         <p>Email</p>
         <input
           type="text"
+          autoFocus="true"
           value={this.state.email}
           onChange={this.handleInput('email')} />
       </label>
@@ -73,13 +84,14 @@ class SessionForm extends React.Component {
     );
 
     return (
-      <div>
+      <div className="session-form-container">
         <div className="session-logo">Disgo</div>
         <form
           className="session-form"
           onSubmit={this.handleSubmit}>
 
-          <h2 className="session-header">{formType}</h2>
+          <h2 className="session-header">{formHeading}</h2>
+          <h3>{formSubHeading}</h3>
 
           {
             errors.map((error, idx) => (
@@ -90,7 +102,7 @@ class SessionForm extends React.Component {
           {emailField}
           {usernameField}
           {passwordField}
-          
+
           <button
             type="submit"
             onClick={this.handleSubmit}>{formType}</button>

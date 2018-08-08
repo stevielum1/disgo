@@ -1,5 +1,6 @@
 class User < ApplicationRecord
-  validates :username, :salt, :email, :img_url, :session_token, presence: true, uniqueness: true
+  validates :username, :salt, :email, :img_url, :session_token, presence: true
+  validates :email, uniqueness: true
   validates :password, length: { minimum: 6, allow_nil: true }
 
   after_initialize :ensure_session_token, :ensure_salt, :ensure_img_url
