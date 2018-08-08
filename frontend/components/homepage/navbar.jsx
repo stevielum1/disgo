@@ -5,7 +5,7 @@ const NavBar = props => {
   return (
     <header className="header">
       <nav className="nav-left">
-        <Link className="nav-logo" to="/">Disgo</Link>
+        <Link className="nav-logo" to="/">DISGO</Link>
         <ul>
           <li><Link to="/">Download</Link></li>
           <li><Link to="/">Nitro</Link></li>

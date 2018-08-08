@@ -85,7 +85,7 @@ class SessionForm extends React.Component {
 
     return (
       <div className="session-form-container">
-        <div className="session-logo">Disgo</div>
+        <div className="session-logo">DISGO</div>
         <form
           className="session-form"
           onSubmit={this.handleSubmit}>

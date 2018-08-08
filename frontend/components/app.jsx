@@ -5,7 +5,7 @@ import HomepageContainer from './homepage/homepage_container';
 import SignupFormContainer from './session/signup_container';
 import LoginFormContainer from './session/login_container';
 
-const App = ({ store }) => {
+const App = () => {
   return (
     <div>
       <Route path="/" component={HomepageContainer} />
