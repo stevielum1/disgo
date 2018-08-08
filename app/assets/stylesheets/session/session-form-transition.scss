@@ -1,0 +1,10 @@
+.session-form-appear {
+  opacity: 0.01;
+  transform: translateY(-10%);
+}
+
+.session-form-appear.session-form-appear-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 250ms, transform 250ms;
+}

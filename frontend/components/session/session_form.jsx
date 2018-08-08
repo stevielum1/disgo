@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 
 class SessionForm extends React.Component {
   constructor(props) {
@@ -99,29 +100,36 @@ class SessionForm extends React.Component {
     return (
       <div className="session-form-container">
         <div className="session-logo">DISGO</div>
-        <form
-          className="session-form"
-          onSubmit={this.handleSubmit}>
+        <ReactCSSTransitionGroup
+        transitionName="session-form"
+        transitionAppear={true}
+        transitionAppearTimeout={250}
+        transitionEnter={false}
+        transitionLeave={false}>
+          <form
+            className="session-form"
+            onSubmit={this.handleSubmit}>
 
-          <h2 className="session-header">{formHeading}</h2>
-          <h3>{formSubHeading}</h3>
+            <h2 className="session-header">{formHeading}</h2>
+            <h3>{formSubHeading}</h3>
 
-          {
-            errors.map((error, idx) => (
-              <p className="session-error" key={idx}>{error}</p>
-            ))
-          }
+            {
+              errors.map((error, idx) => (
+                <p className="session-error" key={idx}>{error}</p>
+              ))
+            }
 
-          {emailField}
-          {usernameField}
-          {passwordField}
+            {emailField}
+            {usernameField}
+            {passwordField}
 
-          <button
-            type="submit"
-            onClick={this.handleSubmit}>{formType}</button>
+            <button
+              type="submit"
+              onClick={this.handleSubmit}>{formType}</button>
 
-          {otherButton}
-        </form>
+            {otherButton}
+          </form>
+        </ReactCSSTransitionGroup>
       </div>
     )
   }
