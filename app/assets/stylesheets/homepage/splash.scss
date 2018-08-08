@@ -1,10 +1,11 @@
 .splash-container {
   /* source: https://pixabay.com/en/game-gaming-gaming-console-gamer-1926907/ */
   background-image: linear-gradient(rgba(0,0,0,0.25), rgba(0,0,0,0.25)), url("https://cdn.pixabay.com/photo/2016/12/23/07/01/game-1926907_1280.png");
-  background-size: auto 100%;
+  background-size: cover;
+
   background-repeat: no-repeat;
   background-position: top;
-  width: 100%;
+  min-width: 100%;
   min-height: 120vh;
 
   h2 {
