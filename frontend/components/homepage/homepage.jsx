@@ -4,7 +4,7 @@ import Splash from './splash';
 import Footer from './footer';
 import Header from '../app/header';
 import ServerIndex from '../app/server_index';
-import UserInfo from '../app/user_info';
+import UserInfoContainer from '../app/user_info_container';
 import { Route } from 'react-router-dom';
 
 const Homepage = ({ loggedIn }) => {
@@ -13,7 +13,7 @@ const Homepage = ({ loggedIn }) => {
       <div>
         <Route path="/" component={Header} />
         <Route path="/" component={ServerIndex} />
-        <Route path="/" component={UserInfo} />
+        <Route path="/" component={UserInfoContainer} />
       </div>
     ) : (
       <div>

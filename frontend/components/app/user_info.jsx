@@ -3,7 +3,10 @@ import React from 'react';
 class UserInfo extends React.Component {
   render() {
     return (
-      <div>USER INFO</div>
+      <div>
+        <p>USER INFO</p>
+        <button onClick={this.props.logout}>Log Out</button>
+      </div>
     )
   }
 }
