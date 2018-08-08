@@ -2,7 +2,7 @@
 
 A Discord clone!
 
-[Live Demo]() (will update when hosted on Heroku)
+[Live Demo](http://disgo.herokuapp.com/#/)
 
 [Here](https://discordapp.com/) is the real site for reference.
 
