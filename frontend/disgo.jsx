@@ -3,10 +3,6 @@ import ReactDOM from 'react-dom';
 import Root from './components/root';
 import configureStore from './store/store';
 
-//TEST
-import { logout } from './actions/session_actions';
-//END TEST
-
 document.addEventListener("DOMContentLoaded", () => {
   const root = document.getElementById('root');
 
@@ -23,12 +19,6 @@ document.addEventListener("DOMContentLoaded", () => {
     } else {
       store = configureStore();
     }
-
-  //TEST
-  window.getState = store.getState;
-  window.dispatch = store.dispatch;
-  window.logout = logout;
-  //END TEST
 
   ReactDOM.render(<Root store={store} />, root);
 })
