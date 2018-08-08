@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 class SessionForm extends React.Component {
   constructor(props) {
     super(props);
-    this.handleInput = this.handleInput.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleDemoLogin = this.handleDemoLogin.bind(this);
     this.state = {
       username: "",
       email: "",
@@ -26,7 +26,12 @@ class SessionForm extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     this.props.processForm(this.state);
-    // Push "/" to browser history
+  }
+
+  handleDemoLogin(e) {
+    e.preventDefault();
+    const demoUser = { email: "demo@disgo.com", password: "D3m0P4ss" };
+    this.props.processForm(demoUser);
   }
 
   render() {
@@ -74,13 +79,21 @@ class SessionForm extends React.Component {
     );
 
     const otherButton = formType === "Signup" ? (
-      <span>
-        <Link to="/login">Already have an account?</Link>
-      </span>
+      <div className="session-other-button">
+        <span>
+          <Link to="/login">Already have an account?</Link>
+        </span>
+      </div>
     ) : (
-      <span>
-        Need an account? <Link to="/signup">Register</Link>
-      </span>
+      <div className="session-other-button">
+        <div>
+          <span>Need an account?</span>
+          <Link to="/signup">Register</Link>
+        </div>
+        <button
+          type="submit"
+          onClick={this.handleDemoLogin}>Or try the demo!</button>
+      </div>
     );
 
     return (
