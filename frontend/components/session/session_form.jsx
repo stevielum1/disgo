@@ -91,9 +91,7 @@ class SessionForm extends React.Component {
           <span>Need an account?</span>
           <Link to="/signup">Register</Link>
         </div>
-        <button
-          type="submit"
-          onClick={this.handleDemoLogin}>Or try the demo!</button>
+          <Link to="#" onClick={this.handleDemoLogin}>Try the demo!</Link>
       </div>
     );
 

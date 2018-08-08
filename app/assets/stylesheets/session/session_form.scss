@@ -1,6 +1,6 @@
 .session-form-container {
   /* source: https://pixabay.com/en/game-gaming-gaming-console-gamer-1926907/ */
-  background: image_url('background');
+  background: image_url('background.png');
   height: 100vh;
 
   .session-logo {
@@ -77,7 +77,7 @@
       padding: 10px;
       background: #7289da;
       box-sizing: border-box;
-      margin: 5px 30px;
+      margin: 15px 30px;
       border-radius: 5px;
     }
 
@@ -93,12 +93,13 @@
 
       span {
         color: gray;
-        padding: 20px 5px 0 30px;
+        padding: 0 5px 0 30px;
       }
 
       a {
         color: #7289da;
         text-decoration: none;
+        margin-right: 30px;
       }
 
       a:hover {
