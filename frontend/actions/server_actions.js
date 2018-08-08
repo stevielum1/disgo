@@ -19,8 +19,8 @@ const removeServer = id => ({
   serverId: id
 });
 
-export const fetchServers = id => dispatch => (
-  ServerApiUtil.fetchServers(id)
+export const fetchServers = () => dispatch => (
+  ServerApiUtil.fetchServers()
     .then(servers => dispatch(receiveServers(servers)))
 );
 

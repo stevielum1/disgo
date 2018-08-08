@@ -1,4 +1,4 @@
-class ServersController < ApplicationController
+class Api::ServersController < ApplicationController
   def index
     # Server.where('id IN ?', current_user.server_memberships)
     @servers = Server.where(owner_id: current_user.id)
