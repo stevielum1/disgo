@@ -5,6 +5,11 @@ class User < ApplicationRecord
 
   after_initialize :ensure_session_token, :ensure_salt, :ensure_img_url
 
+  has_many :owned_servers,
+  primary_key: :id,
+  foreign_key: :owner_id,
+  class_name: :Server
+
   attr_reader :password
 
   def self.find_by_credentials(email, password)
