@@ -7,20 +7,19 @@ const NavBar = props => {
       <nav className="nav-left">
         <Link className="nav-logo" to="/">DISGO</Link>
         <ul>
-          <li><Link to="/">Download</Link></li>
-          <li><Link to="/">Nitro</Link></li>
-          <li><Link to="/">Jobs</Link></li>
-          <li><Link to="/">Developers</Link></li>
-          <li><Link to="/">Community</Link></li>
-          <li><Link to="/">Blog</Link></li>
-          <li><Link to="/">Support</Link></li>
+          <li><Link to="/in-progress">Download</Link></li>
+          <li><Link to="/in-progress">Nitro</Link></li>
+          <li><Link to="/in-progress">Jobs</Link></li>
+          <li><Link to="/in-progress">Developers</Link></li>
+          <li><Link to="/in-progress">Community</Link></li>
+          <li><Link to="/in-progress">Blog</Link></li>
+          <li><Link to="/in-progress">Support</Link></li>
         </ul>
       </nav>
       <nav className="nav-right">
-        <i className="fab fa-twitter"></i>
-        <i className="fab fa-facebook-square"></i>
-        <i className="fab fa-instagram"></i>
-        <Link to="/login">Login</Link>
+        <a href="https://github.com/stevielum1"><i className="fab fa-github"></i></a>
+        <a href="https://www.linkedin.com/in/steven-lum-204868141/"><i className="fab fa-linkedin"></i></a>
+        <Link to="/login" className="nav-login">Login</Link>
       </nav>
     </header>
   );

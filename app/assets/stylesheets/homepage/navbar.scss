@@ -59,7 +59,7 @@
       padding-right: 20px;
     }
 
-    a {
+    .nav-login {
       text-decoration: inherit;
       color: lightgray;
       font-size: 12px;
@@ -69,7 +69,7 @@
       border-radius: 20px;
     }
 
-    a:hover {
+    .nav-login:hover {
       color: white;
       border: 2px solid white;
       transition: color 0.2s, border 0.2s;

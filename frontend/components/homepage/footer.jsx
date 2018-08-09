@@ -8,39 +8,39 @@ const Footer = props => {
       <Link className="footer-logo" to="/">DISGO</Link>
       <ul>
         <li className="footer-heading">Product</li>
-        <li>Features</li>
-        <li>Download</li>
-        <li>Branding</li>
-        <li>Nitro</li>
+        <Link to="/in-progress">Features</Link>
+        <Link to="/in-progress">Download</Link>
+        <Link to="/in-progress">Branding</Link>
+        <Link to="/in-progress">Nitro</Link>
       </ul>
       <ul>
         <li className="footer-heading">Developers</li>
-        <li>Applications</li>
-        <li>Documentation</li>
-        <li>Status</li>
-        <li>Verification</li>
+        <Link to="/in-progress">Applications</Link>
+        <Link to="/in-progress">Documentation</Link>
+        <Link to="/in-progress">Status</Link>
+        <Link to="/in-progress">Verification</Link>
       </ul>
       <ul>
         <li className="footer-heading">Resources</li>
-        <li>Help & Support</li>
-        <li>Guidelines</li>
-        <li>Feedback</li>
-        <li>Terms</li>
-        <li>Privacy</li>
+        <Link to="/in-progress">Help & Support</Link>
+        <Link to="/in-progress">Guidelines</Link>
+        <Link to="/in-progress">Feedback</Link>
+        <Link to="/in-progress">Terms</Link>
+        <Link to="/in-progress">Privacy</Link>
       </ul>
       <ul>
         <li className="footer-heading">Company</li>
-        <li>About</li>
-        <li>Blog</li>
-        <li>Jobs</li>
+        <Link to="/in-progress">About</Link>
+        <Link to="/in-progress">Blog</Link>
+        <Link to="/in-progress">Jobs</Link>
       </ul>
       <ul>
         <li className="footer-heading">More</li>
-        <li>Partners</li>
-        <li>HypeSquad</li>
-        <li>Merch Store</li>
-        <li>Press Inquiries</li>
-        <li>Open Source</li>
+        <Link to="/in-progress">Partners</Link>
+        <Link to="/in-progress">HypeSquad</Link>
+        <Link to="/in-progress">Merch Store</Link>
+        <Link to="/in-progress">Press Inquiries</Link>
+        <Link to="/in-progress">Open Source</Link>
       </ul>
       <div className="footer-last">
         <div>

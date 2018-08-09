@@ -27,12 +27,13 @@
       padding: 15px 0;
     }
 
-    li {
+    a {
       color: lightgray;
       padding: 2px;
+      text-decoration: none;
     }
 
-    li:not([class="footer-heading"]):hover {
+    a:not([class="footer-heading"]):hover {
       cursor: pointer;
       color: white;
       transition: color 0.2s;
