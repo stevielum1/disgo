@@ -10,6 +10,8 @@ class User < ApplicationRecord
   foreign_key: :owner_id,
   class_name: :Server
 
+  has_one_attached :photo
+
   attr_reader :password
 
   def self.find_by_credentials(email, password)
