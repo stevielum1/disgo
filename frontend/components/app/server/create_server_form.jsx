@@ -11,6 +11,10 @@ class CreateServerForm extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  componentDidMount() {
+    this.props.removeServerErrors();
+  }
+
   handleInput(e) {
     this.setState({ name: e.currentTarget.value });
   }
@@ -21,10 +25,16 @@ class CreateServerForm extends React.Component {
   }
 
   render() {
+    const { errors } = this.props;
     return (
       <div className="create-server-form-container">
         <form onSubmit={this.handleSubmit}>
           <h2>Create your server</h2>
+          { errors.map((error, idx) => (
+            <p className="server-error" key={idx}>
+              {error}
+            </p>
+          ))}
           <p>
             By creating a server, you will have access to free  <del>voice and</del> text chat to use amongst your friends.
           </p>

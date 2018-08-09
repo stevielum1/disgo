@@ -1,10 +1,15 @@
 import { connect } from 'react-redux';
 import CreateServerForm from './create_server_form';
-import { createServer } from '../../../actions/server_actions';
+import { createServer, removeServerErrors } from '../../../actions/server_actions';
 import { openModal, closeModal } from '../../../actions/modal_actions';
 
-const mapDispatchToProps = dispatch => ({
-  createServer: server => dispatch(createServer(server))
+const mapStateToProps = state => ({
+  errors: state.errors.serverErrors
 });
 
-export default connect(null, mapDispatchToProps)(CreateServerForm);
+const mapDispatchToProps = dispatch => ({
+  createServer: server => dispatch(createServer(server)),
+  removeServerErrors: () => dispatch(removeServerErrors())
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(CreateServerForm);

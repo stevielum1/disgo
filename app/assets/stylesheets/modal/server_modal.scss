@@ -1,5 +1,9 @@
 .modal-child {
   div.create-server-form-container {
+    background: white;
+    border-radius: 5px;
+    padding: 15px;
+
     form {
       display: flex;
       flex-direction: column;
@@ -11,6 +15,11 @@
         font-weight: 900;
         font-size: 18px;
         padding: 10px;
+      }
+
+      p.server-error {
+        color: red;
+        padding: 0;
       }
 
       p {
