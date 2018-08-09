@@ -1,21 +1,34 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import CreateServerFormContainer from './create_server_form_container';
 import { closeModal } from '../../../actions/modal_actions';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
-const ServerModal = ({ modal, closeModal }) => {
+import CreateServerFormContainer from '../server/create_server_form_container';
+import UserInfoContainer from '../user_info/user_info_container';
+
+const Modal = ({ modal, closeModal }) => {
   if (!modal) return null;
+  let component;
+  switch (modal) {
+    case 'createServer':
+      component = <CreateServerFormContainer />;
+      break;
+    case 'userInfo':
+      component = <UserInfoContainer />;
+      break;
+    default:
+      return null;
+  }
   return (
     <div className="modal-background" onClick={closeModal}>
       <ReactCSSTransitionGroup
-        transitionName="create-server-form"
+        transitionName="modal"
         transitionAppear={true}
         transitionAppearTimeout={250}
         transitionEnter={false}
         transitionLeave={false} >
         <div className="modal-child" onClick={e => e.stopPropagation()}>
-          <CreateServerFormContainer />
+          {component}
         </div>
       </ReactCSSTransitionGroup>
     </div>
@@ -30,4 +43,4 @@ const mapDispatchToProps = dispatch => ({
   closeModal: () => dispatch(closeModal())
 });
 
-export default connect(mapStateToProps,mapDispatchToProps)(ServerModal);
+export default connect(mapStateToProps,mapDispatchToProps)(Modal);

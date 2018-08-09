@@ -5,7 +5,7 @@ import { openModal } from '../../../actions/modal_actions';
 
 const mapStateToProps = state => ({
   servers: Object.values(state.entities.servers),
-  currentUserId: state.session.id
+  currentUser: state.entities.users[state.session.id]
 });
 
 const mapDispatchToProps = dispatch => ({

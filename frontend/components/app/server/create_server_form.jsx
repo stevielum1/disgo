@@ -22,22 +22,24 @@ class CreateServerForm extends React.Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <h2>Create your server</h2>
-        <p>
-          By creating a server, you will have access to free  <del>voice and</del> text chat to use amongst your friends.
-        </p>
-        <label>
-          <p>Server Name</p>
-          <input
-            type="text"
-            onChange={this.handleInput}
-            value={this.state.name}
-            placeholder="Enter a server name"
-            autoFocus="true" />
-        </label>
-        <button>Create</button>
-      </form>
+      <div className="create-server-form-container">
+        <form onSubmit={this.handleSubmit}>
+          <h2>Create your server</h2>
+          <p>
+            By creating a server, you will have access to free  <del>voice and</del> text chat to use amongst your friends.
+          </p>
+          <label>
+            <p>Server Name</p>
+            <input
+              type="text"
+              onChange={this.handleInput}
+              value={this.state.name}
+              placeholder="Enter a server name"
+              autoFocus="true" />
+          </label>
+          <button>Create</button>
+        </form>
+      </div>
     )
   }
 }

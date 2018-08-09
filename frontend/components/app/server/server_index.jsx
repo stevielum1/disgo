@@ -1,7 +1,7 @@
 import React from 'react';
 import ServerIndexItem from './server_index_item';
 import CreateServerFormContainer from './create_server_form_container';
-import ServerModal from './server_modal';
+import Modal from '../modal/modal';
 
 class ServerIndex extends React.Component {
   componentDidMount() {
@@ -11,7 +11,7 @@ class ServerIndex extends React.Component {
   render() {
     return (
       <div>
-        <ServerModal />
+        <Modal />
         <ul>
           { this.props.servers.map(server => (
               <ServerIndexItem key={server.id} server={server} />
@@ -20,6 +20,11 @@ class ServerIndex extends React.Component {
           <li
           onClick={() => this.props.openModal('createServer')}>+</li>
         </ul>
+        <div className="user-info-container">
+          <i
+            className="fas fa-cog"
+            onClick={() => this.props.openModal('userInfo')}></i>
+        </div>
       </div>
     )
   }

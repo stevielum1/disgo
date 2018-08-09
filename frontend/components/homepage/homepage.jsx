@@ -13,7 +13,6 @@ const Homepage = ({ loggedIn }) => {
       <div className="app-container">
         <Route path="/" component={ServerIndexContainer} />
         <Route path="/" component={Main} />
-        <Route path="/" component={UserInfoContainer} />
       </div>
     ) : (
       <div>
