@@ -3,7 +3,9 @@ import React from 'react';
 const ServerIndexItem = ({ server }) => {
   return (
     <li>
-      {server.name}
+      <img
+        src={server.photoUrl}
+        className="server-photo" />
     </li>
   )
 };

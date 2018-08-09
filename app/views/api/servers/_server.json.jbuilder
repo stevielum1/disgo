@@ -1,1 +1,2 @@
-json.extract! server, :id, :name, :img_url, :owner_id
+json.extract! server, :id, :name, :owner_id
+json.photoUrl url_for(server.photo)

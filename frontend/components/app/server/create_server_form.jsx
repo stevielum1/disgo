@@ -4,11 +4,13 @@ class CreateServerForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: ""
+      name: "",
+      photoFile: null
     };
 
     this.handleInput = this.handleInput.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleFile = this.handleFile.bind(this);
   }
 
   componentDidMount() {
@@ -21,7 +23,18 @@ class CreateServerForm extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    this.props.createServer(this.state);
+    const formData = new FormData();
+    formData.append('server[name]', this.state.name);
+    if (this.state.photoFile) {
+      formData.append('server[photo]', this.state.photoFile);
+    }
+    this.props.createServer(formData)
+      .then(() => this.props.closeModal());
+  }
+
+  handleFile(e) {
+    e.preventDefault()
+    this.setState({ photoFile: e.currentTarget.files[0] });
   }
 
   render() {
@@ -47,6 +60,9 @@ class CreateServerForm extends React.Component {
               placeholder="Enter a server name"
               autoFocus="true" />
           </label>
+          <input
+            type="file"
+            onChange={this.handleFile} />
           <button>Create</button>
         </form>
       </div>
@@ -54,4 +70,4 @@ class CreateServerForm extends React.Component {
   }
 }
 
-export default CreateServerForm;
+export default (CreateServerForm);

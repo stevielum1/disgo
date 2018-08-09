@@ -3,14 +3,15 @@ class User < ApplicationRecord
   validates :email, uniqueness: true
   validates :password, length: { minimum: 6, allow_nil: true }
 
-  after_initialize :ensure_session_token, :ensure_salt, :ensure_img_url
-
   has_many :owned_servers,
   primary_key: :id,
   foreign_key: :owner_id,
   class_name: :Server
 
   has_one_attached :photo
+
+  after_initialize :ensure_session_token, :ensure_salt, :ensure_img_url
+  before_create :require_photo
 
   attr_reader :password
 
@@ -29,10 +30,6 @@ class User < ApplicationRecord
     BCrypt::Password.new(self.password_digest).is_password?(password)
   end
 
-  def ensure_session_token
-    self.session_token ||= SecureRandom.urlsafe_base64
-  end
-
   def reset_session_token!
     self.session_token = SecureRandom.urlsafe_base64
     self.save!
@@ -40,6 +37,11 @@ class User < ApplicationRecord
   end
 
   private
+
+  def ensure_session_token
+    self.session_token ||= SecureRandom.urlsafe_base64
+  end
+
   def ensure_salt
     salt = ""
     4.times do
@@ -49,6 +51,14 @@ class User < ApplicationRecord
   end
 
   def ensure_img_url
-    self.img_url = "default_img_url"
+    self.img_url = "user_img_#{rand(1..4)}.jpg"
+  end
+
+  def require_photo
+    unless self.photo.attached?
+      filename = "user_img_#{rand(1..4)}.jpg"
+      file = File.open("app/assets/images/#{filename}")
+      self.photo.attach(io: file, filename: filename)
+    end
   end
 end
