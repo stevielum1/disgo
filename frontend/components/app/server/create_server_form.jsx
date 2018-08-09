@@ -62,7 +62,8 @@ class CreateServerForm extends React.Component {
           </label>
           <input
             type="file"
-            onChange={this.handleFile} />
+            onChange={this.handleFile}
+            accept="image/*" />
           <button>Create</button>
         </form>
       </div>
