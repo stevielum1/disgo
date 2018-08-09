@@ -1,0 +1,83 @@
+.modal-background {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 10;
+}
+
+.modal-child {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  border-radius: 5px;
+  padding: 15px;
+  width: 500px;
+
+  form {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+
+    h2 {
+      color: #7289da;
+      text-transform: uppercase;
+      font-weight: 900;
+      font-size: 18px;
+      padding: 10px;
+    }
+
+    p {
+      color: #a9a9a9;
+      font-weight: 500;
+      padding: 30px 10px;
+    }
+
+    label {
+      text-align: left;
+      padding: 10px;
+
+      p {
+        text-transform: uppercase;
+        color: #656565;
+        font-weight: 600;
+        font-size: 12px;
+        padding: 0;
+      }
+
+      input {
+        font-size: 14px;
+        padding: 5px 0;
+        width: 100%;
+        outline: 0;
+        border: 0;
+        border-bottom: 1px solid #efefef;
+        margin: 15px 0;
+      }
+
+      input:focus {
+        border-bottom: 2px solid #7289da;
+      }
+    }
+
+    button {
+      color: white;
+      background: #7289da;
+      padding: 10px 15px;
+      font-size: 16px;
+      font-weight: 600;
+      border-radius: 5px;
+      align-self: flex-end;
+      border: 0;
+    }
+
+    button:hover {
+      background: #506098;
+      transition: background, 0.2s;
+    }
+  }
+}

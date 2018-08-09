@@ -1,0 +1,10 @@
+.create-server-form-appear {
+  opacity: 0.01;
+  transform: translate(-50%, -60%);
+}
+
+.create-server-form-appear.create-server-form-appear-active {
+  opacity: 1;
+  transform: translate(-50%, -50%);
+  transition: opacity 250ms, transform 250ms;
+}
