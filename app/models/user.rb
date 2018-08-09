@@ -53,6 +53,6 @@ class User < ApplicationRecord
   end
 
   def ensure_img_url
-    self.img_url = DEFAULT_PHOTO_URLS.sample
+    self.img_url ||= DEFAULT_PHOTO_URLS.sample
   end
 end

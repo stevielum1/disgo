@@ -16,7 +16,7 @@ class Server < ApplicationRecord
 
   private
   def ensure_img_url
-    self.img_url = DEFAULT_PHOTO_URL
+    self.img_url ||= DEFAULT_PHOTO_URL
   end
 
 end
