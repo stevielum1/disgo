@@ -1,11 +1,16 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 
 const ServerIndexItem = ({ server }) => {
   return (
     <li>
-      <img
-        src={server.photoUrl}
-        className="server-photo" />
+      <NavLink
+        className="server-link"
+        activeClassName="server-active"
+        to={`/channels/${server.id}`}>
+        <div className="server-active-icon"></div>
+        <img src={server.photoUrl} />
+      </NavLink>
     </li>
   )
 };

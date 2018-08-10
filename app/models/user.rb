@@ -46,7 +46,7 @@ class User < ApplicationRecord
   end
 
   def ensure_salt
-    return unless self.salt
+    return if self.salt
     salt = ""
     4.times do
       salt += rand(0..9).to_s
