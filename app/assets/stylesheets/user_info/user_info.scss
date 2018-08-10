@@ -17,10 +17,46 @@
       cursor: pointer;
     }
 
-    button {
-      outline: none;
-      color: red;
-      background-color: transparent;
+    input[type="file"] {
+      display: none;
     }
+  }
+
+  .edit-username-container {
+    display: flex;
+    flex-direction: column;
+
+    label {
+      color: white;
+      padding-bottom: 10px;
+    }
+
+    .edit-user-info-button {
+      color: white;
+      background: #7289da;
+      padding: 5px;
+      width: 50%;
+      font-size: 14px;
+    }
+
+    .edit-user-info-button:hover {
+      background: #6479c3;
+      transition: background 0.2s;
+    }
+  }
+
+  button {
+    border: none;
+    border-radius: 5px;
+    font-size: 20px;
+    color: red;
+    background-color: transparent;
+    margin-top: 10px;
+    padding: 10px;
+    width: 100%;
+  }
+
+  button:hover {
+    background: rgba(255,100,100,0.2);
   }
 }

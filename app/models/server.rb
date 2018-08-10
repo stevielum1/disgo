@@ -1,6 +1,6 @@
 class Server < ApplicationRecord
 
-  DEFALUT_PHOTO_URL = "https://s3-us-west-1.amazonaws.com/disgo-dev/server_img.png"
+  DEFAULT_PHOTO_URL = "https://s3-us-west-1.amazonaws.com/disgo-dev/server_img.png"
 
   validates :name, :img_url, presence: true
   validates :name, uniqueness: true

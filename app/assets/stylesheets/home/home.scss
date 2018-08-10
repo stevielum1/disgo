@@ -1,0 +1,23 @@
+.home {
+  border-bottom: 1px solid gray;
+  width: 100px;
+
+  .home-photo {
+    width: 60px;
+    height: 60px;
+    margin: 5px;
+    border-radius: 30px;
+    background: #4e4e4e;
+    margin: 20px;
+    transition: border-radius 0.50s, background 0.50s;
+    transition-timing-function: cubic-bezier(1, 3, 0.01, 0);
+  }
+
+  .home-photo:hover {
+    cursor: pointer;
+    border-radius: 15px;
+    background: #7289da;
+    transition: border-radius 0.50s, background 0.50s;
+    transition-timing-function: cubic-bezier(1, 3, 0.01, 0);
+  }
+}

@@ -2,6 +2,7 @@ import React from 'react';
 import NavBar from './navbar';
 import Splash from './splash';
 import Footer from './footer';
+import Home from '../app/home';
 import Main from '../app/main';
 import ServerIndexContainer from '../app/server/server_index_container';
 import UserInfoContainer from '../app/user_info/user_info_container';
@@ -11,7 +12,10 @@ const Homepage = ({ loggedIn }) => {
   return (
     loggedIn ? (
       <div className="app-container">
-        <Route path="/" component={ServerIndexContainer} />
+        <div className="app-left-column">
+          <Route path="/" component={Home} />
+          <Route path="/" component={ServerIndexContainer} />
+        </div>
         <Route path="/" component={Main} />
       </div>
     ) : (

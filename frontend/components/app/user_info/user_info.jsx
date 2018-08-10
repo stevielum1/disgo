@@ -52,15 +52,25 @@ class UserInfo extends React.Component {
           </p>
         ))}
         <form onSubmit={this.handleSubmit}>
-          <img
-          src={currentUser.photoUrl}
-          className="user-info-photo" />
-
+          <label htmlFor="user-info-photo-upload">
+            <img
+            src={currentUser.photoUrl}
+            className="user-info-photo" />
+          </label>
           <input
-            type="text"
-            value={this.state.username}
-            onChange={this.handleInput}
-            disabled={currentUser.username === "demo_disgo_user" ? true : false} />
+            id="user-info-photo-upload"
+            type="file" />
+          <div className="edit-username-container">
+            <label htmlFor="user-info-username">Edit username:</label>
+            <input
+              type="text"
+              value={this.state.username}
+              onChange={this.handleInput}
+              disabled={currentUser.username === "demo_disgo_user" ? true : false} />
+            <button
+              className="edit-user-info-button"
+              onClick={this.handleSubmit}>Edit</button>
+          </div>
         </form>
         <button onClick={this.handleLogout}>Log Out</button>
       </div>

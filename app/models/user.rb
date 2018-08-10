@@ -4,6 +4,7 @@ class User < ApplicationRecord
 
   validates :username, :salt, :email, :img_url, :session_token, presence: true
   validates :email, uniqueness: true
+  validates_uniqueness_of :username, :scope => [:salt]
   validates :password, length: { minimum: 6, allow_nil: true }
 
   has_many :owned_servers,
