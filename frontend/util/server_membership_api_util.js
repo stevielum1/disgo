@@ -1,9 +1,12 @@
-export const createMembership = serverId => (
+export const createMembership = data => (
   $.ajax({
     method: 'POST',
     url: `/api/memberships`,
     data: {
-      membership: { server_id: serverId }
+      name: data.name,
+      membership: {
+        server_id: data.serverId
+      }
     }
   })
 );

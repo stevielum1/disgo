@@ -33,7 +33,7 @@ class CreateServerForm extends React.Component {
     this.props.createServer(formData)
       .then(payload => {
         server = payload.server;
-        this.props.createMembership(payload.server.id);
+        this.props.createMembership(payload.server);
       })
       .then(() => this.props.closeModal())
       .then(() => this.props.history.push(`/channels/${server.id}`));

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 class SessionForm extends React.Component {
@@ -26,15 +26,13 @@ class SessionForm extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    this.props.processForm(this.state)
-      .then(this.props.history.push('/home'));
+    this.props.processForm(this.state);
   }
 
   handleDemoLogin(e) {
     e.preventDefault();
     const demoUser = { email: "demo@disgo.com", password: "disgoPW" };
-    this.props.processForm(demoUser)
-      .then(() => this.props.history.push('/home'));
+    this.props.processForm(demoUser);
   }
 
   render() {
@@ -135,4 +133,4 @@ class SessionForm extends React.Component {
   }
 }
 
-export default withRouter(SessionForm);
+export default SessionForm;
