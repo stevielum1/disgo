@@ -6,10 +6,12 @@ class ServerInfoForm extends React.Component {
     super(props);
     this.state = this.props.server;
     this.state.delete = false;
+    this.state.leave = false;
+    this.state.owner = this.props.currentUser.id === this.props.server.ownerId;
     this.handleInput = this.handleInput.bind(this);
     this.handleFile = this.handleFile.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleDelete = this.handleDelete.bind(this);
+    this.handleWarning = this.handleWarning.bind(this);
   }
 
   componentDidMount() {
@@ -37,13 +39,23 @@ class ServerInfoForm extends React.Component {
       .then(() => this.props.closeModal());
   }
 
-  handleDelete(e) {
-    if (this.state.delete === false) {
-      this.setState({ delete: true });
+  handleWarning(e) {
+    if (this.state.owner) {
+      if (this.state.delete === false) {
+        this.setState({ delete: true });
+      } else {
+        this.props.deleteServer(this.props.server.id)
+          .then(() => this.props.history.push('/home'))
+          .then(() => this.props.closeModal());
+      }
     } else {
-      this.props.deleteServer(this.props.server.id)
-        .then(() => this.props.history.push('/home'))
-        .then(() => this.props.closeModal());
+      if (this.state.leave === false) {
+        this.setState({ leave: true });
+      } else {
+        this.props.deleteMembership(this.props.membership.id)
+          .then(() => this.props.history.push('/home'))
+          .then(() => this.props.closeModal());
+      }
     }
   }
 
@@ -52,7 +64,13 @@ class ServerInfoForm extends React.Component {
 
     if (server === undefined) return <div>Loading...</div>;
 
-    const deleteText = this.state.delete ? "ARE YOU SURE?" : "Delete Server";
+    let warningText;
+
+    if (this.state.owner) {
+      warningText = this.state.delete ? "ARE YOU SURE?" : "Delete Server";
+    } else {
+      warningText = this.state.leave ? "ARE YOU SURE?" : "Leave Server";
+    }
 
     return (
       <div className="server-info-form-container">
@@ -82,7 +100,7 @@ class ServerInfoForm extends React.Component {
               onClick={this.handleSubmit}>Edit</button>
           </div>
         </form>
-        <button onClick={this.handleDelete}>{deleteText}</button>
+        <button onClick={this.handleWarning}>{warningText}</button>
       </div>
     )
   }

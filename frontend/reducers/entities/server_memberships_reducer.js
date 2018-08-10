@@ -2,6 +2,7 @@ import {
   RECEIVE_MEMBERSHIP,
   REMOVE_MEMBERSHIP
 } from '../../actions/server_membership_actions';
+import { RECEIVE_SERVERS } from '../../actions/server_actions';
 import merge from 'lodash/merge';
 
 const serverMembershipsReducer = (state = {}, action) => {
@@ -11,11 +12,10 @@ const serverMembershipsReducer = (state = {}, action) => {
       return merge({}, state, { [action.membership.id]: action.membership });
     case REMOVE_MEMBERSHIP:
       let newState = merge({}, state);
-      const membershipId = Object.values(state).filter(membership => {
-        return membership.serverId === action.serverId;
-      })[0];
-      delete newState[membershipId];
+      delete newState[action.membershipId];
       return newState;
+    case RECEIVE_SERVERS:
+      return action.payload.serverMemberships;
     default:
       return state;
   }

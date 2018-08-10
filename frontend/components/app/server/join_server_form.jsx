@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 
 class JoinServerForm extends React.Component {
   constructor(props) {
@@ -20,18 +21,14 @@ class JoinServerForm extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
+    let membership;
     this.props.createMembership(this.state)
       .then(payload => {
-        this.props.fetchServers();
-        return payload.membership;
-      })
-      .then(membership =>  {
-        this.props.closeModal();
-        return membership;
-      })
-      .then(membership => {
-        debugger
-        this.props.history.push(`/channels/${membership.serverId}`);
+        membership = payload.membership;
+
+        this.props.fetchServers()
+          .then(() => this.props.closeModal())
+          .then(() => this.props.history.push(`/channels/${membership.serverId}`))
       });
   }
 
@@ -46,7 +43,7 @@ class JoinServerForm extends React.Component {
           </p>
         ))}
         <p>Enter the name of the server<br />you want to join below:</p>
-        <form>
+        <form onSubmit={this.handleSubmit}>
           <input
             type="text"
             value={this.state.name}
@@ -61,4 +58,4 @@ class JoinServerForm extends React.Component {
   }
 }
 
-export default JoinServerForm;
+export default withRouter(JoinServerForm);

@@ -10,3 +10,10 @@ export const createMembership = data => (
     }
   })
 );
+
+export const deleteMembership = id => (
+  $.ajax({
+    method: 'DELETE',
+    url: `/api/memberships/${id}`
+  })
+);

@@ -4,8 +4,18 @@ import CreateServerFormContainer from './create_server_form_container';
 import Modal from '../modal/modal';
 
 class ServerIndex extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
   componentDidMount() {
     this.props.fetchServers();
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.memberships.length !== nextProps.memberships.length) {
+      this.props.fetchServers();
+    }
   }
 
   render() {

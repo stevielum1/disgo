@@ -22,6 +22,11 @@ class Api::MembershipsController < ApplicationController
     end
   end
 
+  def destroy
+    @membership = ServerMembership.find_by(id: params[:id])
+    @membership.destroy
+  end
+
   private
   def membership_params
     params.require(:membership).permit(:server_id)
