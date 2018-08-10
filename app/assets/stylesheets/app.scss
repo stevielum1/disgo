@@ -1,0 +1,11 @@
+.app-container {
+  display: flex;
+
+  .app-server-column {
+    width: 100px;
+  }
+
+  .app-channel-column {
+    width: 240px;
+  }
+}

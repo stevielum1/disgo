@@ -6,15 +6,20 @@ import Home from '../app/home';
 import Main from '../app/main';
 import ServerIndexContainer from '../app/server/server_index_container';
 import UserInfoContainer from '../app/user_info/user_info_container';
+import Modal from '../app/modal/modal';
 import { Route } from 'react-router-dom';
 
 const Homepage = ({ loggedIn }) => {
   return (
     loggedIn ? (
       <div className="app-container">
-        <div className="app-left-column">
+        <Modal />
+        <div className="app-server-column">
           <Route path="/" component={Home} />
           <Route path="/" component={ServerIndexContainer} />
+        </div>
+        <div className="app-channel-column">
+          <Route path="/" component={UserInfoContainer} />
         </div>
         <Route path="/" component={Main} />
       </div>

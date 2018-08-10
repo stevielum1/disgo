@@ -9,22 +9,17 @@ class ServerIndex extends React.Component {
   }
 
   render() {
+    const { servers, currentUser, openModal } = this.props;
     return (
       <div className="server-index-container">
-        <Modal />
         <ul>
-          { this.props.servers.map(server => (
+          { servers.map(server => (
               <ServerIndexItem key={server.id} server={server} />
             ))
           }
           <li className="server-create"
-          onClick={() => this.props.openModal('createServer')}><i className="fas fa-plus"></i></li>
+          onClick={() => openModal('createServer')}><i className="fas fa-plus"></i></li>
         </ul>
-        <div className="user-info-container">
-          <i
-            className="fas fa-cog"
-            onClick={() => this.props.openModal('userInfo')}></i>
-        </div>
       </div>
     )
   }
