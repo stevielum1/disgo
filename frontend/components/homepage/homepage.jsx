@@ -10,6 +10,7 @@ import ChannelIndexContainer from '../app/channel/channel_index_container';
 import UserInfoContainer from '../app/user_info/user_info_container';
 import Modal from '../app/modal/modal';
 import { Route } from 'react-router-dom';
+import { ProtectedRoute } from '../../util/route_util';
 
 const Homepage = ({ loggedIn }) => {
   return (
@@ -22,8 +23,8 @@ const Homepage = ({ loggedIn }) => {
         </div>
         <div className="app-channel-column">
           <div>
-            <Route path="/channels/:serverId" component={ServerInfoContainer} />
-            <Route path="/channels/:serverId" component={ChannelIndexContainer} />
+            <ProtectedRoute path="/channels/:serverId" component={ServerInfoContainer} />
+            <ProtectedRoute path="/channels/:serverId" component={ChannelIndexContainer} />
           </div>
           <Route path="/" component={UserInfoContainer} />
         </div>

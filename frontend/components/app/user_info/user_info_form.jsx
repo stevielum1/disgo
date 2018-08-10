@@ -35,7 +35,6 @@ class UserInfo extends React.Component {
     if (this.state.photoFile) {
       formData.append('user[photo]', this.state.photoFile);
     }
-    debugger
     this.props.updateUser(formData)
       .then(() => this.props.closeModal());
   }
@@ -63,7 +62,8 @@ class UserInfo extends React.Component {
           </label>
           <input
             id="user-info-photo-upload"
-            type="file" />
+            type="file"
+            onChange={this.handleFile} />
           <div className="edit-username-container">
             <label htmlFor="user-info-form-username">Edit username:</label>
             <input
