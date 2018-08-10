@@ -61,12 +61,13 @@ class ServerInfoForm extends React.Component {
 
   render() {
     const { server, errors } = this.props;
+    const { owner } = this.state;
 
     if (server === undefined) return <div>Loading...</div>;
 
     let warningText;
 
-    if (this.state.owner) {
+    if (owner) {
       warningText = this.state.delete ? "ARE YOU SURE?" : "Delete Server";
     } else {
       warningText = this.state.leave ? "ARE YOU SURE?" : "Leave Server";
@@ -74,7 +75,7 @@ class ServerInfoForm extends React.Component {
 
     return (
       <div className="server-info-form-container">
-        <h1>{server.name} info</h1>
+        <h1>{server.name}</h1>
         { errors.map((error, idx) => (
           <p key={idx} className="server-error">
             {error}
@@ -88,19 +89,25 @@ class ServerInfoForm extends React.Component {
           </label>
           <input
             id="server-info-photo-upload"
-            type="file" />
+            type="file"
+            onChange={this.handleFile}
+            disabled={!owner} />
           <div className="edit-server-name-container">
             <label htmlFor="server-info-form-name">Edit server name:</label>
             <input
               type="text"
               value={this.state.name}
-              onChange={this.handleInput} />
+              onChange={this.handleInput}
+              disabled={!owner} />
             <button
               className="edit-server-info-button"
-              onClick={this.handleSubmit}>Edit</button>
+              onClick={this.handleSubmit}
+              disabled={!owner}>Edit</button>
           </div>
         </form>
-        <button onClick={this.handleWarning}>{warningText}</button>
+        <button
+          type="submit"
+          onClick={this.handleWarning}>{warningText}</button>
       </div>
     )
   }

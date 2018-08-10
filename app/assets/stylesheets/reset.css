@@ -49,6 +49,6 @@ table {
   border-spacing: 0;
 }
 
-button:hover {
+button[type="submit"]:hover {
   cursor: pointer;
 }

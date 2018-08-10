@@ -5,6 +5,8 @@
 
   h1 {
     color: white;
+    font-size: 24px;
+    text-align: center;
   }
 
   form {
@@ -39,6 +41,13 @@
       padding-bottom: 10px;
     }
 
+    input[type="text"] {
+      outline: none;
+      border: 0;
+      padding: 5px;
+      border-radius: 5px;
+    }
+
     .edit-server-info-button {
       color: white;
       background: #7289da;
@@ -47,7 +56,8 @@
       font-size: 14px;
     }
 
-    .edit-server-info-button:hover {
+    .edit-server-info-button:hover:enabled {
+      cursor: pointer;
       background: #6479c3;
       transition: background 0.2s;
     }

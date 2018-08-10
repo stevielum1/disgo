@@ -49,6 +49,7 @@ class UserInfo extends React.Component {
 
   render() {
     const { currentUser, errors } = this.props;
+    const disabled = currentUser.username === "demo_disgo_user";
     return (
       <div className="user-info-form-container">
         <h1>{currentUser.username}'s info</h1>
@@ -66,20 +67,22 @@ class UserInfo extends React.Component {
           <input
             id="user-info-photo-upload"
             type="file"
-            onChange={this.handleFile} />
+            onChange={this.handleFile}
+            disabled={disabled} />
           <div className="edit-username-container">
             <label htmlFor="user-info-form-username">Edit username:</label>
             <input
               type="text"
               value={this.state.username}
               onChange={this.handleInput}
-              disabled={currentUser.username === "demo_disgo_user" ? true : false} />
+              disabled={disabled} />
             <button
               className="edit-user-info-button"
-              onClick={this.handleSubmit}>Edit</button>
+              onClick={this.handleSubmit}
+              disabled={disabled}>Edit</button>
           </div>
         </form>
-        <button onClick={this.handleLogout}>Log Out</button>
+        <button type="submit" onClick={this.handleLogout}>Log Out</button>
       </div>
     )
   }
