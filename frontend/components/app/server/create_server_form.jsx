@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 
 class CreateServerForm extends React.Component {
   constructor(props) {
@@ -28,8 +29,14 @@ class CreateServerForm extends React.Component {
     if (this.state.photoFile) {
       formData.append('server[photo]', this.state.photoFile);
     }
+    let server;
     this.props.createServer(formData)
-      .then(() => this.props.closeModal());
+      .then(payload => {
+        server = payload.server;
+        this.props.createMembership(payload.server.id);
+      })
+      .then(() => this.props.closeModal())
+      .then(() => this.props.history.push(`/channels/${server.id}`));
   }
 
   handleFile(e) {
@@ -86,4 +93,4 @@ class CreateServerForm extends React.Component {
   }
 }
 
-export default (CreateServerForm);
+export default withRouter(CreateServerForm);

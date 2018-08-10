@@ -11,7 +11,10 @@ const serverMembershipsReducer = (state = {}, action) => {
       return merge({}, state, { [action.membership.id]: action.membership });
     case REMOVE_MEMBERSHIP:
       let newState = merge({}, state);
-      delete newState[action.id];
+      const membershipId = Object.values(state).filter(membership => {
+        return membership.serverId === action.serverId;
+      })[0];
+      delete newState[membershipId];
       return newState;
     default:
       return state;

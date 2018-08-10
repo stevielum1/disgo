@@ -10,7 +10,18 @@ class User < ApplicationRecord
   has_many :owned_servers,
   primary_key: :id,
   foreign_key: :owner_id,
-  class_name: :Server
+  class_name: :Server,
+  dependent: :destroy
+
+  has_many :server_memberships,
+  primary_key: :id,
+  foreign_key: :user_id,
+  class_name: :ServerMembership,
+  dependent: :destroy
+
+  has_many :memberships,
+  through: :server_memberships,
+  source: :server
 
   has_one_attached :photo
 

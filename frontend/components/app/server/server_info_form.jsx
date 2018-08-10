@@ -42,8 +42,8 @@ class ServerInfoForm extends React.Component {
       this.setState({ delete: true });
     } else {
       this.props.deleteServer(this.props.server.id)
-      .then(() => this.props.history.push("/"))
-      .then(() => this.props.closeModal());
+        .then(() => this.props.history.push('/home'))
+        .then(() => this.props.closeModal());
     }
   }
 

@@ -10,6 +10,16 @@ class Server < ApplicationRecord
   foreign_key: :owner_id,
   class_name: :User
 
+  has_many :memberships,
+  primary_key: :id,
+  foreign_key: :server_id,
+  class_name: :ServerMembership,
+  dependent: :destroy
+
+  has_many :members,
+  through: :memberships,
+  source: :user
+
   has_one_attached :photo
 
   after_initialize :ensure_img_url
