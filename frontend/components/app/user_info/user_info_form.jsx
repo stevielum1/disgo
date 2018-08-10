@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 
 class UserInfo extends React.Component {
   constructor(props) {
@@ -7,7 +8,7 @@ class UserInfo extends React.Component {
       id: this.props.currentUser.id,
       username: this.props.currentUser.username,
       photoFile: null
-    }
+    };
     this.handleInput = this.handleInput.bind(this);
     this.handleLogout = this.handleLogout.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -42,13 +43,15 @@ class UserInfo extends React.Component {
   handleLogout(e) {
     e.preventDefault();
     this.props.logout()
-      .then(() => this.props.closeModal());
+      .then(() => this.props.closeModal())
+      .then(() => this.props.history.push('/'));
   }
 
   render() {
     const { currentUser, errors } = this.props;
     return (
       <div className="user-info-form-container">
+        <h1>{currentUser.username}'s info</h1>
         { errors.map((error, idx) => (
           <p key={idx} className="user-error">
             {error}
@@ -82,4 +85,4 @@ class UserInfo extends React.Component {
   }
 }
 
-export default UserInfo;
+export default withRouter(UserInfo);

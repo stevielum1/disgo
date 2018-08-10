@@ -1,9 +1,15 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 
 class ServerInfoForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = this.props.server;
+    this.state.delete = false;
+    this.handleInput = this.handleInput.bind(this);
+    this.handleFile = this.handleFile.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
   }
 
   componentDidMount() {
@@ -27,15 +33,30 @@ class ServerInfoForm extends React.Component {
     if (this.state.photoFile) {
       formData.append('server[photo]', this.state.photoFile);
     }
-    debugger
     this.props.updateServer(formData)
       .then(() => this.props.closeModal());
   }
 
+  handleDelete(e) {
+    if (this.state.delete === false) {
+      this.setState({ delete: true });
+    } else {
+      this.props.deleteServer(this.props.server.id)
+      .then(() => this.props.history.push("/"))
+      .then(() => this.props.closeModal());
+    }
+  }
+
   render() {
     const { server, errors } = this.props;
+
+    if (server === undefined) return <div>Loading...</div>;
+
+    const deleteText = this.state.delete ? "ARE YOU SURE?" : "Delete Server";
+
     return (
       <div className="server-info-form-container">
+        <h1>{server.name} info</h1>
         { errors.map((error, idx) => (
           <p key={idx} className="server-error">
             {error}
@@ -51,7 +72,7 @@ class ServerInfoForm extends React.Component {
             id="server-info-photo-upload"
             type="file" />
           <div className="edit-server-name-container">
-            <label htmlFor="server-info-form-name">Edit username:</label>
+            <label htmlFor="server-info-form-name">Edit server name:</label>
             <input
               type="text"
               value={this.state.name}
@@ -61,9 +82,10 @@ class ServerInfoForm extends React.Component {
               onClick={this.handleSubmit}>Edit</button>
           </div>
         </form>
+        <button onClick={this.handleDelete}>{deleteText}</button>
       </div>
     )
   }
 }
 
-export default ServerInfoForm;
+export default withRouter(ServerInfoForm);

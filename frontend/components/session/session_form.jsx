@@ -1,17 +1,17 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 class SessionForm extends React.Component {
   constructor(props) {
     super(props);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleDemoLogin = this.handleDemoLogin.bind(this);
     this.state = {
       username: "",
       email: "",
       password: ""
-    }
+    };
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleDemoLogin = this.handleDemoLogin.bind(this);
   }
 
   componentDidMount() {
@@ -26,13 +26,15 @@ class SessionForm extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    this.props.processForm(this.state);
+    this.props.processForm(this.state)
+      .then(this.props.history.push('/home'));
   }
 
   handleDemoLogin(e) {
     e.preventDefault();
     const demoUser = { email: "demo@disgo.com", password: "disgoPW" };
-    this.props.processForm(demoUser);
+    this.props.processForm(demoUser)
+      .then(() => this.props.history.push('/home'));
   }
 
   render() {
@@ -133,4 +135,4 @@ class SessionForm extends React.Component {
   }
 }
 
-export default SessionForm;
+export default withRouter(SessionForm);

@@ -18,8 +18,8 @@ const Homepage = ({ loggedIn }) => {
       <div className="app-container">
         <Modal />
         <div className="app-server-column">
-          <Route path="/" component={Home} />
-          <Route path="/" component={ServerIndexContainer} />
+          <ProtectedRoute path="/" component={Home} />
+          <ProtectedRoute path="/" component={ServerIndexContainer} />
         </div>
         <div className="app-channel-column">
           <div>

@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { closeModal } from '../../../actions/modal_actions';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import { Route } from 'react-router-dom';
 
 import CreateServerFormContainer from '../server/create_server_form_container';
 import UserInfoFormContainer from '../user_info/user_info_form_container';
@@ -18,7 +19,8 @@ const Modal = ({ modal, closeModal }) => {
       component = <UserInfoFormContainer />;
       break;
     case 'serverInfo':
-      component = <ServerInfoFormContainer />
+      component = <Route path="/channels/:serverId" component={ServerInfoFormContainer} />;
+      break;
     default:
       return null;
   }
