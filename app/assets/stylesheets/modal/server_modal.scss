@@ -28,9 +28,18 @@
         padding: 30px 10px;
       }
 
+      .server-input-section {
+        display: flex;
+        justify-content: space-around;
+        padding-bottom: 20px;
+      }
+
       label {
         text-align: left;
         padding: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
 
         p {
           text-transform: uppercase;
@@ -70,6 +79,53 @@
       button:hover {
         background: #506098;
         transition: background, 0.2s;
+      }
+
+      .server-photo-input-label {
+        align-items: center;
+
+        .server-photo-input-placeholder {
+          text-align: center;
+          color: white;
+          width: 100px;
+          height: 100px;
+          background: #7289da;
+          border: 5px solid #e4e4e4;
+          border-radius: 100px;
+
+          p {
+            display: none;
+            color: white;
+          }
+
+          p:first-child {
+            padding-top: 37px;
+          }
+        }
+
+        .server-photo-input-placeholder:hover {
+          cursor: pointer;
+          background: radial-gradient(#7289da, rgba(0,0,0,0.9));
+
+          p {
+            display: block;
+          }
+        }
+      }
+
+      input[type="file"] {
+        display: none;
+      }
+
+      .server-input-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .server-photo-filename {
+          width: 100%;
+          overflow: hidden;
+        }
       }
     }
   }
