@@ -13,7 +13,7 @@ class ServerIndex extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.props.memberships.length !== nextProps.memberships.length) || (this.props.servers.length !== nextProps.servers.length) {
+    if ((this.props.memberships.length !== nextProps.memberships.length) || (this.props.servers.length !== nextProps.servers.length)) {
       this.props.fetchServers();
     }
   }
