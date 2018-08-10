@@ -4,7 +4,7 @@ import { closeModal } from '../../../actions/modal_actions';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { Route } from 'react-router-dom';
 
-import CreateServerFormContainer from '../server/create_server_form_container';
+import NewServer from '../server/new_server';
 import UserInfoFormContainer from '../user_info/user_info_form_container';
 import ServerInfoFormContainer from '../server/server_info_form_container';
 
@@ -12,8 +12,8 @@ const Modal = ({ modal, closeModal }) => {
   if (!modal) return null;
   let component;
   switch (modal) {
-    case 'createServer':
-      component = <CreateServerFormContainer />;
+    case 'newServer':
+      component = <NewServer />;
       break;
     case 'userInfo':
       component = <UserInfoFormContainer />;

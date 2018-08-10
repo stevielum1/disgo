@@ -1,0 +1,26 @@
+.new-server-container {
+  background: white;
+  height: 400px;
+  width: 500px;
+  border-radius: 5px;
+  overflow: hidden;
+
+  .new-server-content {
+    display: flex;
+
+    .new-server-create {
+    }
+
+    .new-server-create:hover {
+      cursor: pointer;
+    }
+
+    .new-server-join {
+
+    }
+
+    .new-server-join:hover {
+      cursor: pointer;
+    }
+  }
+}

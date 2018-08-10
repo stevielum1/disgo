@@ -17,8 +17,8 @@ class ServerIndex extends React.Component {
               <ServerIndexItem key={server.id} server={server} />
             ))
           }
-          <li className="server-create"
-          onClick={() => openModal('createServer')}><i className="fas fa-plus"></i></li>
+          <li className="server-new"
+          onClick={() => openModal('newServer')}><i className="fas fa-plus"></i></li>
         </ul>
       </div>
     )

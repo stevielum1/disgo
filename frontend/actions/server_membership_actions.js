@@ -25,8 +25,8 @@ const clearMembershipErrors = () => ({
   type: CLEAR_MEMBERSHIP_ERRORS
 });
 
-export const createMembership = data => dispatch => (
-  MembershipApiUtil.createMembership(data)
+export const createMembership = serverId => dispatch => (
+  MembershipApiUtil.createMembership(serverId)
     .then(
       membership => dispatch(receiveMembership(membership)),
       err => dispatch(receiveMembershipErrors(err.responseJSON))

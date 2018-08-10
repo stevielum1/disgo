@@ -1,0 +1,8 @@
+.new-server-appear {
+  transform: translateX(100%);
+}
+
+.new-server-appear.new-server-appear-active {
+  transform: translateX(0);
+  transition: transform 0.25s
+}
