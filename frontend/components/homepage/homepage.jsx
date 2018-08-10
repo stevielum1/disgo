@@ -5,6 +5,7 @@ import Footer from './footer';
 import Home from '../app/home';
 import Main from '../app/main';
 import ServerIndexContainer from '../app/server/server_index_container';
+import ServerInfoContainer from '../app/server/server_info_container';
 import ChannelIndexContainer from '../app/channel/channel_index_container';
 import UserInfoContainer from '../app/user_info/user_info_container';
 import Modal from '../app/modal/modal';
@@ -20,7 +21,10 @@ const Homepage = ({ loggedIn }) => {
           <Route path="/" component={ServerIndexContainer} />
         </div>
         <div className="app-channel-column">
-          <Route path="/" component={ChannelIndexContainer} />
+          <div>
+            <Route path="/channels/:serverId" component={ServerInfoContainer} />
+            <Route path="/channels/:serverId" component={ChannelIndexContainer} />
+          </div>
           <Route path="/" component={UserInfoContainer} />
         </div>
         <Route path="/" component={Main} />

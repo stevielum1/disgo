@@ -1,0 +1,62 @@
+.server-info-form-container {
+  form {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid gray;
+
+    .server-info-form-photo {
+      width: 100px;
+      height: 100px;
+      border-radius: 50px;
+      margin: 10px;
+    }
+
+    .server-info-form-photo:hover {
+      // color: radial-gradient(rgba(0,0,0,1), rgba(100,100,100,1));
+      opacity: 0.7;
+      cursor: pointer;
+    }
+
+    input[type="file"] {
+      display: none;
+    }
+  }
+
+  .edit-server-name-container {
+    display: flex;
+    flex-direction: column;
+
+    label {
+      color: white;
+      padding-bottom: 10px;
+    }
+
+    .edit-server-info-button {
+      color: white;
+      background: #7289da;
+      padding: 5px;
+      width: 50%;
+      font-size: 14px;
+    }
+
+    .edit-server-info-button:hover {
+      background: #6479c3;
+      transition: background 0.2s;
+    }
+  }
+
+  button {
+    border: none;
+    border-radius: 5px;
+    font-size: 20px;
+    color: red;
+    background-color: transparent;
+    margin-top: 10px;
+    padding: 10px;
+    width: 100%;
+  }
+
+  button:hover {
+    background: rgba(255,100,100,0.2);
+  }
+}

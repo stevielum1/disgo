@@ -1,0 +1,16 @@
+.server-info-container {
+  background: #2C2F33;
+  display: flex;
+  justify-content: space-between;
+
+  h2, i{
+    color: white;
+    padding: 20px;
+  }
+}
+
+.server-info-container:hover {
+  cursor: pointer;
+  background: rgba(0,0,0,0.1);
+  transition: background 0.2s;
+}
