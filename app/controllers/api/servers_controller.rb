@@ -1,7 +1,6 @@
 class Api::ServersController < ApplicationController
   def index
     @servers = current_user.memberships;
-    # @servers = Server.where(owner_id: current_user.id)
     render :index
   end
 

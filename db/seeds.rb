@@ -6,4 +6,37 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-User.create({ username: "demo_disgo_user", email: "demo@disgo.com", password: "disgoPW" })
+user = User.create({ username: "demo_disgo_user", email: "demo@disgo.com", password: "disgoPW" })
+
+users = []
+users << user
+
+50.times do
+  name = Faker::Name.first_name
+  user = {
+    username: Faker::Internet.username(name),
+    email: Faker::Internet.free_email(name),
+    password: Faker::Internet.password(6)
+  }
+  user = User.create(user)
+  users << user
+end
+
+servers = []
+
+20.times do
+  server = {
+    name: Faker::Space.moon + " " + Faker::Space.star,
+    owner_id: users.sample[:id]
+  }
+  server = Server.create(server)
+  servers << server
+end
+
+users.each do |user|
+  count = 0
+  until count >= 5 do
+    membership = ServerMembership.new(user_id: user.id, server_id: servers.sample[:id])
+    count += 1 if membership.save
+  end
+end

@@ -2,10 +2,14 @@
   background: #2C2F33;
   display: flex;
   justify-content: space-between;
+  height: 50px;
 
-  h2, i{
+  h2, i {
     color: white;
-    padding: 20px;
+    padding: 15px;
+    align-self: center;
+    white-space: nowrap;
+    overflow: hidden;
   }
 }
 

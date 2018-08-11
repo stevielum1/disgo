@@ -7,7 +7,7 @@ json.servers do
 end
 
 json.serverMemberships do
-  @servers.each do |server|
+  @servers.includes(:memberships).each do |server|
     server.memberships.each do |membership|
       json.set! membership.id do
         json.extract! membership, :id, :user_id, :server_id
