@@ -15,7 +15,11 @@ const serverMembershipsReducer = (state = {}, action) => {
       delete newState[action.membershipId];
       return newState;
     case RECEIVE_SERVERS:
-      return action.payload.serverMemberships;
+      if (action.payload.serverMemberships) {
+        return action.payload.serverMemberships;
+      } else {
+        return {};
+      }
     default:
       return state;
   }

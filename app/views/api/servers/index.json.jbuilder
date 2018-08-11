@@ -15,3 +15,28 @@ json.serverMemberships do
     end
   end
 end
+
+json.users do
+  @servers.includes(:members).each do |server|
+    server.members.each do |member|
+      json.set! member.id do
+        json.partial! '/api/users/user', user: member
+      end
+    end
+  end
+end
+
+json.channels do
+  @servers.includes(:channels).each do |server|
+    server.channels.each do |channel|
+      json.set! channel.id do
+        json.extract! channel, :id, :name, :server_id
+        if channel.type = 0
+          json.type "TEXT"
+        else
+          json.type "VOICE"
+        end
+      end
+    end
+  end
+end
