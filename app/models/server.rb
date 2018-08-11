@@ -20,6 +20,11 @@ class Server < ApplicationRecord
   through: :memberships,
   source: :user
 
+  has_many :channels,
+  primary_key: :id,
+  foreign_key: :server_id,
+  class_name: :Channel
+
   has_one_attached :photo
 
   after_initialize :ensure_img_url

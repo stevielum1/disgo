@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     resources :users, only: [:create, :update]
     resources :servers, only: [:index, :create, :update, :destroy]
     resources :memberships, only: [:create, :destroy]
+    resources :channels, only: [:create, :update, :destroy]
   end
 
   root to: 'static_pages#root'
