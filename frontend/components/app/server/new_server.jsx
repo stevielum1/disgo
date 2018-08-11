@@ -28,11 +28,15 @@ class NewServer extends React.Component {
           <div className="new-server-content">
             <div className="new-server-create"
               onClick={() => this.updateContent('create')} >
-              <button>Create a Server</button>
+              <h2>Create</h2>
+              <p>Create a new server and invite your friends. It's free!</p>
+              <button type="submit">Create a Server</button>
             </div>
             <div className="new-server-join"
               onClick={() => this.updateContent('join')}>
-              <button>Join a Server</button>
+              <h2>Join</h2>
+              <p>Enter a server name and join your friend's server.</p>
+              <button type="submit">Join a Server</button>
             </div>
           </div>
         </div>

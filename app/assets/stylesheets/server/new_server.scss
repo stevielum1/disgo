@@ -4,23 +4,96 @@
   width: 500px;
   border-radius: 5px;
   overflow: hidden;
+  box-sizing: border-box;
+  padding: 20px;
+
+  > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 100%;
+  }
+
+  h1 {
+    color: #7489da;
+    text-align: center;
+    font-weight: 900;
+    font-size: 18px;
+    text-transform: uppercase;
+    padding: 20px;
+  }
 
   .new-server-content {
     display: flex;
+    justify-content: center;
 
-    .new-server-create {
+    div {
+      border: 1px solid #dedede;
+      border-radius: 3px;
+      margin: 10px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+      box-sizing: border-box;
+
+      button {
+        width: 100%;
+        outline: none;
+        border: 0;
+        color: white;
+        font-size: 16px;
+        padding: 10px 0;
+        border-radius: 2px;
+      }
     }
 
-    .new-server-create:hover {
+    div:hover {
       cursor: pointer;
+    }
+
+    h2 {
+      padding: 10px;
+    }
+
+    p {
+      color: #afafaf;
+      text-align: center;
+      font-size: 14px;
+      font-weight: 100;
+      padding: 50px 0 80px 0;
+    }
+
+    .new-server-create {
+      h2 {
+        color: #7489da;
+        text-transform: uppercase;
+      }
+      button {
+        background: #7489da;
+      }
+    }
+
+    .new-server-create:hover button {
+      background: #697bc1;
+      transition: background 0.2s;
     }
 
     .new-server-join {
-
+      h2 {
+        color: #43b581;
+        text-transform: uppercase;
+      }
+      button {
+        background: #43b581;
+      }
     }
 
-    .new-server-join:hover {
-      cursor: pointer;
+    .new-server-join:hover button {
+      background: #3ba072;
+      transition: background, 0.2s;
     }
   }
 }
