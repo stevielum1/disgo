@@ -4,7 +4,7 @@ import { closeModal } from '../../../actions/modal_actions';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { Route } from 'react-router-dom';
 
-import Server from '../server/new_server';
+import NewServer from '../server/new_server';
 import CreateChannelContainer from '../channel/create_channel_container';
 import EditChannelContainer from '../channel/edit_channel_container';
 import UserInfoFormContainer from '../user_info/user_info_form_container';

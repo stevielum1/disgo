@@ -19,27 +19,55 @@ class ChannelForm extends React.Component {
       .then(payload => {
         const channel = payload.channel;
         this.props.history.push(`/channels/${channel.serverId}/${channel.id}`);
-      });
+      })
+      .then(() => this.props.closeModal());
   }
 
   render() {
-    const { formType, processForm } = this.props;
+    const { formType, processForm, errors, owner } = this.props;
 
-    const headingText = formType === "create" ? "Create channel" : "Edit channel";
+    let headingText, buttonText, deleteButton;
 
-    const buttonText = formType === "create" ? "Create" : "Edit";
+    if (formType === "create") {
+      headingText = "Create channel";
+      buttonText = "Create Channel";
+      deleteButton = null;
+    } else {
+      headingText = "Edit channel";
+      buttonText = "Edit Channel";
+      if (owner) {
+        deleteButton = (
+          <div className="delete-channel">
+          <button
+          className="delete-channel-button"
+          disabled={!owner} >Delete Channel</button>
+          </div>
+        )
+      } else {
+        deleteButton = null;
+      }
+    }
 
     return (
       <div className="channel-form-container">
         <h2>{headingText}</h2>
+        { errors.map((error, idx) => (
+          <p className="channel-error" key={idx}>
+            {error}
+          </p>
+        ))}
         <form onSubmit={this.handleSubmit}>
           <input
             type="text"
             value={this.state.name}
             onChange={this.handleInput}
-            autoFocus="true" />
+            autoFocus="true"
+            disabled={!owner} />
+            <button
+              onSubmit={this.handleSubmit}
+              disabled={!owner} >{buttonText}</button>
         </form>
-        <button onSubmit={this.handleSubmit}>{buttonText}</button>
+        {deleteButton}
       </div>
     )
   }

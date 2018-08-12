@@ -9,6 +9,11 @@
     text-align: center;
   }
 
+  .server-error {
+    color: red;
+    text-align: center;
+  }
+
   form {
     display: flex;
     align-items: center;
@@ -75,6 +80,7 @@
   }
 
   button:hover {
+    cursor: pointer;
     background: rgba(255,100,100,0.2);
   }
 
