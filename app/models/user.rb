@@ -23,6 +23,11 @@ class User < ApplicationRecord
   through: :server_memberships,
   source: :server
 
+  has_many :messages,
+  primary_key: :id,
+  foreign_key: :author_id,
+  class_name: :Message
+
   has_one_attached :photo
 
   after_initialize :ensure_session_token, :ensure_salt, :ensure_img_url

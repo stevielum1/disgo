@@ -40,3 +40,15 @@ json.channels do
     end
   end
 end
+
+json.messages do
+  @servers.includes(channels: [:messages]).each do |server|
+    server.channels.each do |channel|
+      channel.messages.each do |message|
+        json.set! message.id do
+          json.extract! message, :id, :content, :author_id, :channel_id, :created_at, :updated_at
+        end
+      end
+    end
+  end
+end
