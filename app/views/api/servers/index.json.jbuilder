@@ -30,7 +30,7 @@ json.channels do
   @servers.includes(:channels).each do |server|
     server.channels.each do |channel|
       json.set! channel.id do
-        json.extract! channel, :id, :name, :server_id
+        json.extract! channel, :id, :name, :server_id, :destructible
         if channel.channel_type = 0
           json.type "TEXT"
         else

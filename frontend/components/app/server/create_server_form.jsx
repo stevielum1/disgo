@@ -36,7 +36,8 @@ class CreateServerForm extends React.Component {
       .then(payload => {
         const channel = {
           name: "general",
-          server_id: payload.membership.serverId
+          server_id: payload.membership.serverId,
+          destructible: false
         };
         return this.props.createChannel(channel);
       })

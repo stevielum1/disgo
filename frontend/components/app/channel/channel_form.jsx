@@ -23,6 +23,12 @@ class ChannelForm extends React.Component {
       .then(() => this.props.closeModal());
   }
 
+  handleDelete(e) {
+    e.preventDefault();
+    this.deleteChannel(this.props.match.params.channelId)
+      .then(() => this.props.history.push(`/channels/${this.props.match.params.serverId}`));
+  }
+
   render() {
     const { formType, processForm, errors, owner } = this.props;
 

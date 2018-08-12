@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import ChannelForm from './channel_form';
-import { updateChannel } from '../../../actions/channel_actions';
+import { updateChannel, deleteChannel } from '../../../actions/channel_actions';
 import { closeModal } from '../../../actions/modal_actions';
 
 const mapStateToProps = (state, ownProps) => ({
@@ -12,6 +12,7 @@ const mapStateToProps = (state, ownProps) => ({
 
 const mapDispatchToProps = dispatch => ({
   processForm: channel => dispatch(updateChannel(channel)),
+  deleteChannel: id => dispatch(deleteChannel(id)),
   closeModal: () => dispatch(closeModal())
 });
 

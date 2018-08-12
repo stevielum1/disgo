@@ -1,4 +1,4 @@
-json.extract! @channel, :id, :name, :server_id, :channel_type
+json.extract! @channel, :id, :name, :server_id, :destructible
 
 if @channel.channel_type == 0
   json.type "TEXT"

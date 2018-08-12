@@ -41,7 +41,8 @@ end
 servers.each do |server|
   channel = {
     name: "general",
-    server_id: server.id
+    server_id: server.id,
+    destructible: false
   }
   Channel.create(channel)
 end
