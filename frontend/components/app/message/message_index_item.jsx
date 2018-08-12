@@ -13,8 +13,4 @@ class MessageIndexItem extends React.Component {
   }
 }
 
-const formatTime = date => {
-
-}
-
 export default MessageIndexItem;
