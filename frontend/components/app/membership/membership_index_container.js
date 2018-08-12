@@ -3,7 +3,8 @@ import MembershipIndex from './membership_index';
 import { getMembers } from '../../../reducers/selectors';
 
 const mapStateToProps = (state, ownProps) => ({
-  members: getMembers(state, parseInt(ownProps.match.params.serverId))
+  members: getMembers(state, parseInt(ownProps.match.params.serverId)),
+  server: state.entities.servers[ownProps.match.params.serverId]
 });
 
 const mapDispatchToProps = dispatch => ({

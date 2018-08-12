@@ -8,11 +8,13 @@ class MembershipIndex extends React.Component {
         <h1>Members</h1>
         <ul>
           {
-            this.props.members.map(member => (
-              <MembershipIndexItem
+            this.props.members.map(member => {
+              const owner = this.props.server.ownerId === member.id;
+              return <MembershipIndexItem
                 key={member.id}
-                member={member} />
-            ))
+                member={member}
+                owner={owner} />
+            })
           }
         </ul>
       </div>
