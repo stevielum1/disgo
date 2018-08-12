@@ -7,6 +7,11 @@ class ChannelForm extends React.Component {
     this.state = this.props.channel;
     this.handleInput = this.handleInput.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
+  }
+
+  componentDidMount() {
+    this.props.removeChannelErrors();
   }
 
   handleInput(e) {
@@ -25,8 +30,9 @@ class ChannelForm extends React.Component {
 
   handleDelete(e) {
     e.preventDefault();
-    this.deleteChannel(this.props.match.params.channelId)
-      .then(() => this.props.history.push(`/channels/${this.props.match.params.serverId}`));
+    this.props.deleteChannel(this.props.match.params.channelId)
+      .then(() => this.props.history.push(`/channels/${this.props.match.params.serverId}/${this.props.firstChannel.id}`))
+      .then(() => this.props.closeModal());
   }
 
   render() {
@@ -46,6 +52,7 @@ class ChannelForm extends React.Component {
           <div className="delete-channel">
           <button
           className="delete-channel-button"
+          onClick={this.handleDelete}
           disabled={!owner} >Delete Channel</button>
           </div>
         )

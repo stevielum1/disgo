@@ -1,6 +1,7 @@
 import { RECEIVE_CURRENT_USER } from '../../actions/session_actions';
 import { RECEIVE_SERVERS } from '../../actions/server_actions';
 import merge from 'lodash/merge';
+import { LOGOUT_CURRENT_USER } from '../../actions/session_actions';
 
 const usersReducer = (state = {}, action) => {
   Object.freeze(state);
@@ -11,8 +12,10 @@ const usersReducer = (state = {}, action) => {
       if (action.payload.users) {
         return action.payload.users;
       } else {
-        return {};
+        return state;
       }
+    case LOGOUT_CURRENT_USER:
+      return {};
     default:
       return state;
   }

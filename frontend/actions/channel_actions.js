@@ -48,3 +48,7 @@ export const deleteChannel = id => dispatch => (
       err => dispatch(receiveChannelErrors(err.responseJSON))
     )
 );
+
+export const removeChannelErrors = () => dispatch => (
+  dispatch(clearChannelErrors())
+);

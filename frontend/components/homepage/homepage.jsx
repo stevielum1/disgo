@@ -25,7 +25,7 @@ const Homepage = ({ loggedIn }) => {
         </div>
         <div className="app-channel-column">
           <div>
-            <ProtectedRoute path="/channels/:serverId" component={ServerInfoContainer} />
+            <ProtectedRoute path="/channels/:serverId/:channelId" component={ServerInfoContainer} />
             <ProtectedRoute path="/channels/:serverId/:channelId" component={ChannelIndexContainer} />
           </div>
           <Route path="/" component={UserInfoContainer} />

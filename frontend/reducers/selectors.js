@@ -11,3 +11,10 @@ export const getChannels = (state, serverId) => {
       return channel.serverId === serverId;
     });
 };
+
+export const getFirstChannel = (state, serverId) => {
+  const channels = Object.values(state.entities.channels);
+  for(let i = 0; i < channels.length; i++) {
+    if (channels[i].serverId === serverId) return channels[i];
+  }
+};

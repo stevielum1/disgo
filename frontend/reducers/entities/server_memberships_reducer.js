@@ -4,6 +4,7 @@ import {
 } from '../../actions/server_membership_actions';
 import { RECEIVE_SERVERS } from '../../actions/server_actions';
 import merge from 'lodash/merge';
+import { LOGOUT_CURRENT_USER } from '../../actions/session_actions';
 
 const serverMembershipsReducer = (state = {}, action) => {
   Object.freeze(state);
@@ -18,8 +19,10 @@ const serverMembershipsReducer = (state = {}, action) => {
       if (action.payload.serverMemberships) {
         return action.payload.serverMemberships;
       } else {
-        return {};
+        return state;
       }
+    case LOGOUT_CURRENT_USER:
+      return {};
     default:
       return state;
   }

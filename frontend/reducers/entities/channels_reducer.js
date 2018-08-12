@@ -4,6 +4,7 @@ import {
 } from '../../actions/channel_actions';
 import { RECEIVE_SERVERS } from '../../actions/server_actions';
 import merge from 'lodash/merge';
+import { LOGOUT_CURRENT_USER } from '../../actions/session_actions';
 
 const channelsReducer = (state = {}, action) => {
   Object.freeze(state);
@@ -18,8 +19,10 @@ const channelsReducer = (state = {}, action) => {
       if (action.payload.channels) {
         return action.payload.channels;
       } else {
-        return {};
+        return state;
       }
+    case LOGOUT_CURRENT_USER:
+      return {};
     default:
       return state;
   }

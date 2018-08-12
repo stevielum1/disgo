@@ -1,6 +1,7 @@
 import React from 'react';
 
 const UserInfo = ({ currentUser, openModal }) => {
+  if (currentUser === undefined) return <div>Loading...</div>
   return (
     <div className="user-info-container">
       <div className="user-info-username">
