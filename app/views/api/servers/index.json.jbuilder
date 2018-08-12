@@ -46,7 +46,9 @@ json.messages do
     server.channels.each do |channel|
       channel.messages.each do |message|
         json.set! message.id do
-          json.extract! message, :id, :content, :author_id, :channel_id, :created_at, :updated_at
+          json.extract! message, :id, :content, :author_id, :channel_id
+          json.createdAt message.created_at.strftime('%l:%M %p')
+          json.updatedAt message.updated_at.strftime('%l:%M %p')
         end
       end
     end

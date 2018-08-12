@@ -32,3 +32,10 @@ export const getMembers = (state, serverId) => {
 
   return users;
 };
+
+export const getMessages = (state, channelId) => {
+  return Object.values(state.entities.messages)
+    .filter(message => {
+      return message.channelId === channelId;
+    });
+};
