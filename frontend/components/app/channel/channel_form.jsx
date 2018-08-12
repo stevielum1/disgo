@@ -41,7 +41,7 @@ class ChannelForm extends React.Component {
     } else {
       headingText = "Edit channel";
       buttonText = "Edit Channel";
-      if (owner) {
+      if (owner && this.state.destructible) {
         deleteButton = (
           <div className="delete-channel">
           <button

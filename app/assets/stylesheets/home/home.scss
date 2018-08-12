@@ -1,6 +1,8 @@
 .home-container {
   border-bottom: 2px solid rgba(45,45,45,1);
   background: #202225;
+  position: fixed;
+  z-index: 5;
 
   .home-link {
     display: block;

@@ -1,9 +1,10 @@
 .channels-container {
   width: 100%;
-  height: 100%;
+  height: 695px;
   background: #2C2F33;
-  padding: 20px 5px;
+  padding: 20px 7px;
   box-sizing: border-box;
+  overflow: scroll;
 
   .channels-heading {
     display: flex;
@@ -34,7 +35,7 @@
     color: #72767d;
     border-radius: 5px;
     box-sizing: border-box;
-    margin: 2px;
+    margin: 2px 0;
 
     > div {
       display: flex;
