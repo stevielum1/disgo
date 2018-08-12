@@ -12,9 +12,12 @@ class ChannelIndex extends React.Component {
 
 
     return (
-      <div>
+      <div className="channels-container">
         <div className="text-channels-container">
-          <h2>Text channels</h2>
+          <div className="channels-heading">
+            <h2>Text channels</h2>
+            <i className="fas fa-plus"></i>
+          </div>
           <ul>
             {
               textChannels.map(channel => (
