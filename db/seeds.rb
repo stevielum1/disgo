@@ -45,4 +45,13 @@ servers.each do |server|
     destructible: false
   }
   Channel.create(channel)
+
+  3.times do
+    channel = {
+      name: Faker::Space.moon + " " + Faker::Space.star,
+      server_id: server.id,
+      destructible: true
+    }
+    Channel.create(channel)
+  end
 end
