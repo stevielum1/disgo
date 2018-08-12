@@ -18,6 +18,8 @@
       align-items: center;
       padding: 5px;
       border-radius: 5px;
+      white-space: nowrap;
+      overflow: hidden;
 
       .member-photo {
         width: 30px;
