@@ -3,6 +3,8 @@ import ChannelIndexItem from './channel_index_item';
 
 class ChannelIndex extends React.Component {
   render() {
+    const { openModal } = this.props;
+
     const textChannels = this.props.channels.filter(channel => (
       channel.type === "TEXT"
     ));
@@ -10,20 +12,20 @@ class ChannelIndex extends React.Component {
       channel.type === "VOICE"
     ));
 
-
     return (
       <div className="channels-container">
         <div className="text-channels-container">
           <div className="channels-heading">
             <h2>Text channels</h2>
-            <i className="fas fa-plus"></i>
+            <i onClick={() => openModal('createChannel')} className="fas fa-plus"></i>
           </div>
           <ul>
             {
               textChannels.map(channel => (
                 <ChannelIndexItem
                   key={channel.id}
-                  channel={channel} />
+                  channel={channel}
+                  openModal={openModal} />
               ))
             }
           </ul>
