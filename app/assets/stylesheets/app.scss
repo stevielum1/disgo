@@ -15,5 +15,10 @@
 
   .app-main-column {
     display: flex;
+    flex-grow: 1;
+
+    .app-message-column {
+      flex-grow: 1;
+    }
   }
 }
