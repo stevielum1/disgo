@@ -37,3 +37,11 @@ users.each do |user|
   membership = ServerMembership.new(user_id: user.id, server_id: servers.sample[:id])
   membership.save
 end
+
+servers.each do |server|
+  channel = {
+    name: "general",
+    server_id: server.id
+  }
+  Channel.create(channel)
+end

@@ -19,13 +19,19 @@ class ServerIndex extends React.Component {
   }
 
   render() {
-    const { servers, currentUser, openModal } = this.props;
+    const { servers, currentUser, openModal, channels } = this.props;
     return (
       <div className="server-index-container">
         <ul>
-          { servers.map(server => (
-              <ServerIndexItem key={server.id} server={server} />
-            ))
+          { servers.map(server => {
+              const firstChannel = channels.filter(channel => (
+                channel.serverId === server.id
+              ))[0];
+              return <ServerIndexItem
+                key={server.id}
+                server={server}
+                channel={firstChannel} />
+            })
           }
           <li className="server-new"
           onClick={() => openModal('newServer')}><i className="fas fa-plus"></i></li>
