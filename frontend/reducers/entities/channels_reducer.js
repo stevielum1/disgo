@@ -15,7 +15,7 @@ const channelsReducer = (state = {}, action) => {
       delete newState[action.channelId];
       return newState;
     case RECEIVE_SERVERS:
-      if (action.payload.channel) {
+      if (action.payload.channels) {
         return action.payload.channels;
       } else {
         return {};

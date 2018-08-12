@@ -12,7 +12,7 @@ users = []
 users << user
 
 50.times do
-  name = Faker::Name.first_name
+  name = Faker::Name.unique.first_name
   user = {
     username: Faker::Internet.username(name),
     email: Faker::Internet.free_email(name),
@@ -24,7 +24,7 @@ end
 
 servers = []
 
-20.times do
+10.times do
   server = {
     name: Faker::Space.moon + " " + Faker::Space.star,
     owner_id: users.sample[:id]
@@ -34,9 +34,6 @@ servers = []
 end
 
 users.each do |user|
-  count = 0
-  until count >= 5 do
-    membership = ServerMembership.new(user_id: user.id, server_id: servers.sample[:id])
-    count += 1 if membership.save
-  end
+  membership = ServerMembership.new(user_id: user.id, server_id: servers.sample[:id])
+  membership.save
 end

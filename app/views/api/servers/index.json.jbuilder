@@ -31,7 +31,7 @@ json.channels do
     server.channels.each do |channel|
       json.set! channel.id do
         json.extract! channel, :id, :name, :server_id
-        if channel.type = 0
+        if channel.channel_type = 0
           json.type "TEXT"
         else
           json.type "VOICE"

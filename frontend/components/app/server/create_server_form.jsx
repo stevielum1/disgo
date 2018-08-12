@@ -29,14 +29,20 @@ class CreateServerForm extends React.Component {
     if (this.state.photoFile) {
       formData.append('server[photo]', this.state.photoFile);
     }
-    let server;
     this.props.createServer(formData)
       .then(payload => {
-        server = payload.server;
-        this.props.createMembership(payload.server);
+        return this.props.createMembership(payload.server);
       })
-      .then(() => this.props.closeModal())
-      .then(() => this.props.history.push(`/channels/${server.id}`));
+      .then(payload => {
+        debugger
+        const channel = {
+          name: "general",
+          server_id: payload.membership.serverId
+        };
+        return this.props.createChannel(channel);
+      })
+      .then(payload => this.props.history.push(`/channels/${payload.channel.serverId}/${payload.channel.id}`))
+      .then(() => this.props.closeModal());
   }
 
   handleFile(e) {
