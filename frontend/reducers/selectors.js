@@ -18,3 +18,17 @@ export const getFirstChannel = (state, serverId) => {
     if (channels[i].serverId === serverId) return channels[i];
   }
 };
+
+export const getMembers = (state, serverId) => {
+  const memberships = Object.values(state.entities.serverMemberships)
+    .filter(membership => {
+      return (membership.serverId === serverId);
+    });
+
+  let users = [];
+  memberships.forEach(membership => {
+    users.push(state.entities.users[membership.userId]);
+  });
+
+  return users;
+};

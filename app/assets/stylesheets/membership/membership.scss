@@ -1,0 +1,35 @@
+.membership-index-container {
+  width: 240px;
+  height: 100vh;
+  overflow: scroll;
+  background: #2C2F33;
+  box-sizing: border-box;
+  padding: 5px;
+  color: white;
+
+  h1 {
+    padding: 10px;
+  }
+
+  ul {
+
+    li {
+      display: flex;
+      align-items: center;
+      padding: 5px;
+      border-radius: 5px;
+
+      .member-photo {
+        width: 30px;
+        height: 30px;
+        border-radius: 15px;
+        padding-right: 5px;
+      }
+    }
+
+    li:hover {
+      cursor: pointer;
+      background: #383838;
+    }
+  }
+}
