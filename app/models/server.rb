@@ -25,6 +25,10 @@ class Server < ApplicationRecord
   foreign_key: :server_id,
   class_name: :Channel
 
+  has_many :messages,
+  through: :channels,
+  source: :messages
+
   has_one_attached :photo
 
   after_initialize :ensure_img_url

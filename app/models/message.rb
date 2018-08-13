@@ -1,6 +1,8 @@
 class Message < ApplicationRecord
   validates :content, presence: true
 
+  default_scope { order(created_at: :desc) }
+
   belongs_to :author,
   primary_key: :id,
   foreign_key: :author_id,
