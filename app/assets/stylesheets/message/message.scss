@@ -10,7 +10,7 @@
     li {
       display: flex;
       align-items: flex-start;
-      padding: 5px;
+      padding: 7px 5px;
       width: 100%;
       box-sizing: border-box;
 
@@ -19,24 +19,30 @@
         color: rgba(255,255,255,0.3);
         font-size: 12px;
         font-weight: 100;
+        min-width: 50px;
         white-space: nowrap;
+        text-align: right;
       }
 
-      .message-author {
-        padding: 0 5px;
-        color: white;
-        font-size: 14px;
-        font-weight: 400;
-      }
+      .message-body {
+        display :flex;
+        padding-left: 10px;
 
-      .message-content {
-        color: rgba(255,255,255,0.8);
-        width: 100%;
-        font-size: 14px;
-        font-weight: 300;
-        margin-right: 50px;
-        word-break: break-all;
-        overflow-wrap: break-word;
+        .message-author {
+          color: white;
+          font-size: 14px;
+          font-weight: 400;
+        }
+
+        .message-content {
+          color: rgba(255,255,255,0.8);
+          width: 100%;
+          font-size: 14px;
+          font-weight: 300;
+          padding-left: 10px;
+          word-break: break-all;
+          overflow-wrap: break-word;
+        }
       }
     }
   }

@@ -6,8 +6,12 @@ class MessageIndexItem extends React.Component {
     return (
       <li>
         <p className="message-created-at">{message.createdAt}</p>
-        <p className="message-author">{user.username}</p>
-        <p className="message-content">{message.content}</p>
+        <div className="message-body">
+          <span>
+            <span className="message-author">{user.username}</span>
+            <span className="message-content">{message.content}</span>
+          </span>
+        </div>
       </li>
     )
   }
