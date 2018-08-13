@@ -5,7 +5,8 @@ class MessageForm extends React.Component {
     super(props);
     this.state = {
       content: "",
-      channel_id: this.props.channel.id
+      channelId: this.props.channel.id,
+      authorId: this.props.currentUserId
     };
 
     this.handleInput = this.handleInput.bind(this);
@@ -14,7 +15,7 @@ class MessageForm extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     if (this.props.channel.id !== nextProps.channel.id) {
-      this.state.channel_id = nextProps.channel.id;
+      this.state.channelId = nextProps.channel.id;
     }
   }
 
@@ -24,8 +25,8 @@ class MessageForm extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    this.props.createMessage(this.state)
-      .then(() => this.setState({ content: "" }));
+    this.props.chats.create(this.state)
+    this.setState({ content: "" });
   }
 
   render() {

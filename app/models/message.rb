@@ -10,4 +10,8 @@ class Message < ApplicationRecord
   primary_key: :id,
   foreign_key: :channel_id,
   class_name: :Channel
+
+  after_create_commit do
+    MessageCreationEventBroadcastJob.perform_later(self)
+  end
 end

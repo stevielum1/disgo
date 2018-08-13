@@ -3,6 +3,7 @@ import React from 'react';
 class MessageIndexItem extends React.Component {
   render() {
     const { message, user } = this.props;
+
     return (
       <li>
         <p className="message-created-at">{message.createdAt}</p>

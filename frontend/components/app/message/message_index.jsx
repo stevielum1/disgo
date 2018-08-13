@@ -3,14 +3,78 @@ import MessageForm from './message_form';
 import MessageIndexItem from './message_index_item';
 
 class MessageIndex extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      messages: this.props.messages,
+      channel: this.props.channel
+    };
+  }
+
+  componentDidMount() {
+    this.createSocket();
+  }
+
+  componentDidUpdate() {
+    this.scrollToBottom();
+  }
+
+  static getDerivedStateFromProps(props, state) {
+    if (state.channel == undefined) {
+      return {
+        messages: props.messages,
+        channel: props.channel
+      }
+    };
+
+    if (parseInt(props.match.params.channelId) !== state.channel.id) {
+      return {
+        messages: props.messages,
+        channel: props.channel
+      }
+    } else {
+      return state;
+    }
+  }
+
+  createSocket() {
+    let cable = ActionCable.createConsumer('ws://localhost:3000/cable');
+    let that = this;
+    this.chats = cable.subscriptions.create({
+      channel: 'ChatChannel'
+    }, {
+      connected: () => {},
+      received: data => {
+        let messages = that.state.messages;
+        messages.push(data);
+        that.setState({ messages });
+      },
+      create: function(message) {
+        this.perform('create', {
+          content: message.content,
+          channelId: message.channelId,
+          authorId: message.authorId
+        });
+      }
+    });
+  }
+
+  scrollToBottom() {
+    const messages = document.getElementById('message-log');
+    if (messages) {
+      messages.scrollTop = messages.scrollHeight;
+    }
+  }
+
   render() {
     if (this.props.channel === undefined) return <div>Loading...</div>;
 
-    const { messages, channel, createMessage, users } = this.props;
+    const { channel, createMessage, users, currentUserId } = this.props;
+    const { messages } = this.state;
 
     return (
       <div className="message-index-container">
-        <ul>
+        <ul id="message-log">
           { messages.map(message => (
               <MessageIndexItem
                 key={message.id}
@@ -21,7 +85,9 @@ class MessageIndex extends React.Component {
         </ul>
         <MessageForm
           channel={channel}
-          createMessage={createMessage} />
+          createMessage={createMessage}
+          chats={this.chats}
+          currentUserId={currentUserId} />
       </div>
     )
   }
