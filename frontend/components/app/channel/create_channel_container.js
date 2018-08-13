@@ -10,8 +10,7 @@ const mapStateToProps = (state, ownProps) => ({
     name: "",
     server_id: ownProps.match.params.serverId,
     destructible: true
-  },
-  owner: state.entities.servers[ownProps.match.params.serverId].ownerId === state.session.id
+  }
 });
 
 const mapDispatchToProps = dispatch => ({

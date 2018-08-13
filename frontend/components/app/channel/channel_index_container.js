@@ -4,7 +4,9 @@ import { getChannels } from '../../../reducers/selectors';
 import { openModal } from '../../../actions/modal_actions';
 
 const mapStateToProps = (state, ownProps) => ({
-  channels: getChannels(state, parseInt(ownProps.match.params.serverId))
+  channels: getChannels(state, parseInt(ownProps.match.params.serverId)),
+  currentUser: state.entities.users[state.session.id],
+  server: state.entities.servers[ownProps.match.params.serverId]
 });
 
 const mapDispatchToProps = dispatch => ({

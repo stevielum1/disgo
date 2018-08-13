@@ -8,7 +8,6 @@ const mapStateToProps = (state, ownProps) => ({
   formType: "edit",
   errors: state.errors.channelErrors,
   channel: state.entities.channels[ownProps.match.params.channelId],
-  owner: state.entities.servers[ownProps.match.params.serverId].ownerId === state.session.id,
   firstChannel: getFirstChannel(state, parseInt(ownProps.match.params.serverId))
 });
 

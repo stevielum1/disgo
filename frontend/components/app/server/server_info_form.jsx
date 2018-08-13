@@ -60,27 +60,16 @@ class ServerInfoForm extends React.Component {
   }
 
   render() {
-    const { server, errors } = this.props;
+    const { server, errors, currentUser } = this.props;
     const { owner } = this.state;
 
     if (server === undefined) return <div>Loading...</div>;
 
-    let warningText;
+    let warningText, editSection;
 
     if (owner) {
       warningText = this.state.delete ? "ARE YOU SURE?" : "Delete Server";
-    } else {
-      warningText = this.state.leave ? "ARE YOU SURE?" : "Leave Server";
-    }
-
-    return (
-      <div className="server-info-form-container">
-        <h1>{server.name}</h1>
-        { errors.map((error, idx) => (
-          <p key={idx} className="server-error">
-            {error}
-          </p>
-        ))}
+      editSection = (
         <form onSubmit={this.handleSubmit}>
           <label htmlFor="server-info-photo-upload">
             <img
@@ -90,8 +79,7 @@ class ServerInfoForm extends React.Component {
           <input
             id="server-info-photo-upload"
             type="file"
-            onChange={this.handleFile}
-            disabled={!owner} />
+            onChange={this.handleFile} />
           <div className="edit-server-name-container">
             <label htmlFor="server-info-form-name">Edit server name:</label>
             <input
@@ -105,6 +93,20 @@ class ServerInfoForm extends React.Component {
               disabled={!owner}>Edit</button>
           </div>
         </form>
+      );
+    } else {
+      warningText = this.state.leave ? "ARE YOU SURE?" : "Leave Server";
+    }
+
+    return (
+      <div className="server-info-form-container">
+        <h1>{server.name}</h1>
+        { errors.map((error, idx) => (
+          <p key={idx} className="server-error">
+            {error}
+          </p>
+        ))}
+        {editSection}
         <button
           type="submit"
           onClick={this.handleWarning}>{warningText}</button>

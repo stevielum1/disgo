@@ -1,7 +1,10 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-const ChannelIndexItem = ({ channel, openModal }) => {
+const ChannelIndexItem = ({ channel, openModal, owner }) => {
+  const editButton = owner ? (
+    <i onClick={() => openModal('editChannel')} className="fas fa-cog"></i>
+  ) : ( null );
   return (
     <li>
       <NavLink
@@ -13,7 +16,7 @@ const ChannelIndexItem = ({ channel, openModal }) => {
             <span># <span className="channel-name">{channel.name}</span>
             </span>
           </div>
-          <i onClick={() => openModal('editChannel')} className="fas fa-cog"></i>
+          {editButton}
         </div>
       </NavLink>
     </li>

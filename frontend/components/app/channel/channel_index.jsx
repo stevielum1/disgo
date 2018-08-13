@@ -3,7 +3,17 @@ import ChannelIndexItem from './channel_index_item';
 
 class ChannelIndex extends React.Component {
   render() {
-    const { openModal } = this.props;
+    const { openModal, currentUser, server } = this.props;
+
+    if (server === undefined || currentUser === undefined) {
+      return <div>Loading...</div>;
+    }
+
+    const owner = server.ownerId === currentUser.id;
+
+    const createButton = owner ? (
+      <i onClick={() => openModal('createChannel')} className="fas fa-plus"></i>
+    ) : ( null );
 
     const textChannels = this.props.channels.filter(channel => (
       channel.type === "TEXT"
@@ -17,7 +27,7 @@ class ChannelIndex extends React.Component {
         <div className="text-channels-container">
           <div className="channels-heading">
             <h2>Text channels</h2>
-            <i onClick={() => openModal('createChannel')} className="fas fa-plus"></i>
+            {createButton}
           </div>
           <ul>
             {
@@ -25,7 +35,8 @@ class ChannelIndex extends React.Component {
                 <ChannelIndexItem
                   key={channel.id}
                   channel={channel}
-                  openModal={openModal} />
+                  openModal={openModal}
+                  owner={owner} />
               ))
             }
           </ul>

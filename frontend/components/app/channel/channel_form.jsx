@@ -36,7 +36,7 @@ class ChannelForm extends React.Component {
   }
 
   render() {
-    const { formType, processForm, errors, owner } = this.props;
+    const { formType, processForm, errors } = this.props;
 
     let headingText, buttonText, deleteButton;
 
@@ -47,18 +47,14 @@ class ChannelForm extends React.Component {
     } else {
       headingText = "Edit channel";
       buttonText = "Edit Channel";
-      if (owner && this.state.destructible) {
-        deleteButton = (
-          <div className="delete-channel">
-          <button
-          className="delete-channel-button"
-          onClick={this.handleDelete}
-          disabled={!owner} >Delete Channel</button>
-          </div>
-        )
-      } else {
-        deleteButton = null;
-      }
+      deleteButton = (
+        <div className="delete-channel">
+        <button
+        className="delete-channel-button"
+        onClick={this.handleDelete}
+        disabled={!owner} >Delete Channel</button>
+        </div>
+      );
     }
 
     return (
@@ -74,11 +70,8 @@ class ChannelForm extends React.Component {
             type="text"
             value={this.state.name}
             onChange={this.handleInput}
-            autoFocus="true"
-            disabled={!owner} />
-            <button
-              onSubmit={this.handleSubmit}
-              disabled={!owner} >{buttonText}</button>
+            autoFocus="true" />
+            <button onSubmit={this.handleSubmit}>{buttonText}</button>
         </form>
         {deleteButton}
       </div>
