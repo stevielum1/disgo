@@ -11,11 +11,14 @@ class MessageIndex extends React.Component {
     };
   }
 
-  componentDidMount() {
-    this.createSocket();
-  }
-
-  componentDidUpdate() {
+  componentDidUpdate(prevProps, prevState) {
+    if (this.props.messages.length !== prevProps.messages.length) {
+      this.props.fetchServers();
+      if (this.chats) {
+        this.chats.unsubscribe();
+      }
+      this.createSocket();
+    }
     this.scrollToBottom();
   }
 
@@ -38,10 +41,12 @@ class MessageIndex extends React.Component {
   }
 
   createSocket() {
-    let cable = ActionCable.createConsumer('ws://localhost:3000/cable');
     let that = this;
+
+    let cable = ActionCable.createConsumer('ws://localhost:3000/cable');
     this.chats = cable.subscriptions.create({
-      channel: 'ChatChannel'
+      channel: 'ChatChannel',
+      channel_id: that.props.match.params.channelId
     }, {
       connected: () => {},
       received: data => {

@@ -1,6 +1,6 @@
 class Api::ServersController < ApplicationController
   def index
-    @servers = current_user.memberships;
+    @servers = current_user.memberships
     render :index
   end
 

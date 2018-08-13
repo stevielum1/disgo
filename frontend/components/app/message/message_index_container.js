@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 import MessageIndex from './message_index';
 import { getMessages } from '../../../reducers/selectors';
 import { receiveMessage } from '../../../actions/message_actions';
+import { fetchServers } from '../../../actions/server_actions';
 
 const mapStateToProps = (state, ownProps) => {
   return {
@@ -13,7 +14,8 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  receiveMessage: message => dispatch(receiveMessage(message))
+  receiveMessage: message => dispatch(receiveMessage(message)),
+  fetchServers: () => dispatch(fetchServers())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(MessageIndex);

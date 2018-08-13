@@ -30,14 +30,14 @@ export const createMembership = serverId => dispatch => (
     .then(
       membership => dispatch(receiveMembership(membership)),
       err => dispatch(receiveMembershipErrors(err.responseJSON))
-  )
+    )
 );
 
 export const deleteMembership = id => dispatch => (
   MembershipApiUtil.deleteMembership(id)
     .then(
       () => dispatch(removeMembership(id)),
-      err => dispatch(receiveMembershipErrors(err))
+      err => dispatch(receiveMembershipErrors(err.responseJSON))
     )
 );
 

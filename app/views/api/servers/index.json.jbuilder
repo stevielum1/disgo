@@ -42,12 +42,9 @@ json.channels do
 end
 
 json.messages do
-  @servers.includes(channels: [:messages]).each do |server|
+  @servers.includes(:channels => :messages).each do |server|
     server.channels.each do |channel|
-      count = 0;
-      channel.messages.each do |message|
-        count += 1
-        break if count >= 30
+      channel.messages.order(created_at: :desc).each do |message|
         json.set! message.id do
           json.extract! message, :id, :content, :author_id, :channel_id
           json.createdAt message.created_at.strftime('%l:%M %p')
