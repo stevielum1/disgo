@@ -23,12 +23,8 @@ class JoinServerForm extends React.Component {
     e.preventDefault();
     let membership;
     this.props.createMembership(this.state)
-      .then(payload => {
-        membership = payload.membership;
-
-        this.props.fetchServers()
-          .then(() => this.props.closeModal())
-      });
+      .then(() => this.props.fetchServers())
+      .then(() => this.props.closeModal());
   }
 
   render() {
