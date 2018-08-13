@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import MessageIndex from './message_index';
 import { getMessages } from '../../../reducers/selectors';
-import { createMessage } from '../../../actions/message_actions';
+import { receiveMessage } from '../../../actions/message_actions';
 
 const mapStateToProps = (state, ownProps) => {
   return {
@@ -13,7 +13,7 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  createMessage: message => dispatch(createMessage(message))
+  receiveMessage: message => dispatch(receiveMessage(message))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(MessageIndex);
