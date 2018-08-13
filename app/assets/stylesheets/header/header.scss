@@ -1,0 +1,17 @@
+.header-container {
+  min-height: 50px;
+  display: flex;
+  align-items: center;
+  background: #353940;
+  border-bottom: 2px solid rgba(0,0,0,0.2);
+
+  > span {
+    color: #72767d;
+    padding-left: 10px;
+  }
+
+  .header-channel-name {
+    color: white;
+    font-weight: 600;
+  }
+}

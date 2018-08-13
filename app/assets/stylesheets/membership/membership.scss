@@ -1,11 +1,11 @@
 .membership-index-container {
-  width: 240px;
-  height: 100vh;
+  min-width: 240px;
   overflow: scroll;
   background: #2C2F33;
   box-sizing: border-box;
   padding: 5px;
   color: white;
+  flex-grow: 1;
 
   h1 {
     padding: 10px;
