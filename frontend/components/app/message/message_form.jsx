@@ -12,6 +12,12 @@ class MessageForm extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (this.props.channel.id !== nextProps.channel.id) {
+      this.state.channel_id = nextProps.channel.id;
+    }
+  }
+
   handleInput(e) {
     this.setState({ content: e.currentTarget.value });
   }
@@ -24,15 +30,15 @@ class MessageForm extends React.Component {
 
   render() {
     return (
-      <div className="message-form-container">
-        <form onSubmit={this.handleSubmit}>
-          <input
-            type="text"
-            value={this.state.content}
-            onChange={this.handleInput}
-            placeholder={`Message #${this.props.channel.name}`} />
-        </form>
-      </div>
+      <form
+        className="message-form-container"
+        onSubmit={this.handleSubmit}>
+        <input
+          type="text"
+          value={this.state.content}
+          onChange={this.handleInput}
+          placeholder={`Message #${this.props.channel.name}`} />
+      </form>
     )
   }
 }

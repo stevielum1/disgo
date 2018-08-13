@@ -1,4 +1,42 @@
 .message-index-container {
   height: 100vh;
   background: #353940;
+  min-width: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  ul {
+    li {
+      display: flex;
+      align-items: flex-start;
+      padding: 5px;
+      width: 100%;
+
+      .message-created-at {
+        padding-left: 10px;
+        color: rgba(255,255,255,0.3);
+        font-size: 12px;
+        font-weight: 100;
+        white-space: nowrap;
+      }
+
+      .message-author {
+        padding: 0 5px;
+        color: white;
+        font-size: 14px;
+        font-weight: 400;
+      }
+
+      .message-content {
+        color: rgba(255,255,255,0.8);
+        width: 100%;
+        font-size: 14px;
+        font-weight: 300;
+        margin-right: 50px;
+        word-break: break-all;
+        overflow-wrap: break-word;
+      }
+    }
+  }
 }

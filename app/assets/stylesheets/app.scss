@@ -3,11 +3,11 @@
   height: 100vh;
 
   .app-server-column {
-    width: 80px;
+    min-width: 80px;
   }
 
   .app-channel-column {
-    width: 240px;
+    min-width: 240px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;

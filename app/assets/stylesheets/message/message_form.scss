@@ -1,0 +1,20 @@
+.message-form-container {
+  padding: 20px 20px 30px 20px;
+  box-sizing: border-box;
+
+  input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    outline: none;
+    border: 0;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 14px;
+    color: rgba(255,255,255,0.9);
+    background: rgba(255,255,255,0.1);
+  }
+
+  input[type="text"]::placeholder {
+    color: rgba(255,255,255,0.5);
+  }
+}

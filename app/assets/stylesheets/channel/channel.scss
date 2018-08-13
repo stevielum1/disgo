@@ -36,6 +36,8 @@
     border-radius: 5px;
     box-sizing: border-box;
     margin: 2px 0;
+    white-space: nowrap;
+    overflow: hidden;
 
     > div {
       display: flex;
