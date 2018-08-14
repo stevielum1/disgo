@@ -35,8 +35,10 @@ class ServerInfoForm extends React.Component {
     if (this.state.photoFile) {
       formData.append('server[photo]', this.state.photoFile);
     }
+    this.props.updateLoading(true);
     this.props.updateServer(formData)
-      .then(() => this.props.closeModal());
+      .then(() => this.props.closeModal())
+      .then(() => this.props.updateLoading(false));
   }
 
   handleWarning(e) {
@@ -44,17 +46,21 @@ class ServerInfoForm extends React.Component {
       if (this.state.delete === false) {
         this.setState({ delete: true });
       } else {
+        this.props.updateLoading(true);
         this.props.deleteServer(this.props.server.id)
+          .then(() => this.props.closeModal())
           .then(() => this.props.history.push('/home'))
-          .then(() => this.props.closeModal());
+          .then(() => this.props.updateLoading(false));
       }
     } else {
       if (this.state.leave === false) {
         this.setState({ leave: true });
       } else {
+        this.props.updateLoading(true);
         this.props.deleteMembership(this.props.membership.id)
+          .then(() => this.props.closeModal())
           .then(() => this.props.history.push('/home'))
-          .then(() => this.props.closeModal());
+          .then(() => this.props.updateLoading(false));
       }
     }
   }
@@ -83,12 +89,10 @@ class ServerInfoForm extends React.Component {
             <input
               type="text"
               value={this.state.name}
-              onChange={this.handleInput}
-              disabled={!owner} />
+              onChange={this.handleInput} />
             <button
               className="edit-server-info-button"
-              onClick={this.handleSubmit}
-              disabled={!owner}>Edit</button>
+              onClick={this.handleSubmit}>Edit</button>
           </div>
         </form>
       );

@@ -4,7 +4,8 @@ import { NavLink } from 'react-router-dom';
 const ChannelIndexItem = ({ channel, openModal, owner }) => {
   const editButton = owner ? (
     <i onClick={() => openModal('editChannel')} className="fas fa-cog"></i>
-  ) : ( null );
+  ) : null;
+
   return (
     <li>
       <NavLink

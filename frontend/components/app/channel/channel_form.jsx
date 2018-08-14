@@ -20,23 +20,27 @@ class ChannelForm extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
+    this.props.updateLoading(true);
     this.props.processForm(this.state)
+      .then(() => this.props.closeModal())
       .then(payload => {
         const channel = payload.channel;
         this.props.history.push(`/channels/${channel.serverId}/${channel.id}`);
       })
-      .then(() => this.props.closeModal());
+      .then(() => this.props.updateLoading(false));
   }
 
   handleDelete(e) {
     e.preventDefault();
+    this.props.updateLoading(true);
     this.props.deleteChannel(this.props.match.params.channelId)
+      .then(() => this.props.closeModal())
       .then(() => this.props.history.push(`/channels/${this.props.match.params.serverId}/${this.props.firstChannel.id}`))
-      .then(() => this.props.closeModal());
+      .then(() => this.props.updateLoading(false));
   }
 
   render() {
-    const { formType, processForm, errors } = this.props;
+    const { formType, processForm, errors, channel } = this.props;
 
     let headingText, buttonText, deleteButton;
 
@@ -50,11 +54,14 @@ class ChannelForm extends React.Component {
       deleteButton = (
         <div className="delete-channel">
         <button
-        className="delete-channel-button"
-        onClick={this.handleDelete}
-        disabled={!owner} >Delete Channel</button>
+          className="delete-channel-button"
+          onClick={this.handleDelete}>Delete Channel</button>
         </div>
       );
+    }
+
+    if (!channel.destructible) {
+      deleteButton = null;
     }
 
     return (

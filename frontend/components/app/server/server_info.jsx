@@ -1,7 +1,7 @@
 import React from 'react';
 
-const ServerInfo = ({ server, openModal }) => {
-  if (server === undefined) return <div></div>;
+const ServerInfo = ({ server, openModal, loading }) => {
+  if (loading) return null;
   return (
     <div
       className="server-info-container"

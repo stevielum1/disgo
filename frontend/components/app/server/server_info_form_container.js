@@ -8,6 +8,7 @@ import {
 import { closeModal } from '../../../actions/modal_actions';
 import { deleteMembership } from '../../../actions/server_membership_actions';
 import { getMembership } from '../../../reducers/selectors';
+import { updateLoading } from '../../../actions/loading_actions';
 
 const mapStateToProps = (state, ownProps) => ({
     currentUser: state.entities.users[state.session.id],
@@ -21,7 +22,8 @@ const mapDispatchToProps = dispatch => ({
   deleteServer: id => dispatch(deleteServer(id)),
   removeServerErrors: () => dispatch(removeServerErrors()),
   closeModal: () => dispatch(closeModal()),
-  deleteMembership: data => dispatch(deleteMembership(data))
+  deleteMembership: data => dispatch(deleteMembership(data)),
+  updateLoading: loading => dispatch(updateLoading(loading))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ServerInfoForm);

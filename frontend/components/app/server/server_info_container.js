@@ -3,7 +3,8 @@ import ServerInfo from './server_info';
 import { openModal } from '../../../actions/modal_actions';
 
 const mapStateToProps = (state, ownProps) => ({
-  server: state.entities.servers[ownProps.match.params.serverId]
+  server: state.entities.servers[ownProps.match.params.serverId],
+  loading: state.ui.loading
 });
 
 const mapDispatchToProps = dispatch => ({
