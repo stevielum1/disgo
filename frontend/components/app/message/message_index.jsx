@@ -73,25 +73,7 @@ class MessageIndex extends React.Component {
   }
 
   render() {
-    if (this.props.loading) return (
-      <div className="cssload-loader-inner">
-    		<div className="cssload-cssload-loader-line-wrap-wrap">
-    			<div className="cssload-loader-line-wrap"></div>
-    		</div>
-    		<div className="cssload-cssload-loader-line-wrap-wrap">
-    			<div className="cssload-loader-line-wrap"></div>
-    		</div>
-    		<div className="cssload-cssload-loader-line-wrap-wrap">
-    			<div className="cssload-loader-line-wrap"></div>
-    		</div>
-    		<div className="cssload-cssload-loader-line-wrap-wrap">
-    			<div className="cssload-loader-line-wrap"></div>
-    		</div>
-    		<div className="cssload-cssload-loader-line-wrap-wrap">
-    			<div className="cssload-loader-line-wrap"></div>
-    		</div>
-    	</div>
-    );
+    if (this.props.loading) return null;
 
     const { channel, createMessage, users, currentUserId } = this.props;
     const { messages } = this.state;
