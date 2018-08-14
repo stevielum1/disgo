@@ -6,7 +6,7 @@ class ChannelIndex extends React.Component {
     const { openModal, currentUser, server } = this.props;
 
     if (server === undefined || currentUser === undefined) {
-      return <div>Loading...</div>;
+      return <div></div>;
     }
 
     const owner = server.ownerId === currentUser.id;
