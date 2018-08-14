@@ -4,7 +4,7 @@
   flex-direction: column;
   align-items: center;
   color: white;
-  padding: 100px;
+  padding: 100px 100px 0 100px;
   box-sizing: border-box;
 
   a {
@@ -17,10 +17,10 @@
   }
 
   h1 {
-    font-size: 80px;
+    font-size: 100px;
     font-family: 'Orbitron', sans-serif;
     text-transform: uppercase;
-    padding-bottom: 30px;
+    padding: 50px 0;
   }
 
   h2 {
@@ -28,8 +28,20 @@
   }
 
   p {
-    padding: 10px;
+    padding-bottom: 10px;
     text-align: center;
+  }
+
+  img {
+    margin-top: 30px;
+    border-radius: 200px;
+    // border: 5px solid transparent;
+  }
+
+  img:hover {
+    // border: 5px solid #7289da;
+    background: #7289da;
+    cursor: pointer;
   }
 
 }

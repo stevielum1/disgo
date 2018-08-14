@@ -1,10 +1,12 @@
 .app-container {
   display: flex;
   min-height: 100vh;
+  max-height: 100vh;
 
   .app-server-column {
     min-width: 80px;
     height: 100%;
+    z-index: 2;
   }
 
   .app-channel-column {

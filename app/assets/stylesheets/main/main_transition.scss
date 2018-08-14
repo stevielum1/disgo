@@ -1,8 +1,10 @@
 .main-appear {
   opacity: 0;
+  transform: translateY(5%);
 }
 
 .main-appear.main-appear-active {
   opacity: 1;
-  transition: opacity 5s;
+  transform: translateY(0%);
+  transition: opacity 5s, transform 5s;
 }
