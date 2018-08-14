@@ -11,7 +11,7 @@ class MembershipIndex extends React.Component {
       <div className="app-memberships-column">
         <div className="membership-index-container">
           <h1>Members</h1>
-          <ul>
+          <ul className="membership-list">
             {
               members.map(member => {
                 const owner = server.ownerId === member.id;

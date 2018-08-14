@@ -3,7 +3,7 @@ import Search from './search';
 
 const mapStateToProps = state => ({
   loading: state.ui.loading,
-  users: state.entities.users
+  users: Object.values(state.entities.users)
 });
 
 const mapDispatchToProps = dispatch => ({
