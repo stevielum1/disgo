@@ -75,7 +75,14 @@ class MessageIndex extends React.Component {
   render() {
     if (this.props.loading) return null;
 
-    const { channel, createMessage, users, currentUserId } = this.props;
+    const {
+      channel,
+      createMessage,
+      users,
+      currentUserId,
+      updateMessage
+    } = this.props;
+
     const { messages } = this.state;
 
     return (
@@ -86,7 +93,9 @@ class MessageIndex extends React.Component {
                 <MessageIndexItem
                   key={message.id}
                   message={message}
-                  user={users[message.authorId]} />
+                  user={users[message.authorId]}
+                  currentUserId={currentUserId}
+                  updateMessage={updateMessage} />
               ))
             }
           </ul>

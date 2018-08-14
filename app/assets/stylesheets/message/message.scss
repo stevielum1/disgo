@@ -9,43 +9,148 @@
   ul {
     overflow: auto;
 
-    li {
-      display: flex;
-      align-items: flex-start;
-      padding: 7px 5px;
-      width: 100%;
-      box-sizing: border-box;
+    .message-index-item-container {
+      position: relative;
 
-      .message-created-at {
-        padding-left: 10px;
-        color: rgba(255,255,255,0.3);
-        font-size: 12px;
-        font-weight: 100;
-        min-width: 50px;
-        white-space: nowrap;
-        text-align: right;
+      li {
+        position: relative;
+        display: flex;
+        align-items: flex-start;
+        padding: 7px 5px;
+        width: 100%;
+        box-sizing: border-box;
+
+        .message-created-at {
+          padding-left: 10px;
+          padding-top: 2px;
+          color: rgba(255,255,255,0.3);
+          font-size: 12px;
+          font-weight: 100;
+          min-width: 50px;
+          white-space: nowrap;
+          text-align: right;
+        }
+
+        .message-body {
+          display :flex;
+          padding-left: 10px;
+          width: 100%;
+          justify-content: space-between;
+          flex-wrap: wrap;
+
+          .message-author {
+            color: white;
+            font-size: 14px;
+            font-weight: 400;
+          }
+
+          .message-content {
+            color: rgba(255,255,255,0.8);
+            width: 100%;
+            font-size: 14px;
+            font-weight: 300;
+            padding-left: 10px;
+            word-break: break-word;
+            overflow-wrap: break-word;
+          }
+
+          input[type="text"] {
+            min-width: calc(100% - 30px);
+            padding: 10px;
+            outline: none;
+            border: 0;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.1);
+            margin: 5px;
+          }
+
+          .edit-message-nav {
+            width: 100%;
+            display: flex;
+            justify-content: flex-end;
+            margin-right: 30px;
+
+            h6, p, i {
+              display: inline;
+              color: rgba(255,255,255,0.3);
+              font-size: 12px;
+              text-align: center;
+            }
+
+            i.fa-circle {
+              font-size: 6px;
+            }
+
+            .edit-message-link {
+              color: #7289da;
+            }
+
+            .edit-message-link:hover {
+              text-decoration: underline;
+              cursor: pointer;
+            }
+          }
+
+          i.fa-ellipsis-v {
+            color: transparent;
+            font-size: 12px;
+            align-self: center;
+            text-align: right;
+            margin-right: 20px;
+            padding: 5px;
+          }
+
+          i.fa-ellipsis-v:hover {
+            cursor: pointer;
+            color: rgba(255,255,255,0.8);
+          }
+        }
       }
 
-      .message-body {
-        display :flex;
-        padding-left: 10px;
+      li:hover .message-created-at {
+        color: rgba(255,255,255,0.8);
+      }
 
-        .message-author {
-          color: white;
-          font-size: 14px;
-          font-weight: 400;
-        }
-
-        .message-content {
-          color: rgba(255,255,255,0.8);
-          width: 100%;
-          font-size: 14px;
-          font-weight: 300;
-          padding-left: 10px;
-          word-break: break-word;
-          overflow-wrap: break-word;
-        }
+      li:hover i.fa-ellipsis-v {
+        color: gray;
       }
     }
+
+  }
+}
+
+.message-dropdown-background {
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.message-dropdown {
+  position: absolute;
+  top: 80%;
+  right: 1.5%;
+  text-align: center;
+  color: rgba(255,255,255,0.7);
+  background: rgba(0,0,0,0.4);
+  z-index: 11;
+  padding: 2px;
+  border-radius: 5px;
+  font-size: 12px;
+
+  p {
+    padding: 5px;
+    border-radius: 2px;
+  }
+
+  p:hover {
+    background: rgba(0,0,0,0.8);
+    cursor: pointer;
+    color: white;
   }
 }
