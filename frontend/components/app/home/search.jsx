@@ -10,6 +10,17 @@ class Search extends React.Component {
     this.handleInput = this.handleInput.bind(this);
   }
 
+  static getDerivedStateFromProps(props, state) {
+    if (state.users.length !== props.users.length) {
+      return {
+        input: "",
+        users: props.users
+      }
+    } else {
+      return null;
+    }
+  }
+
   handleInput(e) {
     const users = this.props.users.filter(user => (
       user.username.startsWith(e.currentTarget.value)
