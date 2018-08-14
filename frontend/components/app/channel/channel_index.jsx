@@ -3,11 +3,9 @@ import ChannelIndexItem from './channel_index_item';
 
 class ChannelIndex extends React.Component {
   render() {
-    const { openModal, currentUser, server } = this.props;
+    if (this.props.loading) return null;
 
-    if (server === undefined || currentUser === undefined) {
-      return <div></div>;
-    }
+    const { openModal, currentUser, server } = this.props;
 
     const owner = server.ownerId === currentUser.id;
 

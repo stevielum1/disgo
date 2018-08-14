@@ -63,8 +63,6 @@ class ServerInfoForm extends React.Component {
     const { server, errors, currentUser } = this.props;
     const { owner } = this.state;
 
-    if (server === undefined) return <div>Loading...</div>;
-
     let warningText, editSection;
 
     if (owner) {

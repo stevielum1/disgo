@@ -3,7 +3,8 @@ import UserInfo from './user_info';
 import { openModal } from '../../../actions/modal_actions';
 
 const mapStateToProps = state => ({
-  currentUser: state.entities.users[state.session.id]
+  currentUser: state.entities.users[state.session.id],
+  loading: state.ui.loading
 });
 
 const mapDispatchToProps = dispatch => ({

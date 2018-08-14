@@ -9,7 +9,9 @@ class ServerIndex extends React.Component {
   }
 
   componentDidMount() {
-    this.props.fetchServers();
+    this.props.updateLoading(true);
+    this.props.fetchServers()
+      .then(() => this.props.updateLoading(false));
   }
 
   componentWillReceiveProps(nextProps) {
@@ -19,6 +21,8 @@ class ServerIndex extends React.Component {
   }
 
   render() {
+    if (this.props.loading) return null;
+
     const { servers, currentUser, openModal, channels } = this.props;
     return (
       <div className="server-index-container">

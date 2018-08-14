@@ -2,7 +2,7 @@ import React from 'react';
 import NavBar from './navbar';
 import Splash from './splash';
 import Footer from './footer';
-import Home from '../app/home';
+import HomeContainer from '../app/home/home_container';
 import ServerIndexContainer from '../app/server/server_index_container';
 import ServerInfoContainer from '../app/server/server_info_container';
 import ChannelIndexContainer from '../app/channel/channel_index_container';
@@ -21,7 +21,7 @@ const Homepage = ({ loggedIn }) => {
       <div className="app-container">
         <Modal />
         <div className="app-server-column">
-          <ProtectedRoute path="/" component={Home} />
+          <ProtectedRoute path="/" component={HomeContainer} />
           <ProtectedRoute path="/" component={ServerIndexContainer} />
         </div>
         <div className="app-channel-column">

@@ -3,9 +3,9 @@ import MembershipIndexItem from './membership_index_item';
 
 class MembershipIndex extends React.Component {
   render() {
-    const { members, server } = this.props;
+    if (this.props.loading) return null;
 
-    if (server === undefined) return <div>Loading...</div>;
+    const { members, server } = this.props;
 
     return (
       <div className="membership-index-container">

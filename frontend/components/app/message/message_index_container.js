@@ -4,14 +4,13 @@ import { getMessages } from '../../../reducers/selectors';
 import { receiveMessage } from '../../../actions/message_actions';
 import { fetchServers } from '../../../actions/server_actions';
 
-const mapStateToProps = (state, ownProps) => {
-  return {
-    messages: getMessages(state, parseInt(ownProps.match.params.channelId)),
-    channel: state.entities.channels[ownProps.match.params.channelId],
-    users: state.entities.users,
-    currentUserId: state.session.id
-  };
-};
+const mapStateToProps = (state, ownProps) => ({
+  messages: getMessages(state, parseInt(ownProps.match.params.channelId)),
+  channel: state.entities.channels[ownProps.match.params.channelId],
+  users: state.entities.users,
+  currentUserId: state.session.id,
+  loading: state.ui.loading
+});
 
 const mapDispatchToProps = dispatch => ({
   receiveMessage: message => dispatch(receiveMessage(message)),

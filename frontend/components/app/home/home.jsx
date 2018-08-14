@@ -1,7 +1,8 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-const Home = props => {
+const Home = ({ loading }) => {
+  if (loading) return null;
   return (
     <div className="home-container">
       <NavLink

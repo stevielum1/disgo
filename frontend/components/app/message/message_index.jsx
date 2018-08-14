@@ -73,7 +73,7 @@ class MessageIndex extends React.Component {
   }
 
   render() {
-    if (this.props.channel === undefined) return (
+    if (this.props.loading) return (
       <div className="cssload-loader-inner">
     		<div className="cssload-cssload-loader-line-wrap-wrap">
     			<div className="cssload-loader-line-wrap"></div>
