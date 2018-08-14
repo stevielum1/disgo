@@ -23,21 +23,10 @@ class MessageIndex extends React.Component {
   }
 
   static getDerivedStateFromProps(props, state) {
-    if (state.channel == undefined) {
-      return {
-        messages: props.messages,
-        channel: props.channel
-      }
+    return {
+      messages: props.messages,
+      channel: props.channel
     };
-
-    if (parseInt(props.match.params.channelId) !== state.channel.id) {
-      return {
-        messages: props.messages,
-        channel: props.channel
-      }
-    } else {
-      return state;
-    }
   }
 
   createSocket() {

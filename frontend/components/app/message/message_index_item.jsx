@@ -42,7 +42,7 @@ class MessageIndexItem extends React.Component {
 
   handleDelete(e) {
     this.toggleDropdown();
-
+    this.props.deleteMessage(this.state.id);
   }
 
   render() {
