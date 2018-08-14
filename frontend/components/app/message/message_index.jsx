@@ -40,9 +40,6 @@ class MessageIndex extends React.Component {
       connected: () => {},
       received: data => {
         that.props.receiveMessage(data);
-        let messages = that.state.messages;
-        messages.push(data);
-        that.setState({ messages });
       },
       create: function(message) {
         this.perform('create', {
