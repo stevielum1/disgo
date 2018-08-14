@@ -1,7 +1,6 @@
 class Api::ServersController < ApplicationController
   def index
     @servers = current_user.memberships
-    sleep 1.25
     render :index
   end
 
