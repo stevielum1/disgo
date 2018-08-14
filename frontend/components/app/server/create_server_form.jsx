@@ -6,7 +6,8 @@ class CreateServerForm extends React.Component {
     super(props);
     this.state = {
       name: "",
-      photoFile: null
+      photoFile: null,
+      photoUrl: null
     };
 
     this.handleInput = this.handleInput.bind(this);
@@ -29,30 +30,64 @@ class CreateServerForm extends React.Component {
     if (this.state.photoFile) {
       formData.append('server[photo]', this.state.photoFile);
     }
+    const that = this;
+    // this.props.createServer(formData)
+    //   .then(payload => {
+    //     that.props.updateLoading(true);
+    //     return that.props.createMembership(payload.server);
+    //   })
+    //   .then(payload => {
+    //     const channel = {
+    //       name: "general",
+    //       server_id: payload.membership.serverId,
+    //       destructible: false
+    //     };
+    //     return that.props.createChannel(channel);
+    //   })
+    //   .then(payload => that.props.history.push(`/channels/${payload.channel.serverId}/${payload.channel.id}`))
+    //   .then(() => {
+    //     that.props.closeModal();
+    //     that.props.updateLoading(false);
+    //   });
     this.props.createServer(formData)
       .then(payload => {
-        return this.props.createMembership(payload.server);
-      })
-      .then(payload => {
-        const channel = {
-          name: "general",
-          server_id: payload.membership.serverId,
-          destructible: false
-        };
-        return this.props.createChannel(channel);
-      })
-      .then(payload => this.props.history.push(`/channels/${payload.channel.serverId}/${payload.channel.id}`))
-      .then(() => this.props.closeModal());
+        that.props.updateLoading(true);
+        that.props.createMembership(payload.server)
+          .then(payload => {
+            const channel = {
+              name: "general",
+              server_id: payload.membership.serverId,
+              destructible: false
+            };
+            that.props.createChannel(channel)
+              .then(payload => {
+                that.props.history.push(`/channels/${payload.channel.serverId}/${payload.channel.id}`);
+              })
+              .then(() => {
+                that.props.closeModal();
+                that.props.updateLoading(false);
+              });
+          });
+      });
   }
 
   handleFile(e) {
-    e.preventDefault()
-    this.setState({ photoFile: e.currentTarget.files[0] });
+    const reader = new FileReader();
+    const file = e.currentTarget.files[0];
+
+    reader.onloadend = () => (
+      this.setState({ photoUrl: reader.result, photoFile: file })
+    );
+
+    if (file) {
+      reader.readAsDataURL(file);
+    } else {
+      this.setState({ photoUrl: this.props.currentUser.photoUrl, photoFile: null })
+    }
   }
 
   render() {
     const { errors } = this.props;
-    const photoFileName = this.state.photoFile ? `Uploaded ${this.state.photoFile.name}` : "";
     return (
       <div className="create-server-form-container">
         <form onSubmit={this.handleSubmit}>
@@ -78,10 +113,9 @@ class CreateServerForm extends React.Component {
             <label
               className="server-photo-input-label"
               htmlFor="server-photo-input">
-              <div className="server-photo-input-placeholder">
-                <p>Change</p>
-                <p>Icon</p>
-              </div>
+              <img
+                src={this.state.photoUrl}
+                className="server-photo-input-placeholder" />
             </label>
             <input
               type="file"
@@ -90,7 +124,6 @@ class CreateServerForm extends React.Component {
               accept="image/*" />
           </div>
           <div className="server-input-footer">
-            <div className="server-photo-filename">{photoFileName}</div>
             <button>Create</button>
           </div>
         </form>

@@ -7,7 +7,8 @@ class UserInfo extends React.Component {
     this.state = {
       id: this.props.currentUser.id,
       username: this.props.currentUser.username,
-      photoFile: null
+      photoFile: null,
+      photoUrl: this.props.currentUser.photoUrl
     };
     this.handleInput = this.handleInput.bind(this);
     this.handleLogout = this.handleLogout.bind(this);
@@ -24,8 +25,18 @@ class UserInfo extends React.Component {
   }
 
   handleFile(e) {
-    e.preventDefault();
-    this.setState({ photoFile: e.currentTarget.files[0] });
+    const reader = new FileReader();
+    const file = e.currentTarget.files[0];
+
+    reader.onloadend = () => (
+      this.setState({ photoUrl: reader.result, photoFile: file })
+    );
+
+    if (file) {
+      reader.readAsDataURL(file);
+    } else {
+      this.setState({ photoUrl: this.props.currentUser.photoUrl, photoFile: null })
+    }
   }
 
   handleSubmit(e) {
@@ -61,7 +72,7 @@ class UserInfo extends React.Component {
         <form onSubmit={this.handleSubmit}>
           <label htmlFor="user-info-photo-upload">
             <img
-            src={currentUser.photoUrl}
+            src={this.state.photoUrl}
             className="user-info-form-photo" />
           </label>
           <input

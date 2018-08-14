@@ -4,6 +4,7 @@ import { createServer, removeServerErrors } from '../../../actions/server_action
 import { closeModal } from '../../../actions/modal_actions';
 import { createMembership } from '../../../actions/server_membership_actions';
 import { createChannel } from '../../../actions/channel_actions';
+import { updateLoading } from '../../../actions/loading_actions';
 
 const mapStateToProps = state => ({
   errors: state.errors.serverErrors,
@@ -15,7 +16,8 @@ const mapDispatchToProps = dispatch => ({
   removeServerErrors: () => dispatch(removeServerErrors()),
   closeModal: () => dispatch(closeModal()),
   createMembership: serverId => dispatch(createMembership(serverId)),
-  createChannel: channel => dispatch(createChannel(channel))
+  createChannel: channel => dispatch(createChannel(channel)),
+  updateLoading: loading => dispatch(updateLoading(loading))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreateServerForm);

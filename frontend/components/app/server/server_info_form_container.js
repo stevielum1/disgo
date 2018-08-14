@@ -14,7 +14,8 @@ const mapStateToProps = (state, ownProps) => ({
     currentUser: state.entities.users[state.session.id],
     server: state.entities.servers[ownProps.match.params.serverId],
     membership: getMembership(state, state.session.id, parseInt(ownProps.match.params.serverId)),
-    errors: state.errors.serverErrors
+    errors: state.errors.serverErrors,
+    loading: state.ui.loading
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -6,6 +6,7 @@ import Modal from '../modal/modal';
 class ServerIndex extends React.Component {
   constructor(props) {
     super(props);
+    this.state = this.props;
   }
 
   componentDidMount() {
@@ -14,10 +15,18 @@ class ServerIndex extends React.Component {
       .then(() => this.props.updateLoading(false));
   }
 
-  componentWillReceiveProps(nextProps) {
-    if ((this.props.memberships.length !== nextProps.memberships.length) || (this.props.servers.length !== nextProps.servers.length)) {
-      this.props.fetchServers();
+  static getDerivedStateFromProps(props, state) {
+    const { servers, memberships, channels } = props;
+    if (state.servers.length !== servers.length) {
+      return props;
     }
+    if (state.memberships.length !== memberships.length) {
+      return props;
+    }
+    if (state.channels.length !== channels.length) {
+      return props;
+    }
+    return state;
   }
 
   render() {

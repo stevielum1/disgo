@@ -1,10 +1,6 @@
 export const RECEIVE_LOADING = "RECEIVE_LOADING";
 
-const receiveLoading = loading => ({
+export const updateLoading = loading => ({
   type: RECEIVE_LOADING,
   loading
 });
-
-export const updateLoading = loading => dispatch => (
-  dispatch(receiveLoading(loading))
-);

@@ -23,8 +23,18 @@ class ServerInfoForm extends React.Component {
   }
 
   handleFile(e) {
-    e.preventDefault();
-    this.setState({ photoFile: e.currentTarget.files[0] });
+    const reader = new FileReader();
+    const file = e.currentTarget.files[0];
+
+    reader.onloadend = () => (
+      this.setState({ photoUrl: reader.result, photoFile: file })
+    );
+
+    if (file) {
+      reader.readAsDataURL(file);
+    } else {
+      this.setState({ photoUrl: this.props.currentUser.photoUrl, photoFile: null })
+    }
   }
 
   handleSubmit(e) {
@@ -66,6 +76,8 @@ class ServerInfoForm extends React.Component {
   }
 
   render() {
+    if (this.props.loading) return null;
+
     const { server, errors, currentUser } = this.props;
     const { owner } = this.state;
 
@@ -77,7 +89,7 @@ class ServerInfoForm extends React.Component {
         <form onSubmit={this.handleSubmit}>
           <label htmlFor="server-info-photo-upload">
             <img
-            src={server.photoUrl}
+            src={this.state.photoUrl}
             className="server-info-form-photo" />
           </label>
           <input
