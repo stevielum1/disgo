@@ -1,6 +1,6 @@
 .app-container {
   display: flex;
-  height: 100vh;
+  min-height: 100vh;
 
   .app-server-column {
     min-width: 80px;
@@ -8,12 +8,13 @@
   }
 
   .app-channel-column {
+    min-height: 100%;
     display: flex;
     flex-direction: column;
 
     .app-server-channel {
       min-width: 240px;
-      max-height: 100%;
+      height: calc(100% - 56px);
       display: flex;
       flex-direction: column;
       flex-grow: 1;
@@ -28,6 +29,7 @@
     .app-message-membership {
       display: flex;
       height: 100%;
+      flex-shrink: 10000;
 
       .app-message-column {
         flex-grow: 1;

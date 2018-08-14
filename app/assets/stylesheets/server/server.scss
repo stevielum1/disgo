@@ -1,13 +1,12 @@
 .server-index-container {
   box-sizing: border-box;
   background: #202225;
-  min-height: 200px;
   padding-top: 15px;
   position: fixed;
   top: 83px;
   overflow: scroll;
   width: 80px;
-  height: calc(100% - 83px);
+  height: calc(100% - 85px);
 
   ul {
     display: flex;

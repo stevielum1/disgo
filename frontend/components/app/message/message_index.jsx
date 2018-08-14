@@ -79,21 +79,23 @@ class MessageIndex extends React.Component {
     const { messages } = this.state;
 
     return (
-      <div className="message-index-container">
-        <ul id="message-log">
-          { messages.map(message => (
-              <MessageIndexItem
-                key={message.id}
-                message={message}
-                user={users[message.authorId]} />
-            ))
-          }
-        </ul>
-        <MessageForm
-          channel={channel}
-          createMessage={createMessage}
-          chats={this.chats}
-          currentUserId={currentUserId} />
+      <div className="app-message-column">
+        <div className="message-index-container">
+          <ul id="message-log">
+            { messages.map(message => (
+                <MessageIndexItem
+                  key={message.id}
+                  message={message}
+                  user={users[message.authorId]} />
+              ))
+            }
+          </ul>
+          <MessageForm
+            channel={channel}
+            createMessage={createMessage}
+            chats={this.chats}
+            currentUserId={currentUserId} />
+        </div>
       </div>
     )
   }

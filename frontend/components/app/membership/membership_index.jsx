@@ -8,19 +8,21 @@ class MembershipIndex extends React.Component {
     const { members, server } = this.props;
 
     return (
-      <div className="membership-index-container">
-        <h1>Members</h1>
-        <ul>
-          {
-            members.map(member => {
-              const owner = server.ownerId === member.id;
-              return <MembershipIndexItem
-                key={member.id}
-                member={member}
-                owner={owner} />
-            })
-          }
-        </ul>
+      <div className="app-memberships-column">
+        <div className="membership-index-container">
+          <h1>Members</h1>
+          <ul>
+            {
+              members.map(member => {
+                const owner = server.ownerId === member.id;
+                return <MembershipIndexItem
+                  key={member.id}
+                  member={member}
+                  owner={owner} />
+              })
+            }
+          </ul>
+        </div>
       </div>
     )
   }

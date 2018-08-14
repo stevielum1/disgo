@@ -1,0 +1,8 @@
+.main-appear {
+  opacity: 0;
+}
+
+.main-appear.main-appear-active {
+  opacity: 1;
+  transition: opacity 5s;
+}

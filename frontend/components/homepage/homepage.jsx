@@ -7,7 +7,7 @@ import ServerIndexContainer from '../app/server/server_index_container';
 import ServerInfoContainer from '../app/server/server_info_container';
 import ChannelIndexContainer from '../app/channel/channel_index_container';
 import UserInfoContainer from '../app/user_info/user_info_container';
-import Main from '../app/main';
+import MainContainer from '../app/main/main_container';
 import HeaderContainer from '../app/header/header_container';
 import MessageIndexContainer from '../app/message/message_index_container';
 import MembershipIndexContainer from '../app/membership/membership_index_container';
@@ -32,15 +32,11 @@ const Homepage = ({ loggedIn }) => {
           <Route path="/" component={UserInfoContainer} />
         </div>
         <div className="app-main-column">
-          <Route path="/home" component={Main} />
+          <Route path="/home" component={MainContainer} />
           <Route path="/channels/:serverId/:channelId" component={HeaderContainer} />
           <div className="app-message-membership">
-            <div className="app-message-column">
-              <ProtectedRoute path="/channels/:serverId/:channelId" component={MessageIndexContainer} />
-            </div>
-            <div className="app-memberships-column">
-              <ProtectedRoute path="/channels/:serverId/:channelId" component={MembershipIndexContainer} />
-            </div>
+            <ProtectedRoute path="/channels/:serverId/:channelId" component={MessageIndexContainer} />
+            <ProtectedRoute path="/channels/:serverId/:channelId" component={MembershipIndexContainer} />
           </div>
         </div>
       </div>
