@@ -1,21 +1,19 @@
 import React from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, withRouter } from 'react-router-dom';
 
-const ServerIndexItem = ({ server, channel }) => {
-  if (channel === undefined) return <div>Loading...</div>;
+const ServerIndexItem = ({ server, channel, loading, history }) => {
+  if (loading) return null;
   return (
-    <li>
+    <li onClick={() => history.push(`/channels/${server.id}/${channel.id}`)}>
       <NavLink
         className="server-link"
         activeClassName="server-active"
-        to={`/channels/${server.id}`}>
-          <Link to={`/channels/${server.id}/${channel.id}`}>
-          <div className="server-active-icon"></div>
-          <img src={server.photoUrl} />
-        </Link>
+        to={`/channels/${server.id}`} >
+        <div className="server-active-icon"></div>
+        <img src={server.photoUrl} />
       </NavLink>
     </li>
   )
 };
 
-export default ServerIndexItem
+export default withRouter(ServerIndexItem);

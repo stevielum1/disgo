@@ -11,6 +11,7 @@ class MessageIndexItem extends React.Component {
     this.handleCancel = this.handleCancel.bind(this);
     this.handleSave = this.handleSave.bind(this);
     this.toggleDropdown = this.toggleDropdown.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
   }
 
   handleInput(e) {
@@ -19,24 +20,29 @@ class MessageIndexItem extends React.Component {
 
   handleKeyDown(e) {
     if (e.key === "Enter") {
-      this.setState({ editMode: false });
+      this.setState({ editMode: false, dropdown: false });
       this.props.updateMessage(this.state);
     } else if (e.key === "Escape") {
-      this.setState({ editMode: false, content: this.props.message.content });
+      this.setState({ editMode: false, content: this.props.message.content, dropdown: false });
     }
   }
 
   handleCancel(e) {
-    this.setState({ editMode: false, content: this.props.message.content });
+    this.setState({ editMode: false, content: this.props.message.content, dropdown: false });
   }
 
   handleSave(e) {
-    this.setState({ editMode: false });
+    this.setState({ editMode: false, dropdown: false });
     this.props.updateMessage(this.state);
   }
 
   toggleDropdown(e) {
     this.setState({ dropdown: !this.state.dropdown });
+  }
+
+  handleDelete(e) {
+    this.toggleDropdown();
+
   }
 
   render() {
@@ -83,12 +89,12 @@ class MessageIndexItem extends React.Component {
         <div className="message-body">
           <span className="message-author">{user.username}</span>
           <input
-          type="text"
-          className="edit-message-content"
-          value={this.state.content}
-          autoFocus={true}
-          onChange={this.handleInput}
-          onKeyDown={this.handleKeyDown} />
+            type="text"
+            className="edit-message-content"
+            value={this.state.content}
+            autoFocus={true}
+            onChange={this.handleInput}
+            onKeyDown={this.handleKeyDown} />
           <div className="edit-message-nav">
             <h6>escape to <p className="edit-message-link" onClick={this.handleCancel}>cancel</p> <i className="fas fa-circle"></i> enter to <p className="edit-message-link" onClick={this.handleSave}>save</p>
             </h6>

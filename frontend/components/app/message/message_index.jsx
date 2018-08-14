@@ -80,7 +80,8 @@ class MessageIndex extends React.Component {
       createMessage,
       users,
       currentUserId,
-      updateMessage
+      updateMessage,
+      deleteMessage
     } = this.props;
 
     const { messages } = this.state;
@@ -95,7 +96,8 @@ class MessageIndex extends React.Component {
                   message={message}
                   user={users[message.authorId]}
                   currentUserId={currentUserId}
-                  updateMessage={updateMessage} />
+                  updateMessage={updateMessage}
+                  deleteMessage={deleteMessage} />
               ))
             }
           </ul>

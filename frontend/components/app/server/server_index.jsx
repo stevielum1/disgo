@@ -23,7 +23,7 @@ class ServerIndex extends React.Component {
   render() {
     if (this.props.loading) return null;
 
-    const { servers, currentUser, openModal, channels } = this.props;
+    const { servers, currentUser, openModal, channels, loading } = this.props;
     return (
       <div className="server-index-container">
         <ul>
@@ -34,7 +34,8 @@ class ServerIndex extends React.Component {
               return <ServerIndexItem
                 key={server.id}
                 server={server}
-                channel={firstChannel} />
+                channel={firstChannel}
+                loading={loading} />
             })
           }
           <li className="server-new"

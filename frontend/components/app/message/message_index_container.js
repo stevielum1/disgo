@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import MessageIndex from './message_index';
 import { getMessages } from '../../../reducers/selectors';
-import { receiveMessage, updateMessage } from '../../../actions/message_actions';
+import { receiveMessage, updateMessage, deleteMessage } from '../../../actions/message_actions';
 import { fetchServers } from '../../../actions/server_actions';
 import { openModal } from '../../../actions/modal_actions';
 
@@ -17,7 +17,8 @@ const mapDispatchToProps = dispatch => ({
   receiveMessage: message => dispatch(receiveMessage(message)),
   fetchServers: () => dispatch(fetchServers()),
   openModal: modal => dispatch(openModal(modal)),
-  updateMessage: message => dispatch(updateMessage(message))
+  updateMessage: message => dispatch(updateMessage(message)),
+  deleteMessage: id => dispatch(deleteMessage(id))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(MessageIndex);
