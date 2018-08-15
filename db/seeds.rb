@@ -14,7 +14,7 @@ users << user
 50.times do
   name = Faker::Name.unique.first_name
   user = {
-    username: Faker::Internet.username(name),
+    username: Faker::Internet.username(name) + rand(1..1000).to_s,
     email: Faker::Internet.free_email(name),
     password: Faker::Internet.password(6)
   }
@@ -24,9 +24,9 @@ end
 
 servers = []
 
-10.times do
+5.times do
   server = {
-    name: Faker::Space.moon + " " + Faker::Space.star,
+    name: Faker::BreakingBad.unique.episode,
     owner_id: users.sample[:id]
   }
   server = Server.create(server)
@@ -34,24 +34,81 @@ servers = []
 end
 
 users.each do |user|
-  membership = ServerMembership.new(user_id: user.id, server_id: servers.sample[:id])
-  membership.save
-end
-
-servers.each do |server|
-  channel = {
-    name: "general",
-    server_id: server.id,
-    destructible: false
-  }
-  Channel.create(channel)
-
-  3.times do
-    channel = {
-      name: Faker::Space.moon + " " + Faker::Space.star,
-      server_id: server.id,
-      destructible: true
-    }
-    Channel.create(channel)
+  count = 0
+  until count >= 3
+    membership = ServerMembership.new(user_id: user.id, server_id: servers.sample[:id])
+    count += 1 if membership.save
   end
 end
+
+channels = []
+
+servers.each do |server|
+    channel = {
+      name: "general",
+      server_id: server.id,
+      destructible: false
+    }
+    channel = Channel.create(channel)
+    channels << channel
+
+    3.times do
+      channel = {
+        name: Faker::BreakingBad.unique.character,
+        server_id: server.id,
+        destructible: true
+      }
+      channel = Channel.create(channel)
+      channels << channel
+    end
+    Faker::BreakingBad.unique.clear
+end
+
+contents = File.readlines('app/assets/message_contents.txt')
+
+channels.each do |channel|
+  members = channel.server.members
+  30.times do
+    message = {
+      content: contents.sample,
+      author_id: members.sample.id,
+      channel_id: channel.id
+    }
+    Message.create(message)
+  end
+end
+
+
+# servers = []
+#
+# 10.times do
+#   server = {
+#     name: Faker::Space.moon + " " + Faker::Space.star,
+#     owner_id: users.sample[:id]
+#   }
+#   server = Server.create(server)
+#   servers << server
+# end
+#
+# users.each do |user|
+#   membership = ServerMembership.new(user_id: user.id, server_id: servers.sample[:id])
+#   membership.save
+# end
+#
+# servers.each do |server|
+#   channel = {
+#     name: "general",
+#     server_id: server.id,
+#     destructible: false
+#   }
+#   Channel.create(channel)
+#
+#   3.times do
+#     channel = {
+#       name: Faker::Space.moon + " " + Faker::Space.star,
+#       server_id: server.id,
+#       destructible: true
+#     }
+#     Channel.create(channel)
+#   end
+# end
