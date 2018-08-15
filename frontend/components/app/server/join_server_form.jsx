@@ -21,8 +21,11 @@ class JoinServerForm extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    let membership;
-    this.props.createMembership(this.state)
+    let membership = {
+      name: this.state.name,
+      userId: this.props.currentUser.id
+    };
+    this.props.createMembership(membership)
       .then(() => this.props.fetchServers())
       .then(() => this.props.closeModal());
   }

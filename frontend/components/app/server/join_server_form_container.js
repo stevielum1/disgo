@@ -5,7 +5,8 @@ import { closeModal } from '../../../actions/modal_actions';
 import { fetchServers } from '../../../actions/server_actions';
 
 const mapStateToProps = state => ({
-  errors: state.errors.membershipErrors
+  errors: state.errors.membershipErrors,
+  currentUser: state.entities.users[state.session.id]
 });
 
 const mapDispatchToProps = dispatch => ({

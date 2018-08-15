@@ -52,7 +52,12 @@ class CreateServerForm extends React.Component {
     this.props.createServer(formData)
       .then(payload => {
         that.props.updateLoading(true);
-        that.props.createMembership(payload.server)
+        const membership = {
+          name: payload.server.name,
+          serverId: payload.server.id,
+          userId: this.props.currentUser.id
+        }
+        that.props.createMembership(membership)
           .then(payload => {
             const channel = {
               name: "general",

@@ -5,6 +5,7 @@ export const createMembership = data => (
     data: {
       name: data.name,
       membership: {
+        user_id: data.userId,
         server_id: data.serverId
       }
     }

@@ -33,10 +33,15 @@ class ServerIndex extends React.Component {
     if (this.props.loading) return null;
 
     const { servers, currentUser, openModal, channels, loading } = this.props;
+
+    const nonDMServers = servers.filter(server => (
+      !server.name.includes("Direct Message")
+    ));
+
     return (
       <div className="server-index-container">
         <ul>
-          { servers.map(server => {
+          { nonDMServers.map(server => {
               const firstChannel = channels.filter(channel => (
                 channel.serverId === server.id
               ))[0];

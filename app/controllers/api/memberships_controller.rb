@@ -2,7 +2,7 @@ class Api::MembershipsController < ApplicationController
   def create
     if params[:name]
       server = Server.find_by(name: params[:name])
-      @membership = ServerMembership.new
+      @membership = ServerMembership.new(membership_params)
 
       if server
         @membership.server_id = server.id
@@ -13,7 +13,7 @@ class Api::MembershipsController < ApplicationController
       @membership = ServerMembership.new(membership_params)
     end
 
-    @membership.user_id = current_user.id
+    # @membership.user_id = current_user.id
 
     if @membership.save
       render :show
@@ -29,6 +29,6 @@ class Api::MembershipsController < ApplicationController
 
   private
   def membership_params
-    params.require(:membership).permit(:server_id)
+    params.require(:membership).permit(:server_id, :user_id)
   end
 end
