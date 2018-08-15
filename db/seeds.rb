@@ -27,7 +27,7 @@ servers = []
 5.times do
   user = users.sample
   server = {
-    name: Faker::Skyrim.unique.region,
+    name: Faker::ElderScrolls.unique.region,
     owner_id: user.id
   }
   server = Server.create(server)
@@ -57,14 +57,14 @@ servers.each do |server|
 
     3.times do
       channel = {
-        name: Faker::Skyrim.unique.city,
+        name: Faker::Elder.unique.city,
         server_id: server.id,
         destructible: true
       }
       channel = Channel.create(channel)
       channels << channel
     end
-    Faker::Skyrim.unique.clear
+    Faker::Elder.unique.clear
 end
 
 contents = File.readlines('app/assets/skyrim.txt')
