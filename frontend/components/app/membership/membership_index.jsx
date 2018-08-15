@@ -5,7 +5,17 @@ class MembershipIndex extends React.Component {
   render() {
     if (this.props.loading) return null;
 
-    const { members, server } = this.props;
+    const {
+      members,
+      server,
+      currentUser,
+      memberships,
+      servers,
+      channels,
+      createServer,
+      createMembership,
+      createChannel
+    } = this.props;
 
     return (
       <div className="app-memberships-column">
@@ -14,11 +24,17 @@ class MembershipIndex extends React.Component {
           <ul className="membership-list">
             {
               members.map(member => {
-                const owner = server.ownerId === member.id;
                 return <MembershipIndexItem
                   key={member.id}
                   member={member}
-                  owner={owner} />
+                  server={server}
+                  currentUser={currentUser}
+                  memberships={memberships}
+                  servers={servers}
+                  channels={channels}
+                  createServer={createServer}
+                  createMembership={createMembership}
+                  createChannel={createChannel} />
               })
             }
           </ul>

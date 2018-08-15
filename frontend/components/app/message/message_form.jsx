@@ -38,7 +38,8 @@ class MessageForm extends React.Component {
           type="text"
           value={this.state.content}
           onChange={this.handleInput}
-          placeholder={`Message #${this.props.channel.name}`} />
+          placeholder={`Message #${this.props.channel.name}`}
+          autoFocus="true" />
       </form>
     )
   }

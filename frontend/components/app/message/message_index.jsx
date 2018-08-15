@@ -11,6 +11,10 @@ class MessageIndex extends React.Component {
     };
   }
 
+  componentDidMount() {
+    this.createSocket();
+  }
+
   componentDidUpdate(prevProps, prevState) {
     if (this.props.messages.length !== prevProps.messages.length) {
       this.props.fetchServers();

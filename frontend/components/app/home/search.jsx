@@ -79,8 +79,7 @@ class Search extends React.Component {
             type="text"
             value={this.state.input}
             onChange={this.handleInput}
-            placeholder="Find or start a conversation"
-            autoFocus="true" />
+            placeholder="Find or start a conversation" />
         </div>
         <ul className="search-results">
           { this.state.users.map(user => (
