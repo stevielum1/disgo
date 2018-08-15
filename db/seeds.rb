@@ -27,7 +27,7 @@ servers = []
 5.times do
   user = users.sample
   server = {
-    name: Faker::BreakingBad.unique.episode,
+    name: Faker::Skyrim.unique.region,
     owner_id: user.id
   }
   server = Server.create(server)
@@ -57,17 +57,17 @@ servers.each do |server|
 
     3.times do
       channel = {
-        name: Faker::BreakingBad.unique.character,
+        name: Faker::Skyrim.unique.city,
         server_id: server.id,
         destructible: true
       }
       channel = Channel.create(channel)
       channels << channel
     end
-    Faker::BreakingBad.unique.clear
+    Faker::Skyrim.unique.clear
 end
 
-contents = File.readlines('app/assets/message_contents.txt')
+contents = File.readlines('app/assets/skyrim.txt')
 
 channels.each do |channel|
   members = channel.server.members
