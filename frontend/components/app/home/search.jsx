@@ -5,27 +5,32 @@ class Search extends React.Component {
     super(props);
     this.state = {
       input: "",
-      users: []
+      users: [],
+      currentUser: this.props.currentUser
     };
     this.handleInput = this.handleInput.bind(this);
   }
 
-  static getDerivedStateFromProps(props, state) {
-    if (state.users.length !== props.users.length) {
-      return {
-        input: "",
-        users: props.users
+  handleInput(e) {
+    const users = this.props.users.filter(user => {
+      if (user.id === this.props.currentUser.id) {
+        return false;
       }
-    } else {
-      return null;
-    }
+      if (user.username.startsWith(e.currentTarget.value)) {
+        return true;
+      }
+    });
+    this.setState({ input: e.currentTarget.value, users });
   }
 
-  handleInput(e) {
-    const users = this.props.users.filter(user => (
-      user.username.startsWith(e.currentTarget.value)
-    ));
-    this.setState({ input: e.currentTarget.value, users });
+  handleDM(otherUser) {
+    debugger
+    // if a private server between users exists
+    //    redirect to /home/:channelId
+    // else
+    //    create new server with null owner_id
+    //    create memberships for both user
+    //    redirect to /home/:serverId
   }
 
   render() {
@@ -44,7 +49,8 @@ class Search extends React.Component {
           { this.state.users.map(user => (
               <li
                 key={user.id}
-                className="member-info">
+                className="member-info"
+                onClick={() => this.handleDM(user)}>
                 <img className="member-photo" src={user.photoUrl} />
                 <p>{user.username}</p>
               </li>

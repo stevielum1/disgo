@@ -13,4 +13,16 @@ class ChatChannel < ApplicationCable::Channel
       author_id: options.fetch("authorId")
     )
   end
+
+  def update(options)
+    Message.find(options.fetch("id")).update_attributes(
+        content: options.fetch("content"),
+        channel_id: options.fetch("channelId"),
+        author_id: options.fetch("authorId")
+      )
+  end
+
+  def destroy(options)
+    Message.find(options.fetch("id")).destroy
+  end
 end

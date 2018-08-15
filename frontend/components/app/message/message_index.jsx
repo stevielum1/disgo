@@ -39,7 +39,11 @@ class MessageIndex extends React.Component {
     }, {
       connected: () => {},
       received: data => {
-        that.props.receiveMessage(data);
+        if (data.type === "destroy") {
+          that.props.removeMessage(data.message.id);
+        } else {
+          that.props.receiveMessage(data.message);
+        }
       },
       create: function(message) {
         this.perform('create', {
@@ -47,6 +51,19 @@ class MessageIndex extends React.Component {
           channelId: message.channelId,
           authorId: message.authorId
         });
+      },
+      update: function(message) {
+        this.perform('update', {
+          id: message.id,
+          content: message.content,
+          channelId: message.channelId,
+          authorId: message.authorId
+        })
+      },
+      delete: function(message) {
+        this.perform('destroy', {
+          id: message.id
+        })
       }
     });
   }
@@ -78,12 +95,11 @@ class MessageIndex extends React.Component {
           <ul id="message-log">
             { messages.map(message => (
                 <MessageIndexItem
-                  key={message.id}
+                  key={message.id + Date.now()}
                   message={message}
                   user={users[message.authorId]}
                   currentUserId={currentUserId}
-                  updateMessage={updateMessage}
-                  deleteMessage={deleteMessage} />
+                  chats={this.chats} />
               ))
             }
           </ul>

@@ -22,11 +22,11 @@ class ChannelForm extends React.Component {
     e.preventDefault();
     this.props.updateLoading(true);
     this.props.processForm(this.state)
-      .then(() => this.props.closeModal())
       .then(payload => {
         const channel = payload.channel;
         this.props.history.push(`/channels/${channel.serverId}/${channel.id}`);
       })
+      .then(() => this.props.closeModal())
       .then(() => this.props.updateLoading(false));
   }
 
@@ -40,7 +40,9 @@ class ChannelForm extends React.Component {
   }
 
   render() {
-    const { formType, processForm, errors, channel } = this.props;
+    if (this.props.loading) return null;
+
+    const { formType, processForm, errors } = this.props;
 
     let headingText, buttonText, deleteButton;
 
@@ -60,7 +62,7 @@ class ChannelForm extends React.Component {
       );
     }
 
-    if (!channel.destructible) {
+    if (!this.state.destructible) {
       deleteButton = null;
     }
 

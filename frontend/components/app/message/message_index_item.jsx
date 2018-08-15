@@ -21,7 +21,7 @@ class MessageIndexItem extends React.Component {
   handleKeyDown(e) {
     if (e.key === "Enter") {
       this.setState({ editMode: false, dropdown: false });
-      this.props.updateMessage(this.state);
+      this.props.chats.update(this.state);
     } else if (e.key === "Escape") {
       this.setState({ editMode: false, content: this.props.message.content, dropdown: false });
     }
@@ -33,7 +33,7 @@ class MessageIndexItem extends React.Component {
 
   handleSave(e) {
     this.setState({ editMode: false, dropdown: false });
-    this.props.updateMessage(this.state);
+    this.props.chats.update(this.state);
   }
 
   toggleDropdown(e) {
@@ -42,7 +42,7 @@ class MessageIndexItem extends React.Component {
 
   handleDelete(e) {
     this.toggleDropdown();
-    this.props.deleteMessage(this.state.id);
+    this.props.chats.delete(this.state);
   }
 
   render() {

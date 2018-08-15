@@ -14,6 +14,14 @@ class Message < ApplicationRecord
   class_name: :Channel
 
   after_create_commit do
-    MessageCreationEventBroadcastJob.perform_later(self)
+    MessageCreationEventBroadcastJob.perform_later(self, "create")
+  end
+
+  after_destroy_commit do
+    MessageCreationEventBroadcastJob.perform_now(self, "destroy")
+  end
+
+  after_update_commit do
+    MessageCreationEventBroadcastJob.perform_now(self, "update")
   end
 end

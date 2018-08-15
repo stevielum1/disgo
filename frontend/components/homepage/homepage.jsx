@@ -33,11 +33,14 @@ const Homepage = ({ loggedIn }) => {
           <Route path="/" component={UserInfoContainer} />
         </div>
         <div className="app-main-column">
-          <Route path="/home" component={MainContainer} />
+          <Route exact path="/home" component={MainContainer} />
           <Route path="/channels/:serverId/:channelId" component={HeaderContainer} />
+          <Route path="/home/:serverId" component={HeaderContainer} />
           <div className="app-message-membership">
             <Route path="/channels/:serverId/:channelId" component={MessageIndexContainer} />
             <Route path="/channels/:serverId/:channelId" component={MembershipIndexContainer} />
+            <Route path="/home/:serverId" component={MessageIndexContainer} />
+            <Route path="/home/:serverId" component={MembershipIndexContainer} />
           </div>
         </div>
       </div>
