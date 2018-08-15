@@ -57,14 +57,14 @@ servers.each do |server|
 
     3.times do
       channel = {
-        name: Faker::Elder.unique.city,
+        name: Faker::ElderScrolls.unique.city,
         server_id: server.id,
         destructible: true
       }
       channel = Channel.create(channel)
       channels << channel
     end
-    Faker::Elder.unique.clear
+    Faker::ElderScrolls.unique.clear
 end
 
 contents = File.readlines('app/assets/skyrim.txt')
