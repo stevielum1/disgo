@@ -4,7 +4,9 @@ import { Link, NavLink, withRouter } from 'react-router-dom';
 const ServerIndexItem = ({ server, channel, loading, history }) => {
   if (loading) return null;
   return (
-    <li onClick={() => history.push(`/channels/${server.id}/${channel.id}`)}>
+    <li onClick={() => {
+      history.replace(`/channels/${server.id}/${channel.id}`)
+    }} >
       <NavLink
         className="server-link"
         activeClassName="server-active"

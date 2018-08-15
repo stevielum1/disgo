@@ -6,7 +6,6 @@ class MembershipIndex extends React.Component {
     if (this.props.loading) return null;
 
     const {
-      members,
       server,
       currentUser,
       memberships,
@@ -16,6 +15,10 @@ class MembershipIndex extends React.Component {
       createMembership,
       createChannel
     } = this.props;
+
+    const members = this.props.members.sort((user1, user2) => (
+      user1.username < user2.username ? -1 : 1
+    ));
 
     return (
       <div className="app-memberships-column">

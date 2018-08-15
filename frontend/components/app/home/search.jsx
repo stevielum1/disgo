@@ -72,6 +72,10 @@ class Search extends React.Component {
   render() {
     if (this.props.loading) return null;
 
+    const users = this.state.users.sort((user1, user2) => (
+      user1.username < user2.username ? -1 : 1
+    ));
+
     return (
       <div className="search-container">
         <div className="search-input-container">
@@ -82,7 +86,7 @@ class Search extends React.Component {
             placeholder="Find or start a conversation" />
         </div>
         <ul className="search-results">
-          { this.state.users.map(user => (
+          { users.map(user => (
               <li
                 key={user.id}
                 className="member-info"

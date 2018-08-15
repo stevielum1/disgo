@@ -25,12 +25,15 @@ end
 servers = []
 
 5.times do
+  user = users.sample
   server = {
     name: Faker::BreakingBad.unique.episode,
-    owner_id: users.sample[:id]
+    owner_id: user.id
   }
   server = Server.create(server)
   servers << server
+
+  ServerMembership.create(user_id: user.id, server_id: server.id)
 end
 
 users.each do |user|
