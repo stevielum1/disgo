@@ -65,11 +65,6 @@
       color: #585858;
       font-size: 20px;
     }
-
-    i:hover {
-      color: #c1c1c1;
-      transition: color 0.2s;
-    }
   }
 
   .server-new:hover {
@@ -78,5 +73,10 @@
     border: 1px solid gray;
     border-style: dashed;
     transition: color 0.2s, border 0.2s, border-style 0.2s
+  }
+
+  .server-new:hover i {
+    color: #c1c1c1;
+    transition: color 0.2s;
   }
 }
