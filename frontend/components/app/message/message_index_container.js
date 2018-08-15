@@ -17,8 +17,6 @@ const mapDispatchToProps = dispatch => ({
   receiveMessage: message => dispatch(receiveMessage(message)),
   fetchServers: () => dispatch(fetchServers()),
   openModal: modal => dispatch(openModal(modal)),
-  updateMessage: message => dispatch(updateMessage(message)),
-  deleteMessage: id => dispatch(deleteMessage(id)),
   removeMessage: id => dispatch(removeMessage(id))
 });
 

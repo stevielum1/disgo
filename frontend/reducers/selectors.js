@@ -39,3 +39,8 @@ export const getMessages = (state, channelId) => {
       return message.channelId === channelId;
     });
 };
+
+export const getUsersWithoutCurrentUser = (state, currentUserId) => {
+  return Object.values(state.entities.users)
+    .filter(user => user.id !== currentUserId);
+};

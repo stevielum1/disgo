@@ -78,14 +78,7 @@ class MessageIndex extends React.Component {
   render() {
     if (this.props.loading) return null;
 
-    const {
-      channel,
-      createMessage,
-      users,
-      currentUserId,
-      updateMessage,
-      deleteMessage
-    } = this.props;
+    const { channel, users, currentUserId } = this.props;
 
     const { messages } = this.state;
 
@@ -105,7 +98,6 @@ class MessageIndex extends React.Component {
           </ul>
           <MessageForm
             channel={channel}
-            createMessage={createMessage}
             chats={this.chats}
             currentUserId={currentUserId} />
         </div>

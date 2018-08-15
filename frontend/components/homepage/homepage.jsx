@@ -35,12 +35,12 @@ const Homepage = ({ loggedIn }) => {
         <div className="app-main-column">
           <Route exact path="/home" component={MainContainer} />
           <Route path="/channels/:serverId/:channelId" component={HeaderContainer} />
-          <Route path="/home/:serverId" component={HeaderContainer} />
+          <Route path="/home/:serverId/:channelId" component={HeaderContainer} />
           <div className="app-message-membership">
             <Route path="/channels/:serverId/:channelId" component={MessageIndexContainer} />
             <Route path="/channels/:serverId/:channelId" component={MembershipIndexContainer} />
-            <Route path="/home/:serverId" component={MessageIndexContainer} />
-            <Route path="/home/:serverId" component={MembershipIndexContainer} />
+            <Route path="/home/:serverId/:channelId" component={MessageIndexContainer} />
+            <Route path="/home/:serverId/:channelId" component={MembershipIndexContainer} />
           </div>
         </div>
       </div>

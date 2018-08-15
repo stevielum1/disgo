@@ -5,32 +5,28 @@ class Search extends React.Component {
     super(props);
     this.state = {
       input: "",
-      users: [],
+      users: this.props.users,
       currentUser: this.props.currentUser
     };
     this.handleInput = this.handleInput.bind(this);
   }
 
   handleInput(e) {
-    const users = this.props.users.filter(user => {
-      if (user.id === this.props.currentUser.id) {
-        return false;
-      }
-      if (user.username.startsWith(e.currentTarget.value)) {
-        return true;
-      }
-    });
+    const users = this.props.users.filter(user => (
+      user.username.startsWith(e.currentTarget.value)
+    ));
     this.setState({ input: e.currentTarget.value, users });
   }
 
   handleDM(otherUser) {
     debugger
-    // if a private server between users exists
-    //    redirect to /home/:channelId
+    // if a server between these users exists
+    //    redirect to /home/:serverId/:channelId
     // else
     //    create new server with null owner_id
     //    create memberships for both user
-    //    redirect to /home/:serverId
+    //    create default text channel named "Direct Message"
+    //    redirect to /home/:serverId/:channelId
   }
 
   render() {
