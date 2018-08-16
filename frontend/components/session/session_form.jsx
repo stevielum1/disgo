@@ -62,7 +62,7 @@ class SessionForm extends React.Component {
           {errors.map(error => (
             <li
               key={error + Date.now()}
-              className="session-error">{error}</li>
+              className="session-error login-error">{error}</li>
           ))}
         </ul>
       );
@@ -72,8 +72,12 @@ class SessionForm extends React.Component {
 
     const usernameField = formType === "Signup" ? (
       <label>
-        <p>Username</p>
-        {usernameError}
+        {usernameError.length === 0 ? (
+            <p>Username</p>
+          ) : (
+            <p>{usernameError}</p>
+          )
+        }
         <input
           type="text"
           value={this.state.username}
@@ -85,8 +89,12 @@ class SessionForm extends React.Component {
 
     const emailField = (
       <label>
-        <p>Email</p>
-        {emailError}
+        {emailError.length === 0 ? (
+            <p>Email</p>
+          ) : (
+            <p>{emailError}</p>
+          )
+        }
         <input
           type="text"
           autoFocus="true"
@@ -99,8 +107,12 @@ class SessionForm extends React.Component {
 
     const passwordField = (
       <label>
-        <p>Password</p>
-        {passwordError}
+        {passwordError.length === 0 ? (
+            <p>Password</p>
+          ) : (
+            <p>{passwordError}</p>
+          )
+        }
         <input
           type="password"
           value={this.state.password}
