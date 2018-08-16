@@ -94,7 +94,7 @@ class MessageIndexItem extends React.Component {
         className="message-content">{message.content}</span>
     );
 
-    //create an img tag 
+    //create an img tag
     messageContent = message.content.match(/.+\.(png|jpg|jpeg|gif)/) ? (
       <span
         className="message-content">

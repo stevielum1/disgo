@@ -27,7 +27,8 @@ const Protected = ({ component: Component, path, loggedIn, exact }) => {
   );
 };
 
-const Member = ({ component: Component, path, loggedIn, exact, member }) => {
+const Member = ({ component: Component, path, loggedIn, exact, member, loading }) => {
+  if (loading) return null;
   return (
     <Route path={path} exact={exact} render={props => (
       loggedIn ? (
@@ -49,7 +50,8 @@ const mapStateToProps = (state, ownProps) => {
   const member = loggedIn ? isMember(state, serverId, state.session.id) : false;
   return {
     loggedIn,
-    member
+    member,
+    loading: state.ui.loading
   }
 };
 
