@@ -49,11 +49,20 @@
   }
 
   .member-username-offline {
-    filter: saturate(50%);
+    font-weight: 300;
+    filter: brightness(70%);
   }
 }
 
 .member-info:hover {
   cursor: pointer;
   background: #383838;
+}
+
+.member-info:hover .member-photo-offline {
+  filter: saturate(100%);
+}
+
+.member-info:hover .member-username-offline {
+  filter: brightness(100%);
 }
