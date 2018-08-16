@@ -1,0 +1,21 @@
+.search-enter {
+  opacity: 0.01;
+  transform: translateX(5%);
+}
+
+.search-enter.search-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 0.2s, transform 0.2s;
+}
+
+.search-leave {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.search-leave.search-leave-active {
+  opacity: 0.01;
+  transform: translateX(5%);
+  transition: opacity 0.2s, transform 0.2s;
+}

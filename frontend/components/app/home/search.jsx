@@ -1,36 +1,18 @@
 import React from 'react'
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 class Search extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       input: "",
-      users: this.props.users,
       currentUser: this.props.currentUser
     };
     this.handleInput = this.handleInput.bind(this);
   }
 
-  static getDerivedStateFromProps(props, state) {
-    if (state.users.length === 0) {
-      return {
-        input: state.input,
-        users: props.users,
-        currentUser: props.currentUser
-      }
-    }
-    return {
-      input: state.input,
-      users: state.users,
-      currentUser: props.currentUser
-    }
-  }
-
   handleInput(e) {
-    const users = this.props.users.filter(user => (
-      user.username.startsWith(e.currentTarget.value)
-    ));
-    this.setState({ input: e.currentTarget.value, users });
+    this.setState({ input: e.currentTarget.value });
   }
 
   handleDM(otherUser) {
@@ -84,12 +66,37 @@ class Search extends React.Component {
     }
   }
 
+  matches() {
+    const users = this.props.users.sort((user1, user2) => (
+      user1.username < user2.username ? -1 : 1
+    ));
+
+    if (this.state.input.length === 0) return users;
+
+    const matches = [];
+
+    users.forEach(user => {
+      const sub = user.username.slice(0, this.state.input.length);
+      if (sub.toLowerCase() === this.state.input.toLowerCase()) {
+        matches.push(user);
+      }
+    });
+
+    return matches;
+  }
+
   render() {
     if (this.props.loading) return null;
 
-    const users = this.state.users.sort((user1, user2) => (
-      user1.username < user2.username ? -1 : 1
-    ));
+    const users = this.matches().map((user, idx) => (
+      <li
+        key={idx}
+        className="member-info"
+        onClick={() => this.handleDM(user)}>
+        <img className="member-photo" src={user.photoUrl} />
+        <p>{user.username}</p>
+      </li>
+    ))
 
     return (
       <div className="search-container">
@@ -101,16 +108,12 @@ class Search extends React.Component {
             placeholder="Find or start a conversation" />
         </div>
         <ul className="search-results">
-          { users.map(user => (
-              <li
-                key={user.id}
-                className="member-info"
-                onClick={() => this.handleDM(user)}>
-                <img className="member-photo" src={user.photoUrl} />
-                <p>{user.username}</p>
-              </li>
-            ))
-          }
+          <ReactCSSTransitionGroup
+          transitionName="search"
+          transitionEnterTimeout={200}
+          transitionLeaveTimeout={200} >
+            { users }
+          </ReactCSSTransitionGroup>
         </ul>
       </div>
     )
