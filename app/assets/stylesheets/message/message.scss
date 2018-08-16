@@ -38,6 +38,11 @@
           flex-wrap: wrap;
           margin-right: 40px;
 
+          > span {
+            padding-left: 15px;
+            text-indent: -15px;
+          }
+
           .message-author {
             color: white;
             font-size: 14px;
