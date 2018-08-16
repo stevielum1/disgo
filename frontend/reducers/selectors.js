@@ -44,3 +44,11 @@ export const getUsersWithoutCurrentUser = (state, currentUserId) => {
   return Object.values(state.entities.users)
     .filter(user => user.id !== currentUserId);
 };
+
+export const isMember = (state, serverId, userId) => {
+  const memberships = Object.values(state.entities.serverMemberships);
+  for (let i = 0; i < memberships.length; i++) {
+    if (memberships[i].serverId === parseInt(serverId) && memberships[i].userId === userId) return true;
+  }
+  return false;
+};

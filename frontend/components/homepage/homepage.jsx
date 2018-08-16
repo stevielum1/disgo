@@ -14,6 +14,7 @@ import MessageIndexContainer from '../app/message/message_index_container';
 import MembershipIndexContainer from '../app/membership/membership_index_container';
 import Modal from '../app/modal/modal';
 import { Route } from 'react-router-dom';
+import { MemberRoute } from '../../util/route_util';
 
 const Homepage = ({ loggedIn }) => {
   return (
@@ -27,20 +28,20 @@ const Homepage = ({ loggedIn }) => {
         <div className="app-channel-column">
           <div className="app-server-channel">
             <Route path="/home" component={SearchContainer} />
-            <Route path="/channels/:serverId/:channelId" component={ServerInfoContainer} />
-            <Route path="/channels/:serverId/:channelId" component={ChannelIndexContainer} />
+            <MemberRoute path="/channels/:serverId/:channelId" component={ServerInfoContainer} />
+            <MemberRoute path="/channels/:serverId/:channelId" component={ChannelIndexContainer} />
           </div>
           <Route path="/" component={UserInfoContainer} />
         </div>
         <div className="app-main-column">
           <Route exact path="/home" component={MainContainer} />
-          <Route path="/channels/:serverId/:channelId" component={HeaderContainer} />
-          <Route path="/home/:serverId/:channelId" component={HeaderContainer} />
+          <MemberRoute path="/channels/:serverId/:channelId" component={HeaderContainer} />
+          <MemberRoute path="/home/:serverId/:channelId" component={HeaderContainer} />
           <div className="app-message-membership">
-            <Route path="/channels/:serverId/:channelId" component={MessageIndexContainer} />
-            <Route path="/channels/:serverId/:channelId" component={MembershipIndexContainer} />
-            <Route path="/home/:serverId/:channelId" component={MessageIndexContainer} />
-            <Route path="/home/:serverId/:channelId" component={MembershipIndexContainer} />
+            <MemberRoute path="/channels/:serverId/:channelId" component={MessageIndexContainer} />
+            <MemberRoute path="/channels/:serverId/:channelId" component={MembershipIndexContainer} />
+            <MemberRoute path="/home/:serverId/:channelId" component={MessageIndexContainer} />
+            <MemberRoute path="/home/:serverId/:channelId" component={MembershipIndexContainer} />
           </div>
         </div>
       </div>
