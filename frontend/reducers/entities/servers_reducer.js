@@ -5,9 +5,12 @@ import {
 } from '../../actions/server_actions';
 import merge from 'lodash/merge';
 import { LOGOUT_CURRENT_USER } from '../../actions/session_actions';
+import { REMOVE_MEMBERSHIP } from '../../actions/server_membership_actions';
 
 const serversReducer = (state = {}, action) => {
   Object.freeze(state);
+  let newState = merge({}, state);
+
   switch(action.type) {
     case RECEIVE_SERVERS:
       if (action.payload.servers) {
@@ -16,10 +19,12 @@ const serversReducer = (state = {}, action) => {
         return state;
       }
     case RECEIVE_SERVER:
-      return merge({}, state, { [action.server.id]: action.server });
+      return merge(newState, { [action.server.id]: action.server });
     case REMOVE_SERVER:
-      let newState = merge({}, state);
       delete newState[action.serverId];
+      return newState;
+    case REMOVE_MEMBERSHIP:
+      delete newState[action.membership.serverId];
       return newState;
     case LOGOUT_CURRENT_USER:
       return {};

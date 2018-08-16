@@ -7,6 +7,10 @@
     color: white;
   }
 
+  .user-error-list {
+    min-height: 16px;
+  }
+
   .user-error {
     color: red;
     text-align: center;
@@ -24,7 +28,7 @@
       margin: 10px;
     }
 
-    .user-info-form-photo:hover {
+    .user-info-form-photo:hover:enabled {
       opacity: 0.7;
       cursor: pointer;
     }

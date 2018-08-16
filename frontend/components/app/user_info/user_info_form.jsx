@@ -64,16 +64,19 @@ class UserInfo extends React.Component {
     return (
       <div className="user-info-form-container">
         <h1>{currentUser.username}'s info</h1>
-        { errors.map((error, idx) => (
-          <p key={idx} className="user-error">
-            {error}
-          </p>
-        ))}
+        <ul className="user-error-list">
+          { errors.map((error, idx) => (
+            <li key={idx} className="user-error">
+              {error}
+            </li>
+          ))}
+        </ul>
         <form onSubmit={this.handleSubmit}>
           <label htmlFor="user-info-photo-upload">
             <img
             src={this.state.photoUrl}
-            className="user-info-form-photo" />
+            className="user-info-form-photo"
+            disabled={disabled}/>
           </label>
           <input
             id="user-info-photo-upload"

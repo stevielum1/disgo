@@ -9,9 +9,6 @@ class MessageIndex extends React.Component {
       messages: this.props.messages,
       channel: this.props.channel
     };
-  }
-
-  componentDidMount() {
     this.createSocket();
   }
 
@@ -37,7 +34,7 @@ class MessageIndex extends React.Component {
     let that = this;
 
     let cable = ActionCable.createConsumer(`ws://${location.host}/cable`);
-    this.chats = cable.subscriptions.create({
+    that.chats = cable.subscriptions.create({
       channel: 'ChatChannel',
       channel_id: that.props.match.params.channelId
     }, {
@@ -92,7 +89,7 @@ class MessageIndex extends React.Component {
           <ul id="message-log">
             { messages.map(message => (
                 <MessageIndexItem
-                  key={message.id + Date.now()}
+                  key={`${message.id}` + Date.now()}
                   message={message}
                   user={users[message.authorId]}
                   currentUserId={currentUserId}

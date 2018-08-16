@@ -45,10 +45,8 @@ class ServerInfoForm extends React.Component {
     if (this.state.photoFile) {
       formData.append('server[photo]', this.state.photoFile);
     }
-    this.props.updateLoading(true);
     this.props.updateServer(formData)
       .then(() => this.props.closeModal())
-      .then(() => this.props.updateLoading(false));
   }
 
   handleWarning(e) {
@@ -67,7 +65,7 @@ class ServerInfoForm extends React.Component {
         this.setState({ leave: true });
       } else {
         this.props.updateLoading(true);
-        this.props.deleteMembership(this.props.membership.id)
+        this.props.deleteMembership(this.props.membership)
           .then(() => this.props.closeModal())
           .then(() => this.props.history.push('/home'))
           .then(() => this.props.updateLoading(false));
@@ -115,11 +113,13 @@ class ServerInfoForm extends React.Component {
     return (
       <div className="server-info-form-container">
         <h1>{server.name}</h1>
-        { errors.map((error, idx) => (
-          <p key={idx} className="server-error">
-            {error}
-          </p>
-        ))}
+        <ul className="server-errors-list">
+          { errors.map((error, idx) => (
+            <li key={idx} className="server-error">
+              {error}
+            </li>
+          ))}
+        </ul>
         {editSection}
         <button
           type="submit"

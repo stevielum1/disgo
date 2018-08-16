@@ -25,9 +25,16 @@
     border-radius: 5px;
     box-shadow: 0 0 5px black;
 
+    .session-errors-list {
+      min-height: 14px;
+    }
+
     .session-error {
       color: #c72020;
       padding-left: 30px;
+      text-transform: uppercase;
+      font-weight: 700;
+      font-size: 12px;
     }
 
     h2 {
@@ -50,6 +57,11 @@
       text-transform: uppercase;
       font-weight: 700;
       font-size: 12px;
+
+      p {
+        display: inline-block;
+        min-width: 70px;
+      }
 
       input {
         box-sizing: border-box;

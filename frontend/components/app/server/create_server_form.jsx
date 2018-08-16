@@ -31,31 +31,14 @@ class CreateServerForm extends React.Component {
       formData.append('server[photo]', this.state.photoFile);
     }
     const that = this;
-    // this.props.createServer(formData)
-    //   .then(payload => {
-    //     that.props.updateLoading(true);
-    //     return that.props.createMembership(payload.server);
-    //   })
-    //   .then(payload => {
-    //     const channel = {
-    //       name: "general",
-    //       server_id: payload.membership.serverId,
-    //       destructible: false
-    //     };
-    //     return that.props.createChannel(channel);
-    //   })
-    //   .then(payload => that.props.history.push(`/channels/${payload.channel.serverId}/${payload.channel.id}`))
-    //   .then(() => {
-    //     that.props.closeModal();
-    //     that.props.updateLoading(false);
-    //   });
-    this.props.createServer(formData)
+
+    that.props.createServer(formData)
       .then(payload => {
         that.props.updateLoading(true);
         const membership = {
           name: payload.server.name,
           serverId: payload.server.id,
-          userId: this.props.currentUser.id
+          userId: that.props.currentUser.id
         }
         that.props.createMembership(membership)
           .then(payload => {
@@ -97,11 +80,13 @@ class CreateServerForm extends React.Component {
       <div className="create-server-form-container">
         <form onSubmit={this.handleSubmit}>
           <h2>Create your server</h2>
-          { errors.map((error, idx) => (
-            <p className="server-error" key={idx}>
-              {error}
-            </p>
-          ))}
+          <ul className="server-errors-list">
+            { errors.map((error, idx) => (
+              <li className="server-error" key={idx}>
+                {error}
+              </li>
+            ))}
+          </ul>
           <p>
             By creating a server, you will have access to free  <del>voice and</del> text chat to use amongst your friends.
           </p>

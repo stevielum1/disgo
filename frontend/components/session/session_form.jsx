@@ -35,22 +35,45 @@ class SessionForm extends React.Component {
     this.props.processForm(demoUser);
   }
 
+  findError(type) {
+    return this.props.errors.filter(error => (
+      error.toLowerCase().includes(type.toLowerCase())
+    )).map(error => (
+      <span
+        key={error + Date.now()}
+        className="session-error">{error}</span>
+    ))
+  }
+
   render() {
     const { formType, errors } = this.props;
 
     let formHeading = "";
     let formSubHeading = "";
+    let loginErrors;
 
     if (formType === "Signup") {
       formHeading = "Create an account";
     } else {
       formHeading = "Welcome back!";
       formSubHeading = "We're so excited to see you again!";
+      loginErrors = (
+        <ul className="session-errors-list">
+          {errors.map(error => (
+            <li
+              key={error + Date.now()}
+              className="session-error">{error}</li>
+          ))}
+        </ul>
+      );
     }
+
+    const usernameError = this.findError('username');
 
     const usernameField = formType === "Signup" ? (
       <label>
         <p>Username</p>
+        {usernameError}
         <input
           type="text"
           value={this.state.username}
@@ -58,9 +81,12 @@ class SessionForm extends React.Component {
       </label>
     ) : ( null );
 
+    const emailError = this.findError('email');
+
     const emailField = (
       <label>
         <p>Email</p>
+        {emailError}
         <input
           type="text"
           autoFocus="true"
@@ -69,9 +95,12 @@ class SessionForm extends React.Component {
       </label>
     );
 
+    const passwordError = this.findError('password')
+
     const passwordField = (
       <label>
         <p>Password</p>
+        {passwordError}
         <input
           type="password"
           value={this.state.password}
@@ -111,12 +140,7 @@ class SessionForm extends React.Component {
             <h2 className="session-header">{formHeading}</h2>
             <h3>{formSubHeading}</h3>
 
-            {
-              errors.map((error, idx) => (
-                <p className="session-error" key={idx}>{error}</p>
-              ))
-            }
-
+            {loginErrors}
             {emailField}
             {usernameField}
             {passwordField}

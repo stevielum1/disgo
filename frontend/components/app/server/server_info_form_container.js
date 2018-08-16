@@ -23,7 +23,7 @@ const mapDispatchToProps = dispatch => ({
   deleteServer: id => dispatch(deleteServer(id)),
   removeServerErrors: () => dispatch(removeServerErrors()),
   closeModal: () => dispatch(closeModal()),
-  deleteMembership: data => dispatch(deleteMembership(data)),
+  deleteMembership: membership => dispatch(deleteMembership(membership)),
   updateLoading: loading => dispatch(updateLoading(loading))
 });
 

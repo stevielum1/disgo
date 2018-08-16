@@ -35,11 +35,13 @@ class JoinServerForm extends React.Component {
     return (
       <div className="join-server-form-container">
         <h2>Join a Server</h2>
-        { errors.map((error, idx) => (
-          <p className="membership-error" key={idx}>
-            {error}
-          </p>
-        ))}
+        <ul className="membership-errors-list">
+          { errors.map((error, idx) => (
+            <li className="membership-error" key={idx}>
+              {error}
+            </li>
+          ))}
+        </ul>
         <p>Enter the name of the server<br />you want to join below:</p>
         <form onSubmit={this.handleSubmit}>
           <input
