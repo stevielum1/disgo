@@ -34,7 +34,7 @@ const Member = ({ component: Component, path, loggedIn, exact, member }) => {
         member ? (
           <Component {...props} />
         ) : (
-          <Redirect to="/home" />
+          <Redirect to="/" />
         )
       ) : (
         <Redirect to="/" />

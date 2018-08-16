@@ -27,14 +27,14 @@ const Homepage = ({ loggedIn }) => {
         </div>
         <div className="app-channel-column">
           <div className="app-server-channel">
-            <Route path="/home" component={SearchContainer} />
+            <Route path="(/|/home)" component={SearchContainer} />
             <MemberRoute path="/channels/:serverId/:channelId" component={ServerInfoContainer} />
             <MemberRoute path="/channels/:serverId/:channelId" component={ChannelIndexContainer} />
           </div>
           <Route path="/" component={UserInfoContainer} />
         </div>
         <div className="app-main-column">
-          <Route exact path="/home" component={MainContainer} />
+          <Route exact path="(/|/home)" component={MainContainer} />
           <MemberRoute path="/channels/:serverId/:channelId" component={HeaderContainer} />
           <MemberRoute path="/home/:serverId/:channelId" component={HeaderContainer} />
           <div className="app-message-membership">
