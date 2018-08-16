@@ -75,8 +75,7 @@ class UserInfo extends React.Component {
           <label htmlFor="user-info-photo-upload">
             <img
             src={this.state.photoUrl}
-            className="user-info-form-photo"
-            disabled={disabled}/>
+            className="user-info-form-photo" />
           </label>
           <input
             id="user-info-photo-upload"
