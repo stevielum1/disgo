@@ -59,7 +59,7 @@ class MembershipIndexItem extends React.Component {
   }
 
   render() {
-    const { member, server, currentUser } = this.props;
+    const { member, server, currentUser, online } = this.props;
 
     let crown;
     if (!server.name.includes("Direct Message")) {
@@ -74,8 +74,8 @@ class MembershipIndexItem extends React.Component {
       <li
         className="member-info"
         onClick={handleDMCallback}>
-        <img className="member-photo" src={member.photoUrl} />
-        <p>{member.username}{crown}</p>
+        <img className={"member-photo" + `${online ? "" : " member-photo-offline"}`} src={member.photoUrl} />
+        <p className={`${online ? "" : " member-username-offline"}`}>{member.username}</p><span>{crown}</span>
       </li>
     )
   }

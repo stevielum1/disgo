@@ -33,7 +33,7 @@ class ServerInfoForm extends React.Component {
     if (file) {
       reader.readAsDataURL(file);
     } else {
-      this.setState({ photoUrl: this.props.currentUser.photoUrl, photoFile: null })
+      this.setState({ photoUrl: this.state.photoUrl, photoFile: null })
     }
   }
 
