@@ -59,7 +59,21 @@
             overflow-wrap: break-word;
 
             a {
+              text-decoration: none;
               color: #7289da;
+            }
+
+            a:hover {
+              cursor: pointer;
+              text-decoration: underline;
+            }
+
+            .message-content-image-container {
+              padding-left: 15px;
+
+              img {
+                max-width: 100%;
+              }
             }
           }
 

@@ -83,8 +83,8 @@ class MessageIndexItem extends React.Component {
       editButton = null;
     }
 
-    //create an a tag if message content contains these extensions
-    const messageContent = message.content.match(/.+\.(com|org|gov|net|io|co|us).*/) ? (
+    //create an a tag
+    let messageContent = message.content.match(/.+\.(com|org|gov|net|io|co|us).*/) ? (
       <span
         className="message-content">
         <a href={`${message.content}`}>{message.content}</a>
@@ -92,7 +92,22 @@ class MessageIndexItem extends React.Component {
     ) : (
       <span
         className="message-content">{message.content}</span>
-    )
+    );
+
+    //create an img tag 
+    messageContent = message.content.match(/.+\.(png|jpg|jpeg|gif)/) ? (
+      <span
+        className="message-content">
+        <a href={`${message.content}`}>{message.content}</a>
+        <p className="message-content-image-container">
+          <a href={`${message.content}`}>
+            <img src={`${message.content}`} />
+          </a>
+        </p>
+      </span>
+    ) : (
+      messageContent
+    );
 
     const content = this.state.editMode ? (
       <li>
