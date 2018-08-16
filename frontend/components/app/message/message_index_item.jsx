@@ -83,6 +83,17 @@ class MessageIndexItem extends React.Component {
       editButton = null;
     }
 
+    //create an a tag if message content contains these extensions
+    const messageContent = message.content.match(/.+\.(com|org|gov|net|io|co|us).*/) ? (
+      <span
+        className="message-content">
+        <a href={`${message.content}`}>{message.content}</a>
+      </span>
+    ) : (
+      <span
+        className="message-content">{message.content}</span>
+    )
+
     const content = this.state.editMode ? (
       <li>
         <p className="message-created-at">{message.createdAt}</p>
@@ -107,10 +118,10 @@ class MessageIndexItem extends React.Component {
         <div className="message-body">
           <span>
             <span className="message-author">{user.username}</span>
-            <span className="message-content">{this.state.content}</span>
+            {messageContent}
           </span>
-          {editButton}
         </div>
+        {editButton}
       </li>
     );
 
