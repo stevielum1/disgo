@@ -29,5 +29,4 @@ export const updateUser = formData => dispatch => (
 
 export const removeUserErrors = () => dispatch => (
   dispatch(clearUserErrors())
-)
-;
+);

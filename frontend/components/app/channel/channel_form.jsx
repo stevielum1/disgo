@@ -20,14 +20,12 @@ class ChannelForm extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    this.props.updateLoading(true);
     this.props.processForm(this.state)
       .then(payload => {
         const channel = payload.channel;
         this.props.history.push(`/channels/${channel.serverId}/${channel.id}`);
       })
-      .then(() => this.props.closeModal())
-      .then(() => this.props.updateLoading(false));
+      .then(() => this.props.closeModal());
   }
 
   handleDelete(e) {
@@ -37,6 +35,16 @@ class ChannelForm extends React.Component {
       .then(() => this.props.closeModal())
       .then(() => this.props.history.push(`/channels/${this.props.match.params.serverId}/${this.props.firstChannel.id}`))
       .then(() => this.props.updateLoading(false));
+  }
+
+  findError(type) {
+    return this.props.errors.filter(error => (
+      error.toLowerCase().includes(type.toLowerCase())
+    )).map(error => (
+      <span
+        key={error + Date.now()}
+        className="channel-error">{error}</span>
+    ))
   }
 
   render() {
@@ -66,14 +74,14 @@ class ChannelForm extends React.Component {
       deleteButton = null;
     }
 
+    const nameError = this.findError("name");
+
     return (
       <div className="channel-form-container">
         <h2>{headingText}</h2>
-        { errors.map((error, idx) => (
-          <p className="channel-error" key={idx}>
-            {error}
-          </p>
-        ))}
+        <ul className="channel-errors-list">
+          {nameError}
+        </ul>
         <form onSubmit={this.handleSubmit}>
           <input
             type="text"
