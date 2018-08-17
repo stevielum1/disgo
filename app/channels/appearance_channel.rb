@@ -13,7 +13,6 @@ class AppearanceChannel < ApplicationCable::Channel
   end
 
   def destroy(options)
-
     Session.find_by(user_id: options.fetch("userId")).destroy
   end
 end
