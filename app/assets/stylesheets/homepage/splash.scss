@@ -1,6 +1,6 @@
 .splash-container {
   /* source: https://pixabay.com/en/game-gaming-gaming-console-gamer-1926907/ */
-  background: linear-gradient(rgba(0,0,0,0.25), rgba(0,0,0,0.25)), url("https://s3-us-west-1.amazonaws.com/disgo-dev/background.png") no-repeat center center fixed;
+  background: url("https://s3-us-west-1.amazonaws.com/disgo-dev/background.png") no-repeat top center fixed;
   min-width: 100%;
   height: 100vh;
 
@@ -14,7 +14,7 @@
 
   p {
     text-align: center;
-    color: lightgray;
+    color: rgba(255,255,255,0.8);
     font-size: 16px;
     padding: 5px;
   }
