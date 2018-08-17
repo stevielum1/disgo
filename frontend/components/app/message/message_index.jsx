@@ -13,12 +13,25 @@ class MessageIndex extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (this.props.messages.length !== prevProps.messages.length) {
+    if (prevProps.messages.length !== this.props.messages.length) {
       this.props.fetchServers();
       if (this.chats) {
-        this.chats.unsubscribe();
+        this.chats.unsubscribe()
       }
       this.createSocket();
+      this.scrollToBottom();
+      return;
+    }
+
+    for(let i = 0; i < prevProps.messages.length || i < this.props.messages.length; i++) {
+      if (prevProps.messages[i].id !== this.props.messages[i].id) {
+        this.props.fetchServers();
+        if (this.chats) {
+          this.chats.unsubscribe()
+        }
+        this.createSocket();
+        break;
+      }
     }
     this.scrollToBottom();
   }
