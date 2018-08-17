@@ -148,37 +148,3 @@ users[1..-1].each do |dm_user|
   m.created_at = 53.minutes.from_now
   m.save
 end
-
-# servers = []
-#
-# 10.times do
-#   server = {
-#     name: Faker::Space.moon + " " + Faker::Space.star,
-#     owner_id: users.sample[:id]
-#   }
-#   server = Server.create(server)
-#   servers << server
-# end
-#
-# users.each do |user|
-#   membership = ServerMembership.new(user_id: user.id, server_id: servers.sample[:id])
-#   membership.save
-# end
-#
-# servers.each do |server|
-#   channel = {
-#     name: "general",
-#     server_id: server.id,
-#     destructible: false
-#   }
-#   Channel.create(channel)
-#
-#   3.times do
-#     channel = {
-#       name: Faker::Space.moon + " " + Faker::Space.star,
-#       server_id: server.id,
-#       destructible: true
-#     }
-#     Channel.create(channel)
-#   end
-# end
