@@ -7,13 +7,13 @@ const NavBar = props => {
       <nav className="nav-left">
         <Link className="nav-logo" to="/">DISGO</Link>
         <ul>
-          <li><Link to="/in-progress">Download</Link></li>
-          <li><Link to="/in-progress">Nitro</Link></li>
-          <li><Link to="/in-progress">Jobs</Link></li>
-          <li><Link to="/in-progress">Developers</Link></li>
-          <li><Link to="/in-progress">Community</Link></li>
-          <li><Link to="/in-progress">Blog</Link></li>
-          <li><Link to="/in-progress">Support</Link></li>
+          <li><Link to="#">Download</Link></li>
+          <li><Link to="#">Nitro</Link></li>
+          <li><Link to="#">Jobs</Link></li>
+          <li><Link to="#">Developers</Link></li>
+          <li><Link to="#">Community</Link></li>
+          <li><Link to="#">Blog</Link></li>
+          <li><Link to="#">Support</Link></li>
         </ul>
       </nav>
       <nav className="nav-right">
