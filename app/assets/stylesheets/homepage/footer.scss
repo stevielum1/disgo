@@ -34,7 +34,7 @@
     }
 
     a:not([class="footer-heading"]):hover {
-      cursor: pointer;
+      cursor: not-allowed;
       color: white;
       transition: color 0.2s;
     }
