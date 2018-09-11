@@ -476,57 +476,57 @@ def create_dm7(demo_user, dm_user)
 
   dm_channel = Channel.create(name: "Direct Message", server_id: dm_server.id)
 
-  Message.create(author_id: demo_user.id, channel_id: dm_channel.id, content: "hey get on steam")
+  Message.create(author_id: demo_user.id, channel_id: dm_channel.id, content: "you watching?")
 
-  m = Message.create(author_id: dm_user.id, channel_id: dm_channel.id, content: "im already on")
+  m = Message.create(author_id: dm_user.id, channel_id: dm_channel.id, content: "the tourney?")
   m.created_at = 5.minutes.from_now
   m.save
 
-  m = Message.create(author_id: demo_user.id, channel_id: dm_channel.id, content: "oh")
+  m = Message.create(author_id: demo_user.id, channel_id: dm_channel.id, content: "ya")
   m.created_at = 6.minutes.from_now
   m.save
-  m = Message.create(author_id: demo_user.id, channel_id: dm_channel.id, content: "lets play some monster hunter world")
+  m = Message.create(author_id: demo_user.id, channel_id: dm_channel.id, content: "cloud9 gonna win for once :o")
   m.created_at = 6.minutes.from_now
   m.save
 
-  m = Message.create(author_id: dm_user.id, channel_id: dm_channel.id, content: "ill play in like 15 minutes")
+  m = Message.create(author_id: dm_user.id, channel_id: dm_channel.id, content: "ya i know")
   m.created_at = 10.minutes.from_now
   m.save
-  m = Message.create(author_id: dm_user.id, channel_id: dm_channel.id, content: "i just gotta finish up some hw")
+  m = Message.create(author_id: dm_user.id, channel_id: dm_channel.id, content: "i give all the credit to stewie")
   m.created_at = 11.minutes.from_now
   m.save
 
-  m = Message.create(author_id: demo_user.id, channel_id: dm_channel.id, content: "okay")
+  m = Message.create(author_id: demo_user.id, channel_id: dm_channel.id, content: "he's crazy good")
   m.created_at = 11.minutes.from_now
   m.save
-  m = Message.create(author_id: demo_user.id, channel_id: dm_channel.id, content: "ill be grinding for a new weapon")
+  m = Message.create(author_id: demo_user.id, channel_id: dm_channel.id, content: "lol that reminds me about this video of him")
   m.created_at = 11.minutes.from_now
   m.save
-  m = Message.create(author_id: demo_user.id, channel_id: dm_channel.id, content: "join my room when you're done")
+  m = Message.create(author_id: demo_user.id, channel_id: dm_channel.id, content: "https://www.youtube.com/watch?v=PSFgavZAjCY")
   m.created_at = 12.minutes.from_now
   m.save
 
-  m = Message.create(author_id: dm_user.id, channel_id: dm_channel.id, content: "for sure")
+  m = Message.create(author_id: dm_user.id, channel_id: dm_channel.id, content: "lol i love that video")
   m.created_at = 13.minutes.from_now
   m.save
 
-  m = Message.create(author_id: dm_user.id, channel_id: dm_channel.id, content: "im ready to hunt some monsters")
+  m = Message.create(author_id: dm_user.id, channel_id: dm_channel.id, content: "that guy makes some funny videos")
   m.created_at = 30.minutes.from_now
   m.save
 
-  m = Message.create(author_id: demo_user.id, channel_id: dm_channel.id, content: "lets gooooo")
+  m = Message.create(author_id: demo_user.id, channel_id: dm_channel.id, content: "random moe shaming in a stewie video made my day")
   m.created_at = 31.minutes.from_now
   m.save
 
-  m = Message.create(author_id: demo_user.id, channel_id: dm_channel.id, content: "https://assets.vg247.com/current//2018/01/monster_hunter_world_Nergigante_Art.jpg")
+  m = Message.create(author_id: demo_user.id, channel_id: dm_channel.id, content: "AYYYY C9 LETS GO")
   m.created_at = 50.minutes.from_now
   m.save
 
-  m = Message.create(author_id: demo_user.id, channel_id: dm_channel.id, content: "this game is too good")
+  m = Message.create(author_id: demo_user.id, channel_id: dm_channel.id, content: "WORLD CHAMPS")
   m.created_at = 50.minutes.from_now
   m.save
 
-  m = Message.create(author_id: dm_user.id, channel_id: dm_channel.id, content: "https://www.reddit.com/r/MonsterHunterWorld/")
+  m = Message.create(author_id: dm_user.id, channel_id: dm_channel.id, content: "STEWIE MVP")
   m.created_at = 53.minutes.from_now
   m.save
 end
