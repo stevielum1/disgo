@@ -285,57 +285,57 @@ def create_dm4(demo_user, dm_user)
 
   dm_channel = Channel.create(name: "Direct Message", server_id: dm_server.id)
 
-  Message.create(author_id: demo_user.id, channel_id: dm_channel.id, content: "hey get on steam")
+  Message.create(author_id: demo_user.id, channel_id: dm_channel.id, content: "have you looked at haseebs blog")
 
-  m = Message.create(author_id: dm_user.id, channel_id: dm_channel.id, content: "im already on")
+  m = Message.create(author_id: dm_user.id, channel_id: dm_channel.id, content: "he has a blog?")
   m.created_at = 5.minutes.from_now
   m.save
 
-  m = Message.create(author_id: demo_user.id, channel_id: dm_channel.id, content: "oh")
+  m = Message.create(author_id: demo_user.id, channel_id: dm_channel.id, content: "ye")
   m.created_at = 6.minutes.from_now
   m.save
-  m = Message.create(author_id: demo_user.id, channel_id: dm_channel.id, content: "lets play some monster hunter world")
+  m = Message.create(author_id: demo_user.id, channel_id: dm_channel.id, content: "https://haseebq.com/the-time-i-had-to-crack-my-own-reddit-password/")
   m.created_at = 6.minutes.from_now
   m.save
 
-  m = Message.create(author_id: dm_user.id, channel_id: dm_channel.id, content: "ill play in like 15 minutes")
+  m = Message.create(author_id: dm_user.id, channel_id: dm_channel.id, content: "lol")
   m.created_at = 10.minutes.from_now
   m.save
-  m = Message.create(author_id: dm_user.id, channel_id: dm_channel.id, content: "i just gotta finish up some hw")
+  m = Message.create(author_id: dm_user.id, channel_id: dm_channel.id, content: "haseeb guy is so good that he had to hack himself")
   m.created_at = 11.minutes.from_now
   m.save
 
-  m = Message.create(author_id: demo_user.id, channel_id: dm_channel.id, content: "okay")
+  m = Message.create(author_id: demo_user.id, channel_id: dm_channel.id, content: "lol you right")
   m.created_at = 11.minutes.from_now
   m.save
-  m = Message.create(author_id: demo_user.id, channel_id: dm_channel.id, content: "ill be grinding for a new weapon")
+  m = Message.create(author_id: demo_user.id, channel_id: dm_channel.id, content: "he makes it sound so easy")
   m.created_at = 11.minutes.from_now
   m.save
-  m = Message.create(author_id: demo_user.id, channel_id: dm_channel.id, content: "join my room when you're done")
+  m = Message.create(author_id: demo_user.id, channel_id: dm_channel.id, content: "i wouldnt even know where to start if i was in that situation")
   m.created_at = 12.minutes.from_now
   m.save
 
-  m = Message.create(author_id: dm_user.id, channel_id: dm_channel.id, content: "for sure")
+  m = Message.create(author_id: dm_user.id, channel_id: dm_channel.id, content: "id just make a new reddit account")
   m.created_at = 13.minutes.from_now
   m.save
 
-  m = Message.create(author_id: dm_user.id, channel_id: dm_channel.id, content: "im ready to hunt some monsters")
+  m = Message.create(author_id: dm_user.id, channel_id: dm_channel.id, content: "not wurf the time to make a program AND design an algorithm to crack it")
   m.created_at = 30.minutes.from_now
   m.save
 
-  m = Message.create(author_id: demo_user.id, channel_id: dm_channel.id, content: "lets gooooo")
+  m = Message.create(author_id: demo_user.id, channel_id: dm_channel.id, content: "haseebs insane")
   m.created_at = 31.minutes.from_now
   m.save
 
-  m = Message.create(author_id: demo_user.id, channel_id: dm_channel.id, content: "https://assets.vg247.com/current//2018/01/monster_hunter_world_Nergigante_Art.jpg")
+  m = Message.create(author_id: demo_user.id, channel_id: dm_channel.id, content: "the hero we need but dont deserve")
   m.created_at = 50.minutes.from_now
   m.save
 
-  m = Message.create(author_id: demo_user.id, channel_id: dm_channel.id, content: "this game is too good")
+  m = Message.create(author_id: demo_user.id, channel_id: dm_channel.id, content: "no wonder why he left app academy")
   m.created_at = 50.minutes.from_now
   m.save
 
-  m = Message.create(author_id: dm_user.id, channel_id: dm_channel.id, content: "https://www.reddit.com/r/MonsterHunterWorld/")
+  m = Message.create(author_id: dm_user.id, channel_id: dm_channel.id, content: "ya teaching us idiots lol")
   m.created_at = 53.minutes.from_now
   m.save
 end
