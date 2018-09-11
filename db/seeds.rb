@@ -225,58 +225,55 @@ def create_dm3(demo_user, dm_user)
 
   dm_channel = Channel.create(name: "Direct Message", server_id: dm_server.id)
 
-  Message.create(author_id: demo_user.id, channel_id: dm_channel.id, content: "hey get on steam")
+  Message.create(author_id: demo_user.id, channel_id: dm_channel.id, content: "csgo?")
 
-  m = Message.create(author_id: dm_user.id, channel_id: dm_channel.id, content: "im already on")
+  m = Message.create(author_id: dm_user.id, channel_id: dm_channel.id, content: "yea lemme finish this game first")
   m.created_at = 5.minutes.from_now
   m.save
 
-  m = Message.create(author_id: demo_user.id, channel_id: dm_channel.id, content: "oh")
+  m = Message.create(author_id: demo_user.id, channel_id: dm_channel.id, content: "we only play garbage maps")
   m.created_at = 6.minutes.from_now
   m.save
-  m = Message.create(author_id: demo_user.id, channel_id: dm_channel.id, content: "lets play some monster hunter world")
+  m = Message.create(author_id: demo_user.id, channel_id: dm_channel.id, content: "like office and dust")
   m.created_at = 6.minutes.from_now
   m.save
 
-  m = Message.create(author_id: dm_user.id, channel_id: dm_channel.id, content: "ill play in like 15 minutes")
+  m = Message.create(author_id: dm_user.id, channel_id: dm_channel.id, content: "thats fine")
   m.created_at = 10.minutes.from_now
   m.save
-  m = Message.create(author_id: dm_user.id, channel_id: dm_channel.id, content: "i just gotta finish up some hw")
+  m = Message.create(author_id: dm_user.id, channel_id: dm_channel.id, content: "need a break from dust2 once in a while")
   m.created_at = 11.minutes.from_now
   m.save
 
-  m = Message.create(author_id: demo_user.id, channel_id: dm_channel.id, content: "okay")
+  m = Message.create(author_id: demo_user.id, channel_id: dm_channel.id, content: "tell me when you're done with your game")
   m.created_at = 11.minutes.from_now
   m.save
-  m = Message.create(author_id: demo_user.id, channel_id: dm_channel.id, content: "ill be grinding for a new weapon")
+  m = Message.create(author_id: demo_user.id, channel_id: dm_channel.id, content: "ill be practicing my one deags")
   m.created_at = 11.minutes.from_now
-  m.save
-  m = Message.create(author_id: demo_user.id, channel_id: dm_channel.id, content: "join my room when you're done")
-  m.created_at = 12.minutes.from_now
   m.save
 
-  m = Message.create(author_id: dm_user.id, channel_id: dm_channel.id, content: "for sure")
+  m = Message.create(author_id: dm_user.id, channel_id: dm_channel.id, content: "gotcha")
   m.created_at = 13.minutes.from_now
   m.save
 
-  m = Message.create(author_id: dm_user.id, channel_id: dm_channel.id, content: "im ready to hunt some monsters")
+  m = Message.create(author_id: dm_user.id, channel_id: dm_channel.id, content: "donezo")
   m.created_at = 30.minutes.from_now
   m.save
 
-  m = Message.create(author_id: demo_user.id, channel_id: dm_channel.id, content: "lets gooooo")
+  m = Message.create(author_id: demo_user.id, channel_id: dm_channel.id, content: "k invited")
   m.created_at = 31.minutes.from_now
   m.save
 
-  m = Message.create(author_id: demo_user.id, channel_id: dm_channel.id, content: "https://assets.vg247.com/current//2018/01/monster_hunter_world_Nergigante_Art.jpg")
+  m = Message.create(author_id: demo_user.id, channel_id: dm_channel.id, content: "did you win your last game")
   m.created_at = 50.minutes.from_now
   m.save
 
-  m = Message.create(author_id: demo_user.id, channel_id: dm_channel.id, content: "this game is too good")
+  m = Message.create(author_id: demo_user.id, channel_id: dm_channel.id, content: "btw my friend likes troll with the negev")
   m.created_at = 50.minutes.from_now
   m.save
 
-  m = Message.create(author_id: dm_user.id, channel_id: dm_channel.id, content: "https://www.reddit.com/r/MonsterHunterWorld/")
-  m.created_at = 53.minutes.from_now
+  m = Message.create(author_id: dm_user.id, channel_id: dm_channel.id, content: "nope got rekt")
+  m.created_at = 51.minutes.from_now
   m.save
 end
 
