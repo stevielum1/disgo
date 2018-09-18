@@ -85,12 +85,6 @@ channels.each do |channel|
   end
 end
 
-demo_user = User.find(1)
-users.each_with_index do |dm_user, i|
-  next if dm_user == demo_user
-  self.send("create_dm#{i}".to_sym, demo_user, dm_user)
-end
-
 def create_dm1(demo_user, dm_user)
   dm_server = Server.create!(name: "Direct Message_#{demo_user.id}_#{dm_user.id}", owner_id: demo_user.id)
 
@@ -655,4 +649,74 @@ def create_dm9(demo_user, dm_user)
   m = Message.create(author_id: dm_user.id, channel_id: dm_channel.id, content: "r/showerthoughts? lol")
   m.created_at = 53.minutes.from_now
   m.save
+end
+
+def create_dm10(demo_user, dm_user)
+  dm_server = Server.create!(name: "Direct Message_#{demo_user.id}_#{dm_user.id}", owner_id: demo_user.id)
+
+  ServerMembership.create(user_id: demo_user.id, server_id: dm_server.id)
+  ServerMembership.create(user_id: dm_user.id, server_id: dm_server.id)
+
+  dm_channel = Channel.create(name: "Direct Message", server_id: dm_server.id)
+
+  Message.create(author_id: demo_user.id, channel_id: dm_channel.id, content: "where you applying")
+
+  m = Message.create(author_id: dm_user.id, channel_id: dm_channel.id, content: "all them 120k+ jobs")
+  m.created_at = 5.minutes.from_now
+  m.save
+
+  m = Message.create(author_id: demo_user.id, channel_id: dm_channel.id, content: "sick")
+  m.created_at = 6.minutes.from_now
+  m.save
+  m = Message.create(author_id: demo_user.id, channel_id: dm_channel.id, content: "you gonna negotiate?")
+  m.created_at = 6.minutes.from_now
+  m.save
+
+  m = Message.create(author_id: dm_user.id, channel_id: dm_channel.id, content: "idk i might")
+  m.created_at = 10.minutes.from_now
+  m.save
+  m = Message.create(author_id: dm_user.id, channel_id: dm_channel.id, content: "it just feels awkward trying to haggle for literally my first job")
+  m.created_at = 11.minutes.from_now
+  m.save
+
+  m = Message.create(author_id: demo_user.id, channel_id: dm_channel.id, content: "ya i know lol")
+  m.created_at = 11.minutes.from_now
+  m.save
+  m = Message.create(author_id: demo_user.id, channel_id: dm_channel.id, content: "but hey they say it worked out for previous students")
+  m.created_at = 11.minutes.from_now
+  m.save
+  m = Message.create(author_id: demo_user.id, channel_id: dm_channel.id, content: "ima apply to places in the city, not open to relocating")
+  m.created_at = 12.minutes.from_now
+  m.save
+
+  m = Message.create(author_id: dm_user.id, channel_id: dm_channel.id, content: "i hear ya")
+  m.created_at = 13.minutes.from_now
+  m.save
+
+  m = Message.create(author_id: dm_user.id, channel_id: dm_channel.id, content: "that's why you applied to app academy in the first place right")
+  m.created_at = 30.minutes.from_now
+  m.save
+
+  m = Message.create(author_id: demo_user.id, channel_id: dm_channel.id, content: "ya")
+  m.created_at = 31.minutes.from_now
+  m.save
+
+  m = Message.create(author_id: demo_user.id, channel_id: dm_channel.id, content: "i mentioned in my non technical interview that i applied to app academy to get a job in sf")
+  m.created_at = 50.minutes.from_now
+  m.save
+
+  m = Message.create(author_id: demo_user.id, channel_id: dm_channel.id, content: "i dont even know if there are 40+ jobs in sf")
+  m.created_at = 50.minutes.from_now
+  m.save
+
+  m = Message.create(author_id: dm_user.id, channel_id: dm_channel.id, content: "ya you gonna run out fast")
+  m.created_at = 53.minutes.from_now
+  m.save
+end
+
+demo_user = User.find(1)
+users.each_with_index do |dm_user, i|
+  next if dm_user == demo_user
+  puts "i = " + i.to_s
+  self.send("create_dm#{i}".to_sym, demo_user, dm_user)
 end
