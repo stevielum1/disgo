@@ -717,6 +717,5 @@ end
 demo_user = User.find(1)
 users.each_with_index do |dm_user, i|
   next if dm_user == demo_user
-  puts "i = " + i.to_s
   self.send("create_dm#{i}".to_sym, demo_user, dm_user)
 end
