@@ -2,6 +2,7 @@
   display: flex;
   min-height: 100vh;
   max-height: 100vh;
+  overflow-x: hidden;
 
   .app-server-column {
     min-width: 80px;
@@ -27,6 +28,7 @@
     display: flex;
     flex-direction: column;
     width: 100%;
+    overflow: hidden;
 
     .app-message-membership {
       display: flex;
