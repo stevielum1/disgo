@@ -2,8 +2,9 @@
   width: 100%;
   background: #2C2F33;
   padding: 20px 7px;
-  box-sizing: border-box;
-  overflow: scroll;
+  box-sizing: content-box;
+  overflow-y: scroll;
+  overflow-x: hidden;
   flex-grow: 1;
 
   .channels-heading {
@@ -29,7 +30,7 @@
 
   .channel-link {
     display: block;
-    width: 100%;
+    width: 94%;
     padding: 10px;
     text-decoration: none;
     color: #72767d;
