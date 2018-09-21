@@ -94,8 +94,12 @@ Rails.application.configure do
 
   config.middleware.insert_before 0, Rack::Cors do
     allow do
-      origins 'http://disgo.herokuapp.com/*'
-      resource 'http://disgo.herokuapp.com/*', headers: :any, methods: %I[get post options]
+      origins 'https://disgo.herokuapp.com/*'
+      resource 'https://disgo.herokuapp.com/*', headers: :any, methods: %I[get post options]
     end
   end
+
+  config.web_socket_server_url = "wss://disgo.herokuapp.com/cable"
+
+  config.action_cable.allowed_request_origins = ['https://disgo.herokuapp.com', 'http://disgo.herokuapp.com']
 end
