@@ -112,6 +112,7 @@ class MessageIndexItem extends React.Component {
       <span
         className="message-content">
         <a href={`${message.content}`}>{message.content}</a>
+        <br />
         <iframe
           width="342"
           height="192"
