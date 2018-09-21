@@ -35,7 +35,7 @@ On the frontend, we create a WebSocket connection that subscribes the current us
 // frontend/components/app/message/message_index.jsx
 
 // ...
-let cable = ActionCable.createConsumer(`ws://${location.host}/cable`);
+let cable = ActionCable.createConsumer(`wss://${location.host}/cable`);
 that.chats = cable.subscriptions.create({
   channel: 'ChatChannel',
   channel_id: that.props.match.params.channelId
