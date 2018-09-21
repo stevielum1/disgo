@@ -90,8 +90,7 @@ class MessageIndexItem extends React.Component {
         <a href={`${message.content}`}>{message.content}</a>
       </span>
     ) : (
-      <span
-        className="message-content">{message.content}</span>
+      <span className="message-content">{message.content}</span>
     );
 
     //create an img tag
@@ -104,6 +103,20 @@ class MessageIndexItem extends React.Component {
             <img src={`${message.content}`} />
           </a>
         </p>
+      </span>
+    ) : (
+      messageContent
+    );
+
+    messageContent = message.content.match(/youtube.com/) ? (
+      <span
+        className="message-content">
+        <a href={`${message.content}`}>{message.content}</a>
+        <iframe
+          width="342"
+          height="192"
+          src={`${message.content.replace("watch?v=", "embed/")}`}
+          allowFullScreen>Video cannot be played.</iframe>
       </span>
     ) : (
       messageContent
