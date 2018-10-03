@@ -6,21 +6,47 @@ const ChannelIndexItem = ({ channel, openModal, owner }) => {
     <i onClick={() => openModal('editChannel')} className="fas fa-cog"></i>
   ) : null;
 
-  return (
-    <li>
-      <NavLink
-        className="channel-link"
-        activeClassName="channel-active"
-        to={`/channels/${channel.serverId}/${channel.id}`}>
-        <div>
+  let symbol, content;
+  
+  if (channel.type === "TEXT") {
+    symbol = "# ";
+    content = (
+      <li>
+        <NavLink
+          className="channel-link"
+          activeClassName="channel-active"
+          to={`/channels/${channel.serverId}/${channel.id}`}>
           <div>
-            <span># <span className="channel-name">{channel.name}</span>
-            </span>
+            <div>
+              <span>{symbol}<span className="channel-name">{channel.name}</span>
+              </span>
+            </div>
+            {editButton}
           </div>
-          {editButton}
-        </div>
-      </NavLink>
-    </li>
+        </NavLink>
+      </li>
+    );
+  } else {
+    symbol = "> ";
+    content = (
+      <li>
+        <Link
+          className="channel-link"
+          to={"#"}>
+          <div>
+            <div>
+              <span>{symbol}<span className="channel-name">{channel.name}</span>
+              </span>
+            </div>
+            {editButton}
+          </div>
+        </Link>
+      </li>
+    );
+  }
+
+  return (
+    content
   )
 }
 
