@@ -42,12 +42,22 @@ class CreateServerForm extends React.Component {
         }
         that.props.createMembership(membership)
           .then(payload => {
-            const channel = {
+            const textChannel = {
               name: "general",
               server_id: payload.membership.serverId,
               destructible: false
             };
-            that.props.createChannel(channel)
+
+            const voiceChannel = {
+              name: "general",
+              server_id: payload.membership.serverId,
+              destructible: false,
+              channel_type: 1
+            };
+
+            that.props.createChannel(voiceChannel);
+
+            that.props.createChannel(textChannel)
               .then(payload => {
                 that.props.history.push(`/channels/${payload.channel.serverId}/${payload.channel.id}`);
               })
