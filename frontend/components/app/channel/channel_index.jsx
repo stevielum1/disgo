@@ -39,7 +39,23 @@ class ChannelIndex extends React.Component {
             }
           </ul>
         </div>
-        <div></div>
+        <div className="text-channels-container">
+          <div className="channels-heading">
+            <h2>Voice channels</h2>
+            {createButton}
+          </div>
+          <ul>
+            {
+              voiceChannels.map(channel => (
+                <ChannelIndexItem
+                  key={channel.id}
+                  channel={channel}
+                  openModal={openModal}
+                  owner={owner} />
+              ))
+            }
+          </ul>
+        </div>
       </div>
     )
   }
