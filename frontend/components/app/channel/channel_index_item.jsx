@@ -2,8 +2,13 @@ import React from 'react';
 import { NavLink, Link } from 'react-router-dom';
 
 const ChannelIndexItem = ({ channel, openModal, owner }) => {
-  const editButton = owner ? (
-    <i onClick={() => openModal('editChannel')} className="fas fa-cog edit-channel-icon"></i>
+  const editTextButton = owner ? (
+    <i onClick={() => openModal('editTextChannel')} className="fas fa-cog edit-channel-icon"></i>
+  ) : null;
+
+  // TODO somehow get voice channel id to edit_voice_channel_form_container
+  const editVoiceButton = owner ? (
+    <i onClick={() => openModal('editVoiceChannel')} className="fas fa-cog edit-channel-icon"></i>
   ) : null;
 
   let symbol, content;
@@ -21,7 +26,7 @@ const ChannelIndexItem = ({ channel, openModal, owner }) => {
               <span>{symbol} <span className="text-channel-name">{channel.name}</span>
               </span>
             </div>
-            {editButton}
+            {editTextButton}
           </div>
         </NavLink>
       </li>
@@ -38,7 +43,7 @@ const ChannelIndexItem = ({ channel, openModal, owner }) => {
               <span>{symbol} <span className="voice-channel-name">{channel.name}</span>
               </span>
             </div>
-            {editButton}
+            {editVoiceButton}
           </div>
         </Link>
       </li>

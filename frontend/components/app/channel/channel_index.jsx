@@ -9,8 +9,12 @@ class ChannelIndex extends React.Component {
 
     const owner = server.ownerId === currentUser.id;
 
-    const createButton = owner ? (
-      <i onClick={() => openModal('createChannel')} className="fas fa-plus"></i>
+    const createTextButton = owner ? (
+      <i onClick={() => openModal('createTextChannel')} className="fas fa-plus"></i>
+    ) : ( null );
+
+    const createVoiceButton = owner ? (
+      <i onClick={() => openModal('createVoiceChannel')} className="fas fa-plus"></i>
     ) : ( null );
 
     const textChannels = this.props.channels.filter(channel => (
@@ -25,7 +29,7 @@ class ChannelIndex extends React.Component {
         <div className="text-channels-container">
           <div className="channels-heading">
             <h2>Text channels</h2>
-            {createButton}
+            {createTextButton}
           </div>
           <ul>
             {
@@ -39,10 +43,10 @@ class ChannelIndex extends React.Component {
             }
           </ul>
         </div>
-        <div className="text-channels-container">
+        <div className="voice-channels-container">
           <div className="channels-heading">
             <h2>Voice channels</h2>
-            {createButton}
+            {createVoiceButton}
           </div>
           <ul>
             {

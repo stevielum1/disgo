@@ -22,8 +22,10 @@ class ChannelForm extends React.Component {
     e.preventDefault();
     this.props.processForm(this.state)
       .then(payload => {
-        const channel = payload.channel;
-        this.props.history.push(`/channels/${channel.serverId}/${channel.id}`);
+        if (this.props.channelType === "text") {
+          const channel = payload.channel;
+          this.props.history.push(`/channels/${channel.serverId}/${channel.id}`);
+        }
       })
       .then(() => this.props.closeModal());
   }
@@ -50,17 +52,17 @@ class ChannelForm extends React.Component {
   render() {
     if (this.props.loading) return null;
 
-    const { formType, processForm, errors } = this.props;
+    const { formType, channelType, processForm, errors } = this.props;
 
     let headingText, buttonText, deleteButton;
 
     if (formType === "create") {
-      headingText = "Create channel";
-      buttonText = "Create Channel";
+      headingText = `Create ${channelType} channel`;
+      buttonText = `Create ${channelType} channel`;
       deleteButton = null;
     } else {
-      headingText = "Edit channel";
-      buttonText = "Edit Channel";
+      headingText = `Edit ${channelType} channel`;
+      buttonText = `Edit ${channelType} channel`;
       deleteButton = (
         <div className="delete-channel">
         <button

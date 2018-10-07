@@ -49,7 +49,7 @@ class ServerIndex extends React.Component {
                 key={server.id}
                 server={server}
                 channel={firstTextChannel}
-                loading={loading} />
+                loading={loading} />;
             })
           }
           <li className="server-new"
