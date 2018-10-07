@@ -43,41 +43,54 @@
       display: flex;
       justify-content: space-between;
 
-      i {
+      .edit-channel-icon {
         opacity: 0;
       }
 
-      i:hover {
+      .edit-channel-icon:hover {
         cursor: pointer;
         opacity: 1;
       }
     }
   }
 
-  .channel-link:hover span span {
+  .text-channel-link:hover span span {
     cursor: pointer;
     color: #b5b5b5;
   }
 
-  .channel-link:hover {
+  .text-channel-link:hover {
     background: rgba(56,56,56,1);
   }
 
-  .channel-active .channel-name {
+  .text-channel-active .text-channel-name {
     color: white;
   }
 
-  .channel-active {
+  .text-channel-active {
     background: rgba(255,255,255,0.1);
   }
 
-  .channel-active:hover {
+  .text-channel-active span i {
+    color: #72767d;
+  }
+
+  .text-channel-active:hover {
     cursor: default;
     background: rgba(255,255,255,0.1)
   }
 
-  .channel-active:hover span span {
+  .text-channel-active:hover span span {
     cursor: default;
     color: white;
+  }
+
+  .voice-channel-link:hover span span {
+    cursor: pointer;
+    color: white;
+  }
+
+  .voice-channel-link span i {
+    font-size: 12.44px;
   }
 }

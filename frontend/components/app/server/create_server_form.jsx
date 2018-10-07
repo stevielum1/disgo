@@ -55,16 +55,17 @@ class CreateServerForm extends React.Component {
               channel_type: 1
             };
 
-            that.props.createChannel(voiceChannel);
-
+            
             that.props.createChannel(textChannel)
-              .then(payload => {
-                that.props.history.push(`/channels/${payload.channel.serverId}/${payload.channel.id}`);
-              })
-              .then(() => {
-                that.props.closeModal();
-                that.props.updateLoading(false);
-              });
+            .then(payload => {
+              that.props.history.push(`/channels/${payload.channel.serverId}/${payload.channel.id}`);
+            })
+            .then(() => {
+              that.props.closeModal();
+              that.props.updateLoading(false);
+            });
+            
+            that.props.createChannel(voiceChannel);
           });
       });
   }

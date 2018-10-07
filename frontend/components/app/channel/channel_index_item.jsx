@@ -3,22 +3,22 @@ import { NavLink, Link } from 'react-router-dom';
 
 const ChannelIndexItem = ({ channel, openModal, owner }) => {
   const editButton = owner ? (
-    <i onClick={() => openModal('editChannel')} className="fas fa-cog"></i>
+    <i onClick={() => openModal('editChannel')} className="fas fa-cog edit-channel-icon"></i>
   ) : null;
 
   let symbol, content;
   
   if (channel.type === "TEXT") {
-    symbol = "# ";
+    symbol = <i className="fas fa-hashtag"></i>;
     content = (
       <li>
         <NavLink
-          className="channel-link"
-          activeClassName="channel-active"
+          className="text-channel-link channel-link"
+          activeClassName="text-channel-active"
           to={`/channels/${channel.serverId}/${channel.id}`}>
           <div>
             <div>
-              <span>{symbol}<span className="channel-name">{channel.name}</span>
+              <span>{symbol} <span className="text-channel-name">{channel.name}</span>
               </span>
             </div>
             {editButton}
@@ -27,15 +27,15 @@ const ChannelIndexItem = ({ channel, openModal, owner }) => {
       </li>
     );
   } else {
-    symbol = "> ";
+    symbol = <i className="fas fa-volume-up"></i>;
     content = (
       <li>
         <Link
-          className="channel-link"
+          className="voice-channel-link channel-link"
           to={"#"}>
           <div>
             <div>
-              <span>{symbol}<span className="channel-name">{channel.name}</span>
+              <span>{symbol} <span className="voice-channel-name">{channel.name}</span>
               </span>
             </div>
             {editButton}
