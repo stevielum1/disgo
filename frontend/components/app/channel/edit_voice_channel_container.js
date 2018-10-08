@@ -9,7 +9,7 @@ const mapStateToProps = (state, ownProps) => ({
   formType: "edit",
   channelType: "voice",
   errors: state.errors.channelErrors,
-  channel: state.entities.channels[ownProps.match.params.channelId],
+  channel: state.entities.channels[parseInt(ownProps.channelId)],
   firstChannel: getFirstChannel(state, parseInt(ownProps.match.params.serverId)),
   loading: state.ui.loading
 });

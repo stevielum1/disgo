@@ -6,9 +6,8 @@ const ChannelIndexItem = ({ channel, openModal, owner }) => {
     <i onClick={() => openModal('editTextChannel')} className="fas fa-cog edit-channel-icon"></i>
   ) : null;
 
-  // TODO somehow get voice channel id to edit_voice_channel_form_container
   const editVoiceButton = owner ? (
-    <i onClick={() => openModal('editVoiceChannel')} className="fas fa-cog edit-channel-icon"></i>
+    <i onClick={() => openModal(`editVoiceChannel_${channel.id}`)} className="fas fa-cog edit-channel-icon"></i>
   ) : null;
 
   let symbol, content;

@@ -8,6 +8,7 @@ class ChannelForm extends React.Component {
     this.handleInput = this.handleInput.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
+    debugger
   }
 
   componentDidMount() {

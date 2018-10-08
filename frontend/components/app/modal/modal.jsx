@@ -12,9 +12,14 @@ import EditVoiceChannelContainer from '../channel/edit_voice_channel_container';
 import UserInfoFormContainer from '../user_info/user_info_form_container';
 import ServerInfoFormContainer from '../server/server_info_form_container';
 
-const Modal = ({ modal, closeModal }) => {
+const Modal = (props) => {
+  let { modal, closeModal } = props;
   if (!modal) return null;
-  let component;
+  let component, channelId;
+  if (modal.match(/\d+/)) {
+    channelId = modal.match(/\d+/)[0];
+  }
+  modal = modal.match(/.+[^_\d+]/)[0];
   switch (modal) {
     case 'newServer':
       component = <NewServer />;
@@ -29,7 +34,7 @@ const Modal = ({ modal, closeModal }) => {
       component = <Route path="/channels/:serverId/:channelId" component={EditTextChannelContainer} />;
       break;
     case 'editVoiceChannel':
-      component = <Route path="/channels/:serverId/:channelId" component={EditVoiceChannelContainer} />;
+      component = <Route path="/channels/:serverId/:channelId" render={props => <EditVoiceChannelContainer {...props} channelId={channelId} />} />;
       break;
     case 'userInfo':
       component = <UserInfoFormContainer />;
