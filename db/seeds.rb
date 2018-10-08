@@ -47,22 +47,29 @@ end
 channels = []
 
 servers.each do |server|
-    channel = {
+    text_channel = {
       name: "general",
       server_id: server.id,
       destructible: false
     }
-    channel = Channel.create(channel)
-    channels << channel
+    text_channel = Channel.create(channel)
+    channels << text_channel
+
+    voice_channel = {
+      name: "general",
+      server_id: server.id,
+      destructible: false,
+      channel_type: 1
+    }
 
     3.times do
-      channel = {
+      text_channel = {
         name: Faker::ElderScrolls.unique.city,
         server_id: server.id,
         destructible: true
       }
-      channel = Channel.create(channel)
-      channels << channel
+      text_channel = Channel.create(channel)
+      channels << text_channel
     end
     Faker::ElderScrolls.unique.clear
 end
