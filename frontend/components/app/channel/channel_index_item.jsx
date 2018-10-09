@@ -1,20 +1,14 @@
 import React from 'react';
 import { NavLink, Link } from 'react-router-dom';
+import VoiceChannelIndexContainer from './voice_channel_index_container';
 
 const ChannelIndexItem = ({ channel, openModal, owner }) => {
   const editTextButton = owner ? (
     <i onClick={() => openModal('editTextChannel')} className="fas fa-cog edit-channel-icon"></i>
   ) : null;
-
-  const editVoiceButton = owner ? (
-    <i onClick={() => openModal(`editVoiceChannel_${channel.id}`)} className="fas fa-cog edit-channel-icon"></i>
-  ) : null;
-
-  let symbol, content;
   
   if (channel.type === "TEXT") {
-    symbol = <i className="fas fa-hashtag"></i>;
-    content = (
+    return (
       <li>
         <NavLink
           className="text-channel-link channel-link"
@@ -22,7 +16,7 @@ const ChannelIndexItem = ({ channel, openModal, owner }) => {
           to={`/channels/${channel.serverId}/${channel.id}`}>
           <div>
             <div>
-              <span>{symbol} <span className="text-channel-name">{channel.name}</span>
+              <span><i className="fas fa-hashtag"></i> <span className="text-channel-name">{channel.name}</span>
               </span>
             </div>
             {editTextButton}
@@ -31,27 +25,11 @@ const ChannelIndexItem = ({ channel, openModal, owner }) => {
       </li>
     );
   } else {
-    symbol = <i className="fas fa-volume-up"></i>;
-    content = (
-      <li>
-        <Link
-          className="voice-channel-link channel-link"
-          to={"#"}>
-          <div>
-            <div>
-              <span>{symbol} <span className="voice-channel-name">{channel.name}</span>
-              </span>
-            </div>
-            {editVoiceButton}
-          </div>
-        </Link>
-      </li>
-    );
+    return <VoiceChannelIndexContainer
+      channel={channel}
+      openModal={openModal}
+      owner={owner} />;
   }
-
-  return (
-    content
-  )
 }
 
 export default ChannelIndexItem;

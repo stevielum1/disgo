@@ -33,7 +33,7 @@ class ChannelForm extends React.Component {
   handleDelete(e) {
     e.preventDefault();
     this.props.updateLoading(true);
-    this.props.deleteChannel(this.props.match.params.channelId)
+    this.props.deleteChannel(this.state.id)
       .then(() => this.props.closeModal())
       .then(() => this.props.history.push(`/channels/${this.props.match.params.serverId}/${this.props.firstChannel.id}`))
       .then(() => this.props.updateLoading(false));
