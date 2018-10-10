@@ -16,7 +16,7 @@ class MessageIndex extends React.Component {
     if (prevProps.messages.length !== this.props.messages.length) {
       this.props.fetchServers();
       if (this.chats) {
-        this.chats.unsubscribe()
+        this.chats.unsubscribe();
       }
       this.createSocket();
       this.scrollToBottom();
@@ -27,7 +27,7 @@ class MessageIndex extends React.Component {
       if (prevProps.messages[i].id !== this.props.messages[i].id) {
         this.props.fetchServers();
         if (this.chats) {
-          this.chats.unsubscribe()
+          this.chats.unsubscribe();
         }
         this.createSocket();
         break;

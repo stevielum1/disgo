@@ -63,3 +63,9 @@ onlineUserIds = Session.all.collect {|session| session.user_id}
 json.onlineUsers do
   json.array! onlineUserIds
 end
+
+json.voiceUsers do
+  VoiceSession.all.each do |session|
+    json.set! session.user_id, session.channel_id
+  end
+end

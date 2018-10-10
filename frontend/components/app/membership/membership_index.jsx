@@ -49,7 +49,7 @@ class MembershipIndex extends React.Component {
     let that = this;
 
     let cable = ActionCable.createConsumer(`ws://${location.host}/cable`);
-    that.appearances = cable.subscriptions.create( "AppearanceChannel", {
+    that.appearances = cable.subscriptions.create("AppearanceChannel", {
         connected: function() {
           this.perform('create', {
             userId: that.props.currentUser.id

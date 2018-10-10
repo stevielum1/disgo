@@ -1,8 +1,13 @@
 import React from 'react';
 
-const VoiceChannelIndexItem = props => {
+const VoiceChannelIndexItem = ({ user }) => {
+  if (!Boolean(user)) return null;
+
   return (
-    <div>AVATAR + USERNAME</div>
+    <li className="voice-channel-index-item">
+      <img src={user.photoUrl} />
+      <p>{user.username}</p>
+    </li>
   );
 };
 

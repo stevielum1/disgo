@@ -64,7 +64,11 @@
   }
 
   .text-channel-active .text-channel-name {
+    display: inline-block;
     color: white;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    max-width: 170px;
   }
 
   .text-channel-active {
@@ -85,6 +89,19 @@
     color: white;
   }
 
+  .voice-channel-link {
+    padding: 10px 10px 0 10px;
+
+    .voice-channel-name {
+      display: inline-block;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      max-width: 170px;
+      vertical-align: middle;
+    }
+
+  }
+
   .voice-channel-link:hover span span {
     cursor: pointer;
     color: white;
@@ -92,5 +109,27 @@
 
   .voice-channel-link span i {
     font-size: 12.44px;
+  }
+}
+
+.voice-channel-index-item {
+  box-sizing: border-box;
+  padding: 10px 0 0 10px;
+  font-size: 14px;
+
+  img {
+    width: 20px;
+    height: 20px;
+    border-radius: 10px;
+  }
+
+  p {
+    color: #72767d;
+    display: inline-block;
+    margin-left: 7px;
+    margin-bottom: 2px;
+    max-width: 175px;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
   }
 }

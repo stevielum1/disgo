@@ -14,7 +14,7 @@ const voiceReducer = (state = {}, action) => {
       if (action.payload.voiceUsers) {
         return action.payload.voiceUsers;
       } else {
-        return state;
+        return {};
       }
     default:
       return state;

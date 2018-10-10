@@ -9,5 +9,5 @@ export const userJoined = payload => ({
 
 export const userLeft = id => ({
   type: USER_LEFT,
-  id
+  userId: id
 });
