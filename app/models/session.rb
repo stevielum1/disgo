@@ -1,4 +1,6 @@
 class Session < ApplicationRecord
+  validates :user_id, uniqueness: true
+
   belongs_to :user,
   primary_key: :id,
   foreign_key: :user_id,
