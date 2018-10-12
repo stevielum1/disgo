@@ -11,12 +11,14 @@ class VoiceChannelIndex extends React.Component {
     };
     this.handleClick = this.handleClick.bind(this);
     this.createSocket();
+    this.audioContainerRef = React.createRef();
+    this.pcPeers = {};
   }
 
   componentCleanup() {
     //handle page refreshes
     this.props.userLeft(this.props.currentUserId);
-    this.voice.destroy();
+    this.voice.destroy(this.props.currentUserId);
     this.voice.unsubscribe();
   }
 
@@ -49,6 +51,14 @@ class VoiceChannelIndex extends React.Component {
     }
   }
 
+  setLocalStream() {
+    const that = this;
+    navigator.mediaDevices.getUserMedia({audio : true})
+      .then(stream => {
+        that.localStream = stream;
+      });
+  }
+
   createSocket() {
     let that = this;
 
@@ -61,11 +71,20 @@ class VoiceChannelIndex extends React.Component {
         disconnected: () => {},
         received: data => {
           if (data.type === "join") {
+            that.createPeerConnection(data.userId, true);
             let voiceUsers = Object.assign({}, that.state.voiceUsers);
             voiceUsers[data.userId] = data.channelId;
             that.props.userJoined(data);
             that.setState({ voiceUsers });
+          } else if (data.type === "exchange") {
+            if (data.to !== that.props.currentUserId) return;
+            that.exchange(data);
           } else {
+            if (data.from === that.props.currentUserId) {
+              that.closeAllPeerConnections();
+            } else {
+              that.closePeerConnection(data.from);
+            }
             let newVoiceUsers = Object.assign({}, that.state.voiceUsers);
             delete newVoiceUsers[data.userId];
             that.props.userLeft(data.userId);
@@ -77,16 +96,117 @@ class VoiceChannelIndex extends React.Component {
             userId: data.userId,
             channelId: data.channelId
           });
+          that.setLocalStream();
           that.setState({ connected: true });
         },
-        destroy: function() {
-          this.perform('destroy', {
-            userId: that.props.currentUserId
-          });
+        destroy: function(userId) {
+          this.perform('destroy', { userId });
           that.setState({ connected: false });
+        },
+        exchange: function(data) {
+          this.perform('exchange', {
+            channelId: that.props.channel.id,
+            from: that.props.currentUserId,
+            to: data.userId,
+            sdp: data.sdp
+          });
         }
       }
     );
+  }
+
+  createPeerConnection(userId, isOffer) {
+    if (this.localStream === undefined) return;
+    const that = this;
+
+    let pc = new RTCPeerConnection(null);
+    that.pcPeers[userId] = pc;
+    pc.addStream(this.localStream);
+
+    if (isOffer) {
+      pc.createOffer().then(offer => {
+        pc.setLocalDescription(offer);
+        that.voice.exchange({
+          userId,
+          sdp: JSON.stringify(pc.localDescription)
+        });
+      })
+      .catch(console.log);
+
+      pc.onicecandidate = e => {
+        if (e.candidate) {
+          that.voice.exchange({
+            userId,
+            candidate: JSON.stringify(e.candidate)
+          });
+        }
+      };
+
+      pc.onaddstream = e => {
+        const element = document.createElement("video");
+        element.id = `remoteVideoContainer_${userId}`;
+        element.autoplay = "autoplay";
+        element.srcObject = e.stream;
+        that.audioContainerRef.current.appendChild(element);
+      };
+
+      pc.oniceconnectionstatechange = e => {
+        if (pc.iceConnectionState == "disconnected") {
+          that.voice.destroy(userId);
+        }
+      };
+
+      return pc;
+    }
+  }
+
+  exchange(data) {
+    const that = this;
+
+    let pc;
+
+    if (!this.pcPeers[data.from]) {
+      pc = this.createPeerConnection(data.from, false);
+    } else {
+      pc = this.pcPeers[data.from];
+    }
+
+    if (data.candidate) {
+      pc.addIceCandidate(new RTCIceCandidate(JSON.parse(data.candidate)))
+        .then(console.log)
+        .catch(console.log);
+    }
+
+    if (data.sdp) {
+      const sdp = JSON.parse(data.sdp);
+      pc.setRemoteDescription(new RTCSessionDescription(sdp))
+        .then(() => {
+          if (sdp.type === "offer") {
+            pc.createAnswer().then(answer => {
+              pc.setLocalDescription(answer);
+              that.voice.exchange({
+                userId: data.from,
+                sdp: JSON.stringify(pc.localDescription)
+              });
+            });
+          }
+        })
+        .catch(console.log);
+    }
+  }
+
+  closeAllPeerConnections() {
+    for (user in this.pcPeers) {
+      this.pcPeers[user].close();
+    }
+    
+    this.pcPeers = {};
+  }
+
+  closePeerConnection(userId) {
+    const video = document.getElementById(`remoteVideoContainer_${userId}`);
+    if (video) video.remove();
+    delete this.pcPeers[userId];
   }
 
   handleClick(channelId) {
@@ -95,9 +215,9 @@ class VoiceChannelIndex extends React.Component {
         this.voice.create({ userId: this.props.currentUserId, channelId });
       } else {
         if (this.state.voiceUsers[this.props.currentUserId] === channelId) {
-          this.voice.destroy();
+          this.voice.destroy(this.props.currentUserId);
         } else {
-          this.voice.destroy();
+          this.voice.destroy(this.props.currentUserId);
           this.voice.create({ userId: this.props.currentUserId, channelId });
         }
       }
@@ -115,6 +235,7 @@ class VoiceChannelIndex extends React.Component {
 
     return (
       <li>
+        <div ref={this.audioContainerRef}></div>
         <Link
           className="voice-channel-link channel-link"
           to={"#"}
