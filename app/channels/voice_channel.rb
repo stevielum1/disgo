@@ -13,17 +13,6 @@ class VoiceChannel < ApplicationCable::Channel
     )
   end
 
-  def exchange(options)
-    ActionCable
-      .server
-        .broadcast(
-          "voice_channel_#{options.fetch("channelId")}",
-          from: options.fetch("from"),
-          to: options.fetch("to"),
-          sdp: options.sdp("sdp")
-        )
-  end
-
   def destroy(options)
     VoiceSession.find_by(user_id: options.fetch("userId")).destroy
   end

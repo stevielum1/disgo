@@ -10,19 +10,25 @@ class VoiceChannelIndex extends React.Component {
       connected: Boolean(props.voiceUsers[props.currentUserId])
     };
     this.handleClick = this.handleClick.bind(this);
-    this.createSocket();
+    
+    // DOM Elements
     this.audioContainerRef = React.createRef();
+    
+    // Objects
     this.pcPeers = {};
   }
-
+  
   componentCleanup() {
     //handle page refreshes
     this.props.userLeft(this.props.currentUserId);
     this.voice.destroy(this.props.currentUserId);
     this.voice.unsubscribe();
+    if (this.voiceSession) this.voiceSession.unsubscribe();
   }
-
+  
   componentDidMount() {
+    this.createSocket();
+    if (this.state.connected) this.handleJoinSession();
     window.addEventListener("beforeunload", this.componentCleanup);
   }
 
@@ -51,12 +57,162 @@ class VoiceChannelIndex extends React.Component {
     }
   }
 
-  setLocalStream() {
-    const that = this;
+  handleJoinSession() {
+    let that = this;
+
+    let cable = ActionCable.createConsumer(`ws://${location.host}/cable`);
+
     navigator.mediaDevices.getUserMedia({audio : true})
       .then(stream => {
         that.localStream = stream;
+        
+        that.voiceSession = cable.subscriptions.create({
+          channel: "VoiceSessionChannel",
+          channel_id: that.props.channel.id
+        }, {
+          connected: () => {
+            that.voiceSession.broadcastData({
+              type: "JOIN_ROOM",
+              from: that.props.currentUserId
+            });
+          },
+          disconnected: () => {},
+          received: data => {
+            console.log("received", data);
+            switch(data.type) {
+              case "JOIN_ROOM":
+              return that.joinRoom(data);
+              case "EXCHANGE":
+              if (data.to !== that.props.currentUserId) return;
+              return that.exchange(data);
+              case "REMOVE_USER":
+              return that.removeUser(data);
+              default:
+              return;
+            }
+          },
+          broadcastData: function(data) {
+            this.perform("broadcast", { channelId: that.props.channel.id, data });
+          }
+        });
       });
+  }
+
+  handleLeaveSession() {
+    for (let user in this.pcPeers) {
+      this.pcPeers[user].close();
+    }
+
+    this.pcPeers = {};
+  
+    this.voiceSession.unsubscribe();
+  
+    this.audioContainerRef.current.innerHTML = "";
+  
+    this.voiceSession.broadcastData({
+      type: "REMOVE_USER",
+      from: this.props.currentUserId
+    });
+  }
+
+  joinRoom(data) {
+    this.createPC(data.from, true);
+  }
+
+  removeUser(data) {
+    console.log("removing user", data.from);
+    let video = document.getElementById(`remoteVideoContainer+${data.from}`);
+    if (video) video.remove();
+    delete this.pcPeers[data.from];
+  }
+
+  createPC(userId, isOffer) {
+    let pc = new RTCPeerConnection(null);
+    this.pcPeers[userId] = pc;
+    pc.addStream(this.localStream);
+  
+    if (isOffer) {
+      pc.createOffer()
+        .then(offer => {
+          pc.setLocalDescription(offer);
+          this.voiceSession.broadcastData({
+            type: "EXCHANGE",
+            from: this.props.currentUserId,
+            to: userId,
+            sdp: JSON.stringify(pc.localDescription)
+          });
+        })
+        .catch(console.warn);
+    }
+  
+    pc.onicecandidate = event => {
+      if (event.candidate) {
+        this.voiceSession.broadcastData({
+          type: "EXCHANGE",
+          from: this.props.currentUserId,
+          to: userId,
+          candidate: JSON.stringify(event.candidate)
+        });
+      }
+    };
+  
+    pc.onaddstream = event => {
+      const element = document.createElement("video");
+      element.id = `remoteVideoContainer+${userId}`;
+      element.autoplay = "autoplay";
+      element.srcObject = event.stream;
+      element.classList.add("audio-container");
+      this.audioContainerRef.current.appendChild(element);
+    };
+  
+    pc.oniceconnectionstatechange = event => {
+      if (pc.iceConnectionState == "disconnected") {
+        console.log("Disconnected:", userId);
+        this.voiceSession.broadcastData({
+          type: "REMOVE_USER",
+          from: userId
+        });
+      }
+    };
+  
+    return pc;
+  }
+
+  exchange(data) {
+    const that = this;
+
+    let pc;
+
+    if (!this.pcPeers[data.from]) {
+      pc = this.createPC(data.from, false);
+    } else {
+      pc = this.pcPeers[data.from];
+    }
+
+    if (data.candidate) {
+      pc.addIceCandidate(new RTCIceCandidate(JSON.parse(data.candidate)))
+        .then(() => console.log("Ice candidate added"))
+        .catch(console.warn);
+    }
+
+    if (data.sdp) {
+      const sdp = JSON.parse(data.sdp);
+      pc.setRemoteDescription(new RTCSessionDescription(sdp))
+        .then(() => {
+          if (sdp.type === "offer") {
+            pc.createAnswer().then(answer => {
+              pc.setLocalDescription(answer);
+              that.voiceSession.broadcastData({
+                type: "EXCHANGE",
+                from: this.props.currentUserId,
+                to: data.from,
+                sdp: JSON.stringify(pc.localDescription)
+              });
+            });
+          }
+        })
+        .catch(console.warn);
+    }
   }
 
   createSocket() {
@@ -71,20 +227,11 @@ class VoiceChannelIndex extends React.Component {
         disconnected: () => {},
         received: data => {
           if (data.type === "join") {
-            that.createPeerConnection(data.userId, true);
             let voiceUsers = Object.assign({}, that.state.voiceUsers);
             voiceUsers[data.userId] = data.channelId;
             that.props.userJoined(data);
             that.setState({ voiceUsers });
-          } else if (data.type === "exchange") {
-            if (data.to !== that.props.currentUserId) return;
-            that.exchange(data);
           } else {
-            if (data.from === that.props.currentUserId) {
-              that.closeAllPeerConnections();
-            } else {
-              that.closePeerConnection(data.from);
-            }
             let newVoiceUsers = Object.assign({}, that.state.voiceUsers);
             delete newVoiceUsers[data.userId];
             that.props.userLeft(data.userId);
@@ -96,128 +243,30 @@ class VoiceChannelIndex extends React.Component {
             userId: data.userId,
             channelId: data.channelId
           });
-          that.setLocalStream();
           that.setState({ connected: true });
         },
         destroy: function(userId) {
           this.perform('destroy', { userId });
           that.setState({ connected: false });
-        },
-        exchange: function(data) {
-          this.perform('exchange', {
-            channelId: that.props.channel.id,
-            from: that.props.currentUserId,
-            to: data.userId,
-            sdp: data.sdp
-          });
         }
       }
     );
   }
 
-  createPeerConnection(userId, isOffer) {
-    if (this.localStream === undefined) return;
-    const that = this;
-
-    let pc = new RTCPeerConnection(null);
-    that.pcPeers[userId] = pc;
-    pc.addStream(this.localStream);
-
-    if (isOffer) {
-      pc.createOffer().then(offer => {
-        pc.setLocalDescription(offer);
-        that.voice.exchange({
-          userId,
-          sdp: JSON.stringify(pc.localDescription)
-        });
-      })
-      .catch(console.log);
-
-      pc.onicecandidate = e => {
-        if (e.candidate) {
-          that.voice.exchange({
-            userId,
-            candidate: JSON.stringify(e.candidate)
-          });
-        }
-      };
-
-      pc.onaddstream = e => {
-        const element = document.createElement("video");
-        element.id = `remoteVideoContainer_${userId}`;
-        element.autoplay = "autoplay";
-        element.srcObject = e.stream;
-        that.audioContainerRef.current.appendChild(element);
-      };
-
-      pc.oniceconnectionstatechange = e => {
-        if (pc.iceConnectionState == "disconnected") {
-          that.voice.destroy(userId);
-        }
-      };
-
-      return pc;
-    }
-  }
-
-  exchange(data) {
-    const that = this;
-
-    let pc;
-
-    if (!this.pcPeers[data.from]) {
-      pc = this.createPeerConnection(data.from, false);
-    } else {
-      pc = this.pcPeers[data.from];
-    }
-
-    if (data.candidate) {
-      pc.addIceCandidate(new RTCIceCandidate(JSON.parse(data.candidate)))
-        .then(console.log)
-        .catch(console.log);
-    }
-
-    if (data.sdp) {
-      const sdp = JSON.parse(data.sdp);
-      pc.setRemoteDescription(new RTCSessionDescription(sdp))
-        .then(() => {
-          if (sdp.type === "offer") {
-            pc.createAnswer().then(answer => {
-              pc.setLocalDescription(answer);
-              that.voice.exchange({
-                userId: data.from,
-                sdp: JSON.stringify(pc.localDescription)
-              });
-            });
-          }
-        })
-        .catch(console.log);
-    }
-  }
-
-  closeAllPeerConnections() {
-    for (user in this.pcPeers) {
-      this.pcPeers[user].close();
-    }
-    
-    this.pcPeers = {};
-  }
-
-  closePeerConnection(userId) {
-    const video = document.getElementById(`remoteVideoContainer_${userId}`);
-    if (video) video.remove();
-    delete this.pcPeers[userId];
-  }
-
   handleClick(channelId) {
     return e => {
       if (this.state.connected === false) {
+        this.handleJoinSession();
         this.voice.create({ userId: this.props.currentUserId, channelId });
       } else {
         if (this.state.voiceUsers[this.props.currentUserId] === channelId) {
+          this.handleLeaveSession();
           this.voice.destroy(this.props.currentUserId);
         } else {
+          this.handleLeaveSession();
           this.voice.destroy(this.props.currentUserId);
+
+          this.handleJoinSession();
           this.voice.create({ userId: this.props.currentUserId, channelId });
         }
       }
@@ -227,7 +276,7 @@ class VoiceChannelIndex extends React.Component {
   render() {
     if (this.props.loading) return null;
 
-    const { channel, openModal, owner, currentUserId, users } = this.props;
+    const { channel, openModal, owner, users } = this.props;
 
     const editVoiceButton = owner ? (
       <i onClick={() => openModal(`editVoiceChannel_${channel.id}`)} className="fas fa-cog edit-channel-icon"></i>
