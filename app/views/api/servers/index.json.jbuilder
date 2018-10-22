@@ -31,7 +31,7 @@ json.channels do
     server.channels.each do |channel|
       json.set! channel.id do
         json.extract! channel, :id, :name, :server_id, :destructible
-        if channel.channel_type = 0
+        if channel.channel_type == 0
           json.type "TEXT"
         else
           json.type "VOICE"
@@ -62,4 +62,10 @@ onlineUserIds = Session.all.collect {|session| session.user_id}
 
 json.onlineUsers do
   json.array! onlineUserIds
+end
+
+json.voiceUsers do
+  VoiceSession.all.each do |session|
+    json.set! session.user_id, session.channel_id
+  end
 end

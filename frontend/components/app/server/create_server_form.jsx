@@ -42,19 +42,30 @@ class CreateServerForm extends React.Component {
         }
         that.props.createMembership(membership)
           .then(payload => {
-            const channel = {
+            const textChannel = {
               name: "general",
               server_id: payload.membership.serverId,
               destructible: false
             };
-            that.props.createChannel(channel)
-              .then(payload => {
-                that.props.history.push(`/channels/${payload.channel.serverId}/${payload.channel.id}`);
-              })
-              .then(() => {
-                that.props.closeModal();
-                that.props.updateLoading(false);
-              });
+
+            const voiceChannel = {
+              name: "general",
+              server_id: payload.membership.serverId,
+              destructible: false,
+              channel_type: 1
+            };
+
+            
+            that.props.createChannel(textChannel)
+            .then(payload => {
+              that.props.history.push(`/channels/${payload.channel.serverId}/${payload.channel.id}`);
+            })
+            .then(() => {
+              that.props.closeModal();
+              that.props.updateLoading(false);
+            });
+            
+            that.props.createChannel(voiceChannel);
           });
       });
   }

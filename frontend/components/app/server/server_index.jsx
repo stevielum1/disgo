@@ -42,14 +42,14 @@ class ServerIndex extends React.Component {
       <div className="server-index-container">
         <ul>
           { nonDMServers.map(server => {
-              const firstChannel = channels.filter(channel => (
-                channel.serverId === server.id
+              const firstTextChannel = channels.filter(channel => (
+                channel.serverId === server.id && channel.type === "TEXT"
               ))[0];
               return <ServerIndexItem
                 key={server.id}
                 server={server}
-                channel={firstChannel}
-                loading={loading} />
+                channel={firstTextChannel}
+                loading={loading} />;
             })
           }
           <li className="server-new"

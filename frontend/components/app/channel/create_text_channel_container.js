@@ -1,21 +1,22 @@
 import { connect } from 'react-redux';
 import ChannelForm from './channel_form';
-import { updateChannel, deleteChannel, removeChannelErrors } from '../../../actions/channel_actions';
+import { createChannel, removeChannelErrors } from '../../../actions/channel_actions';
 import { closeModal } from '../../../actions/modal_actions';
-import { getFirstChannel } from '../../../reducers/selectors';
 import { updateLoading } from '../../../actions/loading_actions';
 
 const mapStateToProps = (state, ownProps) => ({
-  formType: "edit",
+  formType: "create",
+  channelType: "text",
   errors: state.errors.channelErrors,
-  channel: state.entities.channels[ownProps.match.params.channelId],
-  firstChannel: getFirstChannel(state, parseInt(ownProps.match.params.serverId)),
-  loading: state.ui.loading
+  channel: {
+    name: "",
+    server_id: ownProps.match.params.serverId,
+    destructible: true
+  }
 });
 
 const mapDispatchToProps = dispatch => ({
-  processForm: channel => dispatch(updateChannel(channel)),
-  deleteChannel: id => dispatch(deleteChannel(id)),
+  processForm: channel => dispatch(createChannel(channel)),
   removeChannelErrors: () => dispatch(removeChannelErrors()),
   closeModal: () => dispatch(closeModal()),
   updateLoading: loading => dispatch(updateLoading(loading))

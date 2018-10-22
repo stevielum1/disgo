@@ -21,6 +21,6 @@ class Channel < ApplicationRecord
 
   private
   def ensure_channel_type
-    self.channel_type = 0
+    self.channel_type ||= 0
   end
 end

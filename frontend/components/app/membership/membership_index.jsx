@@ -48,8 +48,8 @@ class MembershipIndex extends React.Component {
   createSocket() {
     let that = this;
 
-    let cable = ActionCable.createConsumer(`wss://${location.host}/cable`);
-    that.appearances = cable.subscriptions.create( "AppearanceChannel", {
+    let cable = ActionCable.createConsumer(`ws://${location.host}/cable`);
+    that.appearances = cable.subscriptions.create("AppearanceChannel", {
         connected: function() {
           this.perform('create', {
             userId: that.props.currentUser.id
