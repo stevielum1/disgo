@@ -60,7 +60,7 @@ class VoiceChannelIndex extends React.Component {
   handleJoinSession() {
     let that = this;
 
-    let cable = ActionCable.createConsumer(`ws://${location.host}/cable`);
+    let cable = ActionCable.createConsumer(`wss://${location.host}/cable`);
 
     navigator.mediaDevices.getUserMedia({audio : true})
       .then(stream => {
@@ -218,7 +218,7 @@ class VoiceChannelIndex extends React.Component {
   createSocket() {
     let that = this;
 
-    let cable = ActionCable.createConsumer(`ws://${location.host}/cable`);
+    let cable = ActionCable.createConsumer(`wss://${location.host}/cable`);
     that.voice = cable.subscriptions.create({
       channel: "VoiceChannel",
       channel_id: that.props.channel.id 
