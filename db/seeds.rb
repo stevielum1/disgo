@@ -52,7 +52,7 @@ servers.each do |server|
       server_id: server.id,
       destructible: false
     }
-    text_channel = Channel.create(channel)
+    text_channel = Channel.create(text_channel)
     channels << text_channel
 
     voice_channel = {
@@ -68,7 +68,7 @@ servers.each do |server|
         server_id: server.id,
         destructible: true
       }
-      text_channel = Channel.create(channel)
+      text_channel = Channel.create(text_channel)
       channels << text_channel
     end
     Faker::ElderScrolls.unique.clear
