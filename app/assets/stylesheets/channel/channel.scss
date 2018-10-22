@@ -67,7 +67,6 @@
     display: inline-block;
     color: white;
     text-overflow: ellipsis;
-    overflow: hidden;
     max-width: 170px;
   }
 
@@ -95,7 +94,6 @@
     .voice-channel-name {
       display: inline-block;
       text-overflow: ellipsis;
-      overflow: hidden;
       max-width: 170px;
       vertical-align: middle;
     }
