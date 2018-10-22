@@ -62,6 +62,8 @@ servers.each do |server|
       channel_type: 1
     }
 
+    Channel.create(voice_channel)
+
     3.times do
       text_channel = {
         name: Faker::ElderScrolls.unique.city,
