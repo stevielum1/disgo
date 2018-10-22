@@ -78,7 +78,7 @@ class VoiceChannelIndex extends React.Component {
           },
           disconnected: () => {},
           received: data => {
-            console.log("received", data);
+            // console.log("received", data);
             switch(data.type) {
               case "JOIN_ROOM":
               return that.joinRoom(data);
@@ -120,7 +120,7 @@ class VoiceChannelIndex extends React.Component {
   }
 
   removeUser(data) {
-    console.log("removing user", data.from);
+    // console.log("removing user", data.from);
     let video = document.getElementById(`remoteVideoContainer+${data.from}`);
     if (video) video.remove();
     delete this.pcPeers[data.from];
@@ -167,7 +167,7 @@ class VoiceChannelIndex extends React.Component {
   
     pc.oniceconnectionstatechange = event => {
       if (pc.iceConnectionState == "disconnected") {
-        console.log("Disconnected:", userId);
+        // console.log("Disconnected:", userId);
         this.voiceSession.broadcastData({
           type: "REMOVE_USER",
           from: userId
@@ -191,7 +191,7 @@ class VoiceChannelIndex extends React.Component {
 
     if (data.candidate) {
       pc.addIceCandidate(new RTCIceCandidate(JSON.parse(data.candidate)))
-        .then(() => console.log("Ice candidate added"))
+        // .then(() => console.log("Ice candidate added"))
         .catch(console.warn);
     }
 
